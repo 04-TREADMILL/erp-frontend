@@ -1,0 +1,47 @@
+/*:root {*/
+/*    --card-deep : #f2f8f8;*/
+/*    --bgd-color: #f7f8fa;*/
+/*}*/
+
+
+/*.shkb-card {*/
+/*    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);*/
+/*    background-color: #ffffff;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*body {*/
+/*    min-width: 1200px;*/
+/*}*/
+html,body,#app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #e8eaf6!important;
+}
+
+a {
+    text-decoration: none;
+    color: #999;
+}
+
+button,a {
+    outline: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.clear-fix:after {/*伪元素是行内元素 正常浏览器清除浮动方法*/
+    content: "";
+    display: block;
+    height: 0;
+    clear:both;
+    visibility: hidden;
+}
+.clear-fix {
+    *zoom: 1;/*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
+}
