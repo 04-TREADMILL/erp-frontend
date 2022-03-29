@@ -1,5 +1,5 @@
 // 部署url
-export const REQUEST_BASE_URL_PROD = "http://erpbackend.seec-erp-backend-2150.devcloud.seec.seecoder.cn/";
+export const REQUEST_BASE_URL_PROD = "";
 // 开发url （mock的地址
 export const REQUEST_BASE_URL_DEV = "http://localhost:8080";
 

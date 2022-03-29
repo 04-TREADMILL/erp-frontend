@@ -7,6 +7,10 @@ const instanceNormal = () => {
     "Authorization": 'Bearer ' + sessionStorage.getItem("token")
   } : {};
   return Axios.create({
+    // baseURL:
+    //   process.env.NODE_ENV === "production"
+    //     ? REQUEST_BASE_URL_PROD
+    //     : REQUEST_BASE_URL_DEV,
     headers
   });
 }
