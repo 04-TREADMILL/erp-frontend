@@ -1,6 +1,8 @@
 <template>
   <Layout>
     <Title title="库存操作"></Title>
+
+
     <Echarts :chart-axis="chartAxis" :chart-data="chartData" v-if="product_data.length!==0"></Echarts>
     <!--上面v-if：异步请求到数据之后，computed再次计算，再完成实际表格内容的渲染-->
     <div class="operation_list">

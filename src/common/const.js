@@ -1,11 +1,12 @@
 // 部署url
-export const REQUEST_BASE_URL_PROD = "";
+export const REQUEST_BASE_URL_PROD = "http://ismzl.com/";
 // 开发url （mock的地址
 export const REQUEST_BASE_URL_DEV = "http://localhost:8080";
 
 export const ROLE = {
   INVENTORY_MANAGER: "INVENTORY_MANAGER", //库存管理人员
   SALE_STAFF: "SALE_STAFF", // 进货销售人员
+  SALE_MANAGER: "SALE_MANAGER", //销售经理
   FINANCIAL_STAFF: "FINANCIAL_STAFF", // 财务人员
   HR: "HR", // 人力资源人员
   GM: "GM", // 总经理
@@ -21,6 +22,10 @@ export const PATH = {
   },
   COMMODITY_MANAGEMENT: {
     path: '/commodityManagement',
+    requiresAuth: [ROLE.INVENTORY_MANAGER,ROLE.ADMIN]
+  },
+  INVENTORY_MANAGEMENT: {
+    path: '/inventoryManagement',
     requiresAuth: [ROLE.INVENTORY_MANAGER,ROLE.ADMIN]
   },
   INVENTORY_OPERATION: {
@@ -58,6 +63,24 @@ export const PATH = {
   INVENTORY_VIEW: {
     path: '/inventoryView',
     requiresAuth: [ROLE.INVENTORY_MANAGER,ROLE.ADMIN]
+  },
+
+  // SALE_STAFF & SALE_MANAGER
+  PURCHASE_VIEW: {
+    path: '/purchaseView',
+    requiresAuth: [ROLE.SALE_STAFF,ROLE.SALE_MANAGER,ROLE.GM,ROLE.ADMIN]
+  },
+  PURCHASE_RETURN_VIEW: {
+    path: '/purchaseReturnView',
+    requiresAuth: [ROLE.SALE_STAFF,ROLE.SALE_MANAGER,ROLE.GM,ROLE.ADMIN]
+  },
+  SALE_VIEW: {
+    path: '/saleView',
+    requiresAuth: [ROLE.SALE_STAFF,ROLE.SALE_MANAGER,ROLE.GM,ROLE.ADMIN]
+  },
+  CUSTOMER_VIEW: {
+    path: '/customerView',
+    requiresAuth: [ROLE.SALE_STAFF,ROLE.SALE_MANAGER,ROLE.GM,ROLE.ADMIN]
   },
 
   // GM

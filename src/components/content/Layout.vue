@@ -14,7 +14,8 @@
         active-text-color="#7e57c2"
         router
       >
-        <el-submenu index="1">
+        <el-submenu index="1"
+          v-if="permit(PATH.COMMODITY_CLASSIFICATION.requiresAuth)">
           <template slot="title">
             <i class="el-icon-receiving"></i>
             <span slot="title">商品管理</span>
@@ -35,18 +36,25 @@
           </el-menu-item>
         </el-submenu>
 
-        <el-submenu index="2">
+        <el-submenu index="2" v-if="permit(PATH.INVENTORY_OPERATION.requiresAuth)">
           <template slot="title">
             <i class="el-icon-receiving"></i>
             <span slot="title">库存管理</span>
           </template>
           <el-menu-item
-            :index="PATH.INVENTORY_OPERATION.path"
-            v-if="permit(PATH.INVENTORY_OPERATION.requiresAuth)"
+            :index="PATH.INVENTORY_MANAGEMENT.path"
+            v-if="permit(PATH.INVENTORY_MANAGEMENT.requiresAuth)"
           >
             <i class="el-icon-receiving"></i>
-            <span slot="title">库存操作</span>
+            <span slot="title">库存管理</span>
           </el-menu-item>
+<!--          <el-menu-item-->
+<!--            :index="PATH.INVENTORY_OPERATION.path"-->
+<!--            v-if="permit(PATH.INVENTORY_OPERATION.requiresAuth)"-->
+<!--          >-->
+<!--            <i class="el-icon-receiving"></i>-->
+<!--            <span slot="title">库存操作</span>-->
+<!--          </el-menu-item>-->
           <el-menu-item
             :index="PATH.INVENTORY_VIEW.path"
             v-if="permit(PATH.INVENTORY_VIEW.requiresAuth)"
@@ -62,8 +70,43 @@
             <span slot="title">库存盘点</span>
           </el-menu-item>
         </el-submenu>
-
-        <el-submenu index="3">
+        <el-submenu index="3"
+          v-if="permit(PATH.CUSTOMER_VIEW.requiresAuth)">
+          <template slot="title">
+            <i class="el-icon-sell"></i>
+            <span slot="title">销售管理</span>
+          </template>
+          <el-menu-item
+            :index="PATH.PURCHASE_VIEW.path"
+            v-if="permit(PATH.PURCHASE_VIEW.requiresAuth)"
+          >
+            <i class="el-icon-shopping-cart-full"></i>
+            <span slot="title">进货管理</span>
+          </el-menu-item>
+          <el-menu-item
+            :index="PATH.PURCHASE_RETURN_VIEW.path"
+            v-if="permit(PATH.PURCHASE_RETURN_VIEW.requiresAuth)"
+          >
+            <i class="el-icon-shopping-cart-2"></i>
+            <span slot="title">进货退货管理</span>
+          </el-menu-item>
+          <el-menu-item
+            :index="PATH.SALE_VIEW.path"
+            v-if="permit(PATH.SALE_VIEW.requiresAuth)"
+          >
+            <i class="el-icon-sell"></i>
+            <span slot="title">销售管理</span>
+          </el-menu-item>
+          <el-menu-item
+            :index="PATH.CUSTOMER_VIEW.path"
+            v-if="permit(PATH.CUSTOMER_VIEW.requiresAuth)"
+          >
+            <i class="el-icon-user"></i>
+            <span slot="title">客户管理</span>
+          </el-menu-item>
+        </el-submenu>
+        <el-submenu index="4"
+          v-if="permit(PATH.GM_APPROVAL.requiresAuth)">
           <template slot="title">
             <i class="el-icon-receiving"></i>
             <span slot="title">审核管理</span>

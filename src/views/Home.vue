@@ -15,7 +15,10 @@ import { ROLE, PATH } from "../common/const";
         this.$router.push(PATH.COMMODITY_CLASSIFICATION.path);
       } else if(role === ROLE.GM) {
         this.$router.push(PATH.GM_APPROVAL);
-      } else {
+      } else if (role === ROLE.SALE_STAFF || role === ROLE.SALE_MANAGER) {
+        this.$router.push(PATH.PURCHASE_VIEW)
+      }
+      else {
         this.$router.push("/error");
       }
     }
