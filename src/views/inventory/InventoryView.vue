@@ -70,7 +70,7 @@
               width="150">
             </el-table-column>
             <el-table-column
-              prop="total_price"
+              prop="totalPrice"
               label="总价(元)"
               width="150">
             </el-table-column>
