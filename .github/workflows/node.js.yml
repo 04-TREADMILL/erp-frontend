@@ -29,3 +29,18 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+    - name: set ssh key
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{secrets.COSEN_ID_RSA}}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan "43.142.159.174" >> ~/.ssh/known_hosts      
+    - name: scp
+      run: scp -r dist ubuntu@43.142.159.174:/var/www/
+    - name: deploy
+      run: |
+        ssh ubuntu@43.142.159.174 "
+          ./frontend-setup.sh
+        "
+    - name: delete ssh key
+      run: rm -rf ~/.ssh/id_rsa
