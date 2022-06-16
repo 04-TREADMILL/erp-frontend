@@ -98,6 +98,13 @@
             <span slot="title">销售管理</span>
           </el-menu-item>
           <el-menu-item
+              :index="PATH.SALE_VIEW.path"
+              v-if="permit(PATH.SALE_VIEW.requiresAuth)"
+          >
+            <i class="el-icon-sell"></i>
+            <span slot="title">销售管理</span>
+          </el-menu-item>
+          <el-menu-item
               :index="PATH.SALE_RETURN_VIEW.path"
               v-if="permit(PATH.SALE_RETURN_VIEW.requiresAuth)"
           >
