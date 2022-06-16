@@ -50,6 +50,11 @@ const SALE_CREATE = '/api/sale/sheet-make';
 const SALE_FIRST_APPROVAL = '/api/sale/first-approval';
 const SALE_SECOND_APPROVAL = '/api/sale/second-approval';
 const SALE_FIND_SHEET_BY_ID = '/api/sale/find-sheet';
+// 销售退货管理
+const SALE_RETURN_ALL = '/api/sale-returns/sheet-show';
+const SALE_RETURN_CREATE = '/api/sale-returns/sheet-make';
+const SALE_RETURN_FIRST_APPROVAL = '/api/sale-returns/first-approval';
+const SALE_RETURN_SECOND_APPROVAL = '/api/sale-returns/second-approval';
 // 客户管理
 const CUSTOMER_QUERY = '/api/customer/findByType';
 const SALE_PURCHASE_ALL = '/api/purchase/sheet-show';
@@ -103,5 +108,8 @@ module.exports = {
   SALE_CUSTOMER_QUERY,
   SALE_CUSTOMER_MAX,
   SALE_FIND_SHEET_BY_ID,
+  SALE_RETURN_ALL,SALE_RETURN_CREATE,
+  SALE_RETURN_FIRST_APPROVAL,
+  SALE_RETURN_SECOND_APPROVAL,
   CUSTOMER_QUERY,
 };

@@ -1,7 +1,7 @@
 <template>
   <Layout>
-    <Title title="进货退货管理"></Title>
-    <el-button type="primary" size="medium" @click="dialogVisible = true">制定进货退货单</el-button>
+    <Title title="销售退货管理"></Title>
+    <el-button type="primary" size="medium" @click="dialogVisible = true">制定销售退货单</el-button>
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
         <el-tab-pane label="待一级审批" name="PENDING_LEVEL_1">
@@ -9,7 +9,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="pendingLevel1List" :type="1" @refresh="getPurchaseReturn()"/>
+            <sale-return-list :list="pendingLevel1List" :type="1" @refresh="getSaleReturn()"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="待二级审批" name="PENDING_LEVEL_2">
@@ -17,7 +17,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="pendingLevel2List" :type="2" @refresh="getPurchaseReturn()"/>
+            <sale-return-list :list="pendingLevel2List" :type="2" @refresh="getSaleReturn()"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="审批完成" name="SUCCESS">
@@ -25,7 +25,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="successList" :type="3"/>
+            <sale-return-list :list="successList" :type="3"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="审批失败" name="FAILURE">
@@ -33,24 +33,24 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="failureList" :type="4"/>
+            <sale-return-list :list="failureList" :type="4"/>
           </div>
         </el-tab-pane>
       </el-tabs>
     </div>
     <el-dialog
-        title="创建进货退货单"
+        title="创建销售退货单"
         :visible.sync="dialogVisible"
         width="40%"
         :before-close="handleClose">
       <div style="width: 90%; margin: 0 auto">
-        <el-form :model="purchaseReturnForm" label-width="100px" ref="purchaseReturnForm">
-          <el-form-item label="进货单id: " prop="purchaseSheetId">
-            <el-select v-model="purchaseReturnForm.purchaseSheetId"
-                       placeholder="请选择关联的进货单id"
-                       @change="selectPurchase(completedPurchase.filter(item => item.id === purchaseReturnForm.purchaseSheetId))">
+        <el-form :model="saleReturnForm" label-width="100px" ref="saleReturnForm">
+          <el-form-item label="销售单id: " prop="saleSheetId">
+            <el-select v-model="saleReturnForm.saleSheetId"
+                       placeholder="请选择关联的销售单id"
+                       @change="selectSale(completedSale.filter(item => item.id === saleReturnForm.saleSheetId))">
               <el-option
-                  v-for="(item, index) in completedPurchase"
+                  v-for="(item, index) in completedSale"
                   :key="item.id"
                   :label="item.id"
                   :value="item.id">
@@ -58,7 +58,7 @@
                     placement="right"
                     width="800"
                     trigger="hover">
-                  <el-table :data="completedPurchase[index].purchaseSheetContent">
+                  <el-table :data="completedSale[index].saleSheetContent">
                     <el-table-column width="100" property="id" label="id"></el-table-column>
                     <el-table-column width="200" property="pid" label="pid"></el-table-column>
                     <el-table-column width="100" property="unitPrice" label="单价"></el-table-column>
@@ -71,12 +71,12 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="进货单清单: " v-if="this.purchaseReturnForm.purchaseReturnsSheetContent.length === 0">
+          <el-form-item label="销售单清单: " v-if="this.saleReturnForm.saleReturnsSheetContent.length === 0">
             暂无数据!
           </el-form-item>
-          <el-form-item label="进货单清单: " v-else>
+          <el-form-item label="销售单清单: " v-else>
             <div
-                v-for="(item, index) in purchaseReturnForm.purchaseReturnsSheetContent"
+                v-for="(item, index) in saleReturnForm.saleReturnsSheetContent"
                 :key="index">
               <el-row>
                 <el-col :span="8">
@@ -92,12 +92,12 @@
             </div>
           </el-form-item>
           <el-form-item label="备注: ">
-            <el-input type="textarea" v-model="purchaseReturnForm.remark"></el-input>
+            <el-input type="textarea" v-model="saleReturnForm.remark"></el-input>
           </el-form-item>
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm('purchaseReturnForm')">立即创建</el-button>
+        <el-button type="primary" @click="submitForm('saleReturnForm')">立即创建</el-button>
       </span>
     </el-dialog>
   </Layout>
@@ -106,81 +106,81 @@
 <script>
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
-import purchaseReturnList from "./components/PurchaseReturnList"
-import { getAllPurchaseReturn,
-  getAllPurchase,
-  createPurchaseReturn } from '../../network/purchase'
+import saleReturnList from "./components/SaleReturnList"
+import {  getAllSaleReturn,
+          getAllSale,
+          createSaleReturn } from '../../network/sale'
 export default {
-  name: 'PurchaseReturnView',
+  name: 'SaleReturnView',
   components: {
     Layout,
     Title,
-    purchaseReturnList
+    saleReturnList
   },
   data() {
     return {
       activeName: 'PENDING_LEVEL_1',
-      purchaseReturnList: [],
+      saleReturnList: [],
       pendingLevel1List: [],
       pendingLevel2List: [],
       successList: [],
       failureList: [],
       dialogVisible: false,
-      purchaseReturnForm: {
-        purchaseReturnsSheetContent: []
+      saleReturnForm: {
+        saleReturnsSheetContent: []
       },
-      completedPurchase: []
+      completedSale: []
     }
   },
   async mounted() {
-    this.getPurchaseReturn()
-    await getAllPurchase({ params: { state: 'SUCCESS' } }).then(_res => {
-      this.completedPurchase = _res.result
+    this.getSaleReturn()
+    await getAllSale({ params: { state: 'SUCCESS' } }).then(_res => {
+      this.completedSale = _res.result
     })
-    // console.log(this.completedPurchase);
+    // console.log(this.completedSale);
   },
   methods: {
-    getPurchaseReturn() {
-      getAllPurchaseReturn({}).then(_res => {
-        this.purchaseReturnList = _res.result
-        this.pendingLevel1List = this.purchaseReturnList.filter(item => item.state === '待一级审批')
-        this.pendingLevel2List = this.purchaseReturnList.filter(item => item.state === '待二级审批')
-        this.successList = this.purchaseReturnList.filter(item => item.state === '审批完成')
-        this.failureList = this.purchaseReturnList.filter(item => item.state === '审批失败')
+    getSaleReturn() {
+      getAllSaleReturn({}).then(_res => {
+        this.saleReturnList = _res.result
+        this.pendingLevel1List = this.saleReturnList.filter(item => item.state === '待一级审批')
+        this.pendingLevel2List = this.saleReturnList.filter(item => item.state === '待二级审批')
+        this.successList = this.saleReturnList.filter(item => item.state === '审批完成')
+        this.failureList = this.saleReturnList.filter(item => item.state === '审批失败')
       })
     },
     handleClose(done) {
       this.$confirm('确认关闭？')
           .then(_ => {
-            this.purchaseReturnForm = {}
-            this.purchaseReturnForm.purchaseReturnsSheetContent = []
+            this.saleReturnForm = {}
+            this.saleReturnForm.saleReturnsSheetContent = []
             done();
           })
           .catch(_ => {});
     },
-    selectPurchase(content) {
-      this.purchaseReturnForm.purchaseReturnsSheetContent = content[0].purchaseSheetContent
+    selectSale(content) {
+      this.saleReturnForm.saleReturnsSheetContent = content[0].saleSheetContent
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.purchaseReturnForm.id = null
-          this.purchaseReturnForm.operator = sessionStorage.getItem("name")
-          this.purchaseReturnForm.totalAmount = null
-          this.purchaseReturnForm.state = null
-          this.purchaseReturnForm.createTime = null
-          this.purchaseReturnForm.purchaseReturnsSheetContent.forEach(item => {
+          this.saleReturnForm.id = null
+          this.saleReturnForm.operator = sessionStorage.getItem("name")
+          this.saleReturnForm.totalAmount = null
+          this.saleReturnForm.state = null
+          this.saleReturnForm.createTime = null
+          this.saleReturnForm.saleReturnsSheetContent.forEach(item => {
             item.unitPrice = Number(item.unitPrice)
             item.quantity = Number(item.quantity)
             item.totalPrice = item.unitPrice * item.quantity
           })
-          createPurchaseReturn(this.purchaseReturnForm).then(_res => {
+          createSaleReturn(this.saleReturnForm).then(_res => {
             if (_res.msg == 'Success') {
               this.$message.success('创建成功!')
               this.dialogVisible = false
-              this.purchaseReturnForm = {}
-              this.purchaseReturnForm.purchaseReturnsSheetContent = []
-              this.getPurchaseReturn()
+              this.saleReturnForm = {}
+              this.saleReturnForm.saleReturnsSheetContent = []
+              this.getSaleReturn()
             }
           })
         }

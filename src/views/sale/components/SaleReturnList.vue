@@ -34,7 +34,7 @@
       <div>
         <el-row>
           <el-col :span="8">
-            <span><strong>关联的进货单id: </strong>{{item.purchaseSheetId}}</span>
+            <span><strong>关联的销售单id: </strong>{{item.saleSheetId}}</span>
           </el-col>
           <el-col :span="3">
             <span><strong>操作员: </strong>{{item.operator}}</span>
@@ -51,7 +51,7 @@
         <div v-if="showAll[index]" style="margin-top: 15px">
           <div style="margin-bottom: 15px"><strong>详细商品清单:</strong></div>
           <el-table
-              :data="item.purchaseReturnsSheetContent"
+              :data="item.saleReturnsSheetContent"
               stripe
               style="width: 100%"
               :header-cell-style="{'text-align':'center'}"
@@ -93,9 +93,9 @@
 </template>
 
 <script>
-import { returnFirstApproval, returnSecondApproval } from '../../../network/purchase'
+import { returnFirstApproval, returnSecondApproval } from '../../../network/sale'
 export default {
-  name: "PurchaseReturnList",
+  name: "SaleReturnList",
   props: {
     list: Array,
     type: Number,
@@ -122,7 +122,7 @@ export default {
     approval(id) {
       let config = {
         params: {
-          purchaseReturnsSheetId: id,
+          saleReturnsSheetId: id,
           state: this.type === 1 ? 'PENDING_LEVEL_2' : 'SUCCESS'
         }
       }
@@ -147,7 +147,7 @@ export default {
     deny(id) {
       let config = {
         params: {
-          purchaseReturnsSheetId: id,
+          saleReturnsSheetId: id,
           state: 'FAILURE'
         }
       }
