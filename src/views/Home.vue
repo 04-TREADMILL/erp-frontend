@@ -17,7 +17,7 @@ import { ROLE, PATH } from "../common/const";
         this.$router.push(PATH.GM_APPROVAL);
       } else if (role === ROLE.SALE_STAFF || role === ROLE.SALE_MANAGER) {
         this.$router.push(PATH.PURCHASE_VIEW)
-      }else if(role == ROLE.FINANCIAL_STAFF){
+      }else if(role === ROLE.FINANCIAL_STAFF){
         this.$router.push(PATH.SALE_VIEW);
       }
       else {
