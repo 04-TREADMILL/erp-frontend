@@ -23,6 +23,7 @@ const InventoryWarning = () => import("../views/inventory/InventoryWarning");
 const PurchaseView = () => import("../views/purchase/PurchaseView");
 const PurchaseReturnView = () => import("../views/purchase/PurchaseReturnView");
 const SaleView = () => import("../views/sale/SaleView");
+const SaleReturnView = () => import("../views/sale/SaleReturnView");
 const CustomerView = () => import ("../views/purchase/CustomerView");
 const Approval = () => import("../views/approval/Approval");
 
@@ -132,6 +133,12 @@ const routes = [
     component: SaleView,
     name: "SaleView",
     meta: { requiresAuth: PATH.SALE_VIEW.requiresAuth }
+  },
+  {
+    path: PATH.SALE_RETURN_VIEW.path,
+    component: SaleReturnView,
+    name: "SaleReturnView",
+    meta: { requiresAuth: PATH.SALE_RETURN_VIEW.requiresAuth }
   },
   {
     path: PATH.CUSTOMER_VIEW.path,
