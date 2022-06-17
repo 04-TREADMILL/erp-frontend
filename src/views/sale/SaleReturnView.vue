@@ -166,8 +166,12 @@ export default {
         if (valid) {
           this.saleReturnForm.id = null
           this.saleReturnForm.operator = sessionStorage.getItem("name")
-          this.saleReturnForm.totalAmount = null
+          this.saleReturnForm.salesman = sessionStorage.getItem("name")
+          this.saleReturnForm.rawTotalAmount = null
+          this.saleReturnForm.finalAmount = null
           this.saleReturnForm.state = null
+          this.saleReturnForm.discount = Number(this.saleReturnForm.discount)
+          this.saleReturnForm.voucherAmount = Number(this.saleReturnForm.voucherAmount)
           this.saleReturnForm.createTime = null
           this.saleReturnForm.saleReturnsSheetContent.forEach(item => {
             item.unitPrice = Number(item.unitPrice)
