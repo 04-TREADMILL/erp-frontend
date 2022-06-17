@@ -195,6 +195,8 @@ export default {
               this.dialogVisible = false
               this.resetForm()
               this.getSale()
+            }else{
+              this.$message.error("创建失败!")
             }
           })
         }
