@@ -33,14 +33,28 @@
       </template>
       <div>
         <el-row>
-          <el-col :span="8">
-            <span><strong>关联的销售单id: </strong>{{item.saleSheetId}}</span>
+          <el-col :span="3">
+            <span><strong>销售商id: </strong>{{item.supplier}}</span>
           </el-col>
           <el-col :span="3">
             <span><strong>操作员: </strong>{{item.operator}}</span>
           </el-col>
+          <el-col :span="3">
+            <span><strong>业务员: </strong>{{item.salesman}}</span>
+          </el-col>
           <el-col :span="6">
-            <span><strong>总额合计: </strong>{{item.totalAmount}}(元)</span>
+            <span><strong>折让前总额: </strong>{{item.rawTotalAmount}}(元)</span>
+          </el-col>
+        </el-row>
+        <el-row style="margin-top: 15px">
+          <el-col :span="3">
+            <span><strong>折扣: </strong>{{item.discount}}</span>
+          </el-col>
+          <el-col :span="6">
+            <span><strong>使用代金券总额: </strong>{{item.voucherAmount}}(元)</span>
+          </el-col>
+          <el-col :span="6">
+            <span><strong>折让后总额: </strong>{{item.finalAmount}}(元)</span>
           </el-col>
         </el-row>
         <el-row style="margin-top: 15px">
