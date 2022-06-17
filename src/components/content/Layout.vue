@@ -98,20 +98,6 @@
             <span slot="title">销售管理</span>
           </el-menu-item>
           <el-menu-item
-              :index="PATH.SALE_VIEW.path"
-              v-if="permit(PATH.SALE_VIEW.requiresAuth)"
-          >
-            <i class="el-icon-sell"></i>
-            <span slot="title">销售管理</span>
-          </el-menu-item>
-          <el-menu-item
-              :index="PATH.SALE_RETURN_VIEW.path"
-              v-if="permit(PATH.SALE_RETURN_VIEW.requiresAuth)"
-          >
-            <i class="el-icon-shopping-cart-2"></i>
-            <span slot="title">销售退货管理</span>
-          </el-menu-item>
-          <el-menu-item
             :index="PATH.CUSTOMER_VIEW.path"
             v-if="permit(PATH.CUSTOMER_VIEW.requiresAuth)"
           >
