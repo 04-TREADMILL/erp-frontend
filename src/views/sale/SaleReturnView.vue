@@ -170,8 +170,8 @@ export default {
           this.saleReturnForm.rawTotalAmount = null
           this.saleReturnForm.finalAmount = null
           this.saleReturnForm.state = null
-          this.saleReturnForm.discount = Number(this.saleReturnForm.discount)
-          this.saleReturnForm.voucherAmount = Number(this.saleReturnForm.voucherAmount)
+          this.saleReturnForm.discount = null
+          this.saleReturnForm.voucherAmount = null
           this.saleReturnForm.createTime = null
           this.saleReturnForm.saleReturnsSheetContent.forEach(item => {
             item.unitPrice = Number(item.unitPrice)
