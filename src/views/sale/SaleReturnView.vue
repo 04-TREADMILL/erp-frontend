@@ -181,6 +181,8 @@ export default {
               this.saleReturnForm = {}
               this.saleReturnForm.saleReturnsSheetContent = []
               this.getSaleReturn()
+            }else{
+              this.$message.error("创建失败！")
             }
           })
         }
