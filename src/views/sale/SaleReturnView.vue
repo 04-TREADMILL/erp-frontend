@@ -186,6 +186,8 @@ export default {
               this.saleReturnForm = {}
               this.saleReturnForm.saleReturnsSheetContent = []
               this.getSaleReturn()
+            }else{
+              this.$message.error("出现返回错误")
             }
             this.$message.error("检测")
           })
