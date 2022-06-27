@@ -179,6 +179,7 @@ export default {
             item.totalPrice = item.unitPrice * item.quantity
           })
           createSaleReturn(this.saleReturnForm).then(_res => {
+            this.$message.error("Something wrong")
             if (_res.msg == 'Success') {
               this.$message.success('创建成功!')
               this.dialogVisible = false
@@ -188,8 +189,6 @@ export default {
             }
             this.$message.error("检测")
           })
-        }else{
-          this.$message.error("出现错误")
         }
       })
     }
