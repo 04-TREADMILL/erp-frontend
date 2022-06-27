@@ -189,10 +189,10 @@ export default {
             }else{
               this.$message.error("出现返回错误")
             }
-            this.$message.error("检测")
+            this.$message.success("检测")
           })
         }else{
-          this.$message.error("出现错误")
+          this.$message.success("出现错误")
         }
       })
     }
