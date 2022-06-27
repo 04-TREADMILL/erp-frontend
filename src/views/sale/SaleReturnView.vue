@@ -188,6 +188,8 @@ export default {
             }
             this.$message.error("检测")
           })
+        }else{
+          this.$message.error("出现错误")
         }
       })
     }

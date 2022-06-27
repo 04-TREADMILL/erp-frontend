@@ -111,7 +111,7 @@ import { returnFirstApproval, returnSecondApproval } from '../../../network/sale
 export default {
   name: "SaleReturnList",
   props: {
-    list: Array,
+      list: Array,
     type: Number,
   },
   data() {
