@@ -100,11 +100,6 @@ export default {
   methods: {
     exportAsExcel() {
 
-
-      console.log(this.cur_list)
-      console.log(this.cur_row)
-
-
       getExcelExport({responseType:'blob'}).then(_res=>{
         let blob = new Blob([_res],{
           type:"application/vnd.ms.excel",
@@ -123,6 +118,7 @@ export default {
         document.removeChild(temp);
         window.URL.revokeObjectURL(blobUrl);
       })
+      
       // getExcelExport().then(_res => {
       //   console.log(_res);
       //   downLoadXls(_res);
