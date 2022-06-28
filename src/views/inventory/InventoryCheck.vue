@@ -122,7 +122,8 @@ export default {
 
   },
   methods: {
-    
+
+
     exportAsExcel() {
       //TODO 导出Excel
       console.log("EXCEL")
@@ -148,10 +149,11 @@ export default {
 
      axios({
         method: "get",
-        url: "/api/warehouse/warehouse/exportExcel",//这是接口地址
+        url: "api/warehouse/warehouse/exportExcel",//这是接口地址
         data: {},
         responseType: "blob",
       }).then((response) => {
+        console.log(response.headers)
         downLoadXls(response);
         function downLoadXls(response) {
           const content = response.data;
