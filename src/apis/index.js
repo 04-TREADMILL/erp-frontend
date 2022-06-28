@@ -62,6 +62,12 @@ const SALE_PURCHASE_CREATE = '/api/purchase/sheet-make';
 const SALE_CUSTOMER_QUERY = '/api/customer/findByType';
 const SALE_CUSTOMER_MAX = '/api/sale/maxAmountCustomer';
 
+const CUSTOMER_ADD = 'api/customer/add';
+const CUSTOMER_DELETE = 'api/customer/delete';
+const CUSTOMER_UPDATE = 'api/customer/update';
+
+const EXCEL_EXPORT = 'api/warehouse/warehouse/exportExcel';
+
 module.exports = {
   TEST_GET,
   TEST_POST,
@@ -113,4 +119,9 @@ module.exports = {
   SALE_RETURN_FIRST_APPROVAL,
   SALE_RETURN_SECOND_APPROVAL,
   CUSTOMER_QUERY,
+  
+  CUSTOMER_ADD,
+  CUSTOMER_DELETE,
+  CUSTOMER_UPDATE,
+  EXCEL_EXPORT,
 };

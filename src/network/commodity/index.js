@@ -10,3 +10,5 @@ export const getAllCommodity = config => request._get(testAPI.COMMODITY_ALL, con
 export const createCommodity = config => request._post(testAPI.COMMODITY_CREATE, config);
 export const updateCommodity = config => request._post(testAPI.COMMODITY_UPDATE, config);
 export const deleteCommodity = config => request._get(testAPI.COMMODITY_DELETE, config);
+
+
