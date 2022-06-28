@@ -70,6 +70,7 @@ import Title from "@/components/content/Title";
 import { getWarehouseCounting, getExcelExport } from "@/network/warehouse";
 import axios from "axios";
 
+import fileDownload from 'js-file-download'
 export default {
   components: {
     Layout,
@@ -98,28 +99,52 @@ export default {
   },
   methods: {
     exportAsExcel() {
-      getExcelExport().then(_res => {
-        console.log(_res);
-        downLoadXls(_res);
-        function downLoadXls(response) {
-          const blob = new Blob([response]);
-          const fileName = "名单.xls"; // 这是设置表格的文件名
-          if ("download" in document.createElement("a")) {
-            // 非 IE 下载
-            const elink = document.createElement("a");
-            elink.download = fileName;
-            elink.style.display = "none";
-            elink.href = URL.createObjectURL(blob);
-            document.body.appendChild(elink);
-            elink.click();
-            URL.revokeObjectURL(elink.href); // 释放 URL 对象
-            document.body.removeChild(elink);
-          } else {
-            // IE10+ 下载
-            navigator.msSaveBlob(blob, fileName);
-          }
+
+
+      console.log(this.cur_list)
+      console.log(this.cur_row)
+
+
+      getExcelExport({responseType:'blob'}).then(_res=>{
+        let blob = new Blob([_res],{
+          type:"application/vnd.ms.excel",
+        });
+        let filename = "Inventory.xls";
+        var blobUrl = window.URL.createObjectURL(blob);
+        var temp = document.createElement("a");
+        temp.style.display = "none";
+        temp.href = blobUrl;
+        temp.setAttribute("download",filename);
+        if(typeof temp.download == "undefined"){
+          temp.setAttribute("target","_black");
         }
-      });
+        document.body.appendChild(temp);
+        temp.click();
+        document.removeChild(temp);
+        window.URL.revokeObjectURL(blobUrl);
+      })
+      // getExcelExport().then(_res => {
+      //   console.log(_res);
+      //   downLoadXls(_res);
+      //   function downLoadXls(response) {
+      //     const blob = new Blob([response]);
+      //     const fileName = "名单.xls"; // 这是设置表格的文件名
+      //     if ("download" in document.createElement("a")) {
+      //       // 非 IE 下载
+      //       const elink = document.createElement("a");
+      //       elink.download = fileName;
+      //       elink.style.display = "none";
+      //       elink.href = URL.createObjectURL(blob);
+      //       document.body.appendChild(elink);
+      //       elink.click();
+      //       URL.revokeObjectURL(elink.href); // 释放 URL 对象
+      //       document.body.removeChild(elink);
+      //     } else {
+      //       // IE10+ 下载
+      //       navigator.msSaveBlob(blob, fileName);
+      //     }
+      //   }
+      // });
     },
     showProduct(row) {
       this.cur_row = row;
