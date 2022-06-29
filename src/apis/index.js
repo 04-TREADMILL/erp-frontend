@@ -46,6 +46,7 @@ const PURCHASE_RETURN_FIRST_APPROVAL = '/api/purchase-returns/first-approval';
 const PURCHASE_RETURN_SECOND_APPROVAL = '/api/purchase-returns/second-approval';
 // 销售管理
 const SALE_ALL = '/api/sale/sheet-show';
+const SALESMAN_ALL = '/api/user/findByType';
 const SALE_CREATE = '/api/sale/sheet-make';
 const SALE_FIRST_APPROVAL = '/api/sale/first-approval';
 const SALE_SECOND_APPROVAL = '/api/sale/second-approval';
@@ -108,6 +109,7 @@ module.exports = {
   PURCHASE_FIND_SHEET_BY_ID,
 
   SALE_ALL,
+  SALESMAN_ALL,
   SALE_CREATE,
   SALE_FIRST_APPROVAL,
   SALE_SECOND_APPROVAL,
