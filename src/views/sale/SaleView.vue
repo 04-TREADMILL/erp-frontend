@@ -144,7 +144,7 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import SaleList from './components/SaleList'
-import { getAllSale, createSale, getAllSalesman,getMaxAmountCustomerOfSalesmanByTime } from '../../network/sale'
+import { getAllSale, createSale,getMaxAmountCustomerOfSalesmanByTime } from '../../network/sale'
 import { getAllCustomer } from '../../network/purchase'
 import { getAllCommodity } from '../../network/commodity'
 import { formatDate } from "@/common/utils";
