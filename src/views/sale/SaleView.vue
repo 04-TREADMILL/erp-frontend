@@ -2,6 +2,7 @@
   <Layout>
     <Title title="销售管理"></Title>
     <el-button type="primary" size="medium" @click="dialogVisible = true">制定销售单</el-button>
+    <el-button type="primary" size="medium" @click="dialogVisible2 = true">获取指定客户</el-button>
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
         <el-tab-pane label="待一级审批" name="PENDING_LEVEL_1">
@@ -92,6 +93,62 @@
         <el-button type="primary" @click="submitForm('saleForm')">立即创建</el-button>
       </span>
     </el-dialog>
+
+    <el-dialog
+    title = "获取指定客户"
+    :visible.sync = "dialogVisible2"
+    width="40%"
+    :before-close="handleClose2">
+      <div style="width: 90%; margin: 0 auto">
+        <el-form :model="saleForm" label-width="100px" ref="saleForm" :rules="rules">
+          <el-form-item label="销售商: " prop="supplier">
+            <el-select v-model="saleForm.supplier" placeholder="请选择销售商">
+              <el-option
+                v-for="item in sellers"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="折扣: " prop="discount">
+            <el-input v-model="saleForm.discount"></el-input>
+          </el-form-item>
+          <el-form-item label="代金券总额: " prop="voucherAmount">
+            <el-input v-model="saleForm.voucherAmount"></el-input>
+          </el-form-item>
+          <el-form-item
+            v-for="(item, index) in saleForm.saleSheetContent"
+            :key="index"
+            :label="'商品' + index">
+            <div>
+              <el-select v-model="item.pid" placeholder="请选择商品id" style="width: 40%; margin-right: 5%">
+                <el-option
+                  v-for="item1 in commodityList"
+                  :key="item1.id"
+                  :label="item1.id"
+                  :value="item1.id">
+                </el-option>
+              </el-select>
+              <el-input v-model="item.quantity" style="width: 25%; margin-right: 5%" placeholder="请输入商品数量"></el-input>
+              <el-input v-model="item.unitPrice" style="width: 25%;" placeholder="请输入商品单价"></el-input>
+            </div>
+            <div style="margin-top: 10px">
+              <el-input v-model="item.remark" style="width: 70%; margin-right: 10%" placeholder="请填写备注"></el-input>
+              <el-button type="text" size="small" @click="addProduct" v-if="index === saleForm.saleSheetContent.length - 1">添加</el-button>
+              <el-button type="text" size="small" @click.prevent="removeProduct(item)" v-if="index !== 0">删除</el-button>
+            </div>
+          </el-form-item>
+          <el-form-item label="备注: ">
+            <el-input type="textarea" v-model="saleForm.remark"></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm('saleForm')">立即创建</el-button>
+      </span>
+
+    </el-dialog>
   </Layout>
 </template>
 
@@ -118,6 +175,7 @@ export default {
       successList: [],
       failureList: [],
       dialogVisible: false,
+      dialogVisible2: false,
       saleForm: {
         saleSheetContent: [
           {
@@ -170,6 +228,12 @@ export default {
           done();
         })
         .catch(_ => {});
+    },
+    handleClose2(done){
+      this.$confirm('确认关闭？').
+      then(_=>{
+        done();
+      }).catch(_=>{});
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
