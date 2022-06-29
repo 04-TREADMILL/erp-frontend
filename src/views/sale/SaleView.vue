@@ -124,8 +124,18 @@
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm('saleForm')">立即查询</el-button>
+        <el-button type="primary" @click="submitInquiry('saleForm')">立即查询</el-button>
       </span>
+    </el-dialog>
+
+    <el-dialog
+    title = "获取交易金额最大的客户"
+    :visible.sync = "AlertdialogDialogVisible"
+     width="40%"
+    :before-close="AlertClose">
+        客户编号: {{alertInfo.id}} <br>
+        客户名称: {{alertInfo.name}} <br>
+        销售金额: {{alertInfo.price}}
     </el-dialog>
   </Layout>
 </template>
@@ -134,9 +144,10 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import SaleList from './components/SaleList'
-import { getAllSale, createSale, getAllSalesman } from '../../network/sale'
+import { getAllSale, createSale, getAllSalesman,getMaxAmountCustomerOfSalesmanByTime } from '../../network/sale'
 import { getAllCustomer } from '../../network/purchase'
 import { getAllCommodity } from '../../network/commodity'
+import { formatDate } from "@/common/utils";
 export default {
   name: 'SaleView',
   components: {
@@ -154,7 +165,13 @@ export default {
       failureList: [],
       dialogVisible: false,
       CustomerInquiryDialogVisible: false,
+      AlertdialogDialogVisible:false,
       salesmanName: '',
+      alertInfo:{
+        name:"",
+        price:"",
+        id:""
+      },
       date: '',
       saleForm: {
         saleSheetContent: [
@@ -195,15 +212,23 @@ export default {
     })
     getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
       this.sellers = _res.result
+
     })
-    getAllSalesman({ params : { type: 'SALE_STAFF' } }).then(_res => {
-      this.salesmanList = _res.result
-    })
+    // getAllSalesman({ params : { type: "SALE_STAFF" } }).then(_res => {
+   
+     
+    // })
   },
   methods: {
     getSale() {
       getAllSale({}).then(_res => {
         this.saleList = _res.result
+        var s = new Set();
+        var ss = new Set();
+        for(var i=0;i<this.saleList.length;i++) s.add(this.saleList[i].operator);
+        for (var x of s) { ss.add({name: x});}//去重之后
+        this.salesmanList = ss; 
+        
         this.pendingLevel1List = this.saleList.filter(item => item.state === '待一级审批')
         this.pendingLevel2List = this.saleList.filter(item => item.state === '待二级审批')
         this.successList = this.saleList.filter(item => item.state === '审批完成')
@@ -211,13 +236,6 @@ export default {
       })
     },
     getData() {
-      const config = {
-        params: {
-          beginDateStr: this.beginDate,
-          endDateStr: this.endDate
-        }
-      }
-
     },
     handleClose(done) {
       this.$confirm('确认关闭？')
@@ -229,6 +247,12 @@ export default {
     },
     InquiryClose(done){
       this.$confirm('确认关闭？').
+      then(_=>{
+        done();
+      }).catch(_=>{});
+    },
+    AlertClose(done){
+          this.$confirm('确认').
       then(_=>{
         done();
       }).catch(_=>{});
@@ -264,6 +288,23 @@ export default {
         }
       })
     },
+    submitInquiry(){
+      const config = {
+        params: {
+          beginDateStr: formatDate(this.date[0]),
+          endDateStr:  formatDate(this.date[1]),
+          salesman: this.salesmanName
+        }
+      }
+  
+      getMaxAmountCustomerOfSalesmanByTime(config).then(_res=>{
+        console.log(_res)
+        this.alertInfo.name =  _res.result.name
+        this.alertInfo.price = _res.result.totalFinalAmount
+        this.alertInfo.id = _res.result.id
+      })
+      this.AlertdialogDialogVisible = true;
+    },
     resetForm() {
       this.saleForm = {
         saleSheetContent: [
@@ -290,6 +331,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.body {
+  margin: 0 auto;
+  margin-top: 10px;
+  height: 80vh;
+  overflow-y: auto;
+  width: 100%;
+  background: rgba($color: #fff, $alpha: 0.5);
+}
+</style>
 .body {
   margin: 0 auto;
   margin-top: 10px;
