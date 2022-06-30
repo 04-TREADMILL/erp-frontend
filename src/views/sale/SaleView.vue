@@ -2,7 +2,7 @@
   <Layout>
     <Title title="销售管理"></Title>
     <el-button type="primary" size="medium" @click="dialogVisible = true">制定销售单</el-button>
-    <el-button type="primary" size="medium" @click="CustomerInquiryDialogVisible = true">获取客户</el-button>
+    <el-button type="primary" size="medium" @click="CustomerInquiryDialogVisible = true">获取某个销售人员某段时间内消费总金额最大的客户</el-button>
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
         <el-tab-pane label="待一级审批" name="PENDING_LEVEL_1">
@@ -95,7 +95,7 @@
     </el-dialog>
 
     <el-dialog
-    title = "获取客户"
+    title = "获取某个销售人员某段时间内消费总金额最大的客户"
     :visible.sync = "CustomerInquiryDialogVisible"
     width="40%"
     :before-close="InquiryClose">
@@ -214,10 +214,6 @@ export default {
       this.sellers = _res.result
 
     })
-    // getAllSalesman({ params : { type: "SALE_STAFF" } }).then(_res => {
-   
-     
-    // })
   },
   methods: {
     getSale() {
@@ -331,15 +327,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.body {
-  margin: 0 auto;
-  margin-top: 10px;
-  height: 80vh;
-  overflow-y: auto;
-  width: 100%;
-  background: rgba($color: #fff, $alpha: 0.5);
-}
-</style>
 .body {
   margin: 0 auto;
   margin-top: 10px;

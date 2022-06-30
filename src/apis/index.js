@@ -30,7 +30,7 @@ const WAREHOUSE_OPQ_BY_TIME = '/api/warehouse/outputSheet/time/quantity';
 const WAREHOUSE_OUTPUTSHEET_APPROVE = '/api/warehouse/outputSheet/approve';
 const WAREHOUSE_INPUTSHEET_APPROVE = '/api/warehouse/inputSheet/approve';
 const WAREHOUSE_DAILY_COUNT = '/api/warehouse/warehouse/counting';
-
+const WAREHOUSE_EXCEL_EXPORT = 'api/warehouse/warehouse/exportExcel';
 
 // 销售管理
 // 进货管理
@@ -46,7 +46,6 @@ const PURCHASE_RETURN_FIRST_APPROVAL = '/api/purchase-returns/first-approval';
 const PURCHASE_RETURN_SECOND_APPROVAL = '/api/purchase-returns/second-approval';
 // 销售管理
 const SALE_ALL = '/api/sale/sheet-show';
-const SALESMAN_ALL = '/api/user/findByType';
 const SALE_CREATE = '/api/sale/sheet-make';
 const SALE_FIRST_APPROVAL = '/api/sale/first-approval';
 const SALE_SECOND_APPROVAL = '/api/sale/second-approval';
@@ -66,8 +65,6 @@ const SALE_CUSTOMER_MAX = '/api/sale/maxAmountCustomer';
 const CUSTOMER_ADD = 'api/customer/add';
 const CUSTOMER_DELETE = 'api/customer/delete';
 const CUSTOMER_UPDATE = 'api/customer/update';
-
-const EXCEL_EXPORT = 'api/warehouse/warehouse/exportExcel';
 
 module.exports = {
   TEST_GET,
@@ -97,6 +94,7 @@ module.exports = {
   WAREHOUSE_OUTPUTSHEET_APPROVE,
   WAREHOUSE_INPUTSHEET_APPROVE,
   WAREHOUSE_DAILY_COUNT,
+  WAREHOUSE_EXCEL_EXPORT,
 
   PURCHASE_ALL,
   PURCHASE_CREATE,
@@ -109,7 +107,6 @@ module.exports = {
   PURCHASE_FIND_SHEET_BY_ID,
 
   SALE_ALL,
-  SALESMAN_ALL,
   SALE_CREATE,
   SALE_FIRST_APPROVAL,
   SALE_SECOND_APPROVAL,
@@ -125,5 +122,4 @@ module.exports = {
   CUSTOMER_ADD,
   CUSTOMER_DELETE,
   CUSTOMER_UPDATE,
-  EXCEL_EXPORT,
 };
