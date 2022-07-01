@@ -26,6 +26,10 @@ const SaleView = () => import("../views/sale/SaleView");
 const SaleReturnView = () => import("../views/sale/SaleReturnView");
 const CustomerView = () => import ("../views/purchase/CustomerView");
 const Approval = () => import("../views/approval/Approval");
+const StaffManageView = () => import("../views/staff/StaffView");
+const StaffIncome = () => import("../views/staff/Income");
+const StaffDailyAttendance = ()=>import("../views/staff/StaffDailyAttendance");
+const StaffYearBonus = ()=>import("../views/staff/YearBonus");
 
 Vue.use(VueRouter);
 
@@ -152,7 +156,27 @@ const routes = [
     component: Approval,
     meta: { requiresAuth: PATH.GM_APPROVAL.requiresAuth }
   },
-
+  //HR
+  {
+    path: PATH.HR_STAFFMANAGE.path,
+    component: StaffManageView,
+    meta: { requiresAuth: PATH.HR_STAFFMANAGE.requiresAuth }
+  },
+  {
+    path:PATH.HR_STAFFDAILYATTENDANCE.path,
+    component: StaffDailyAttendance,
+    meta:{ requiresAuth:PATH.HR_STAFFDAILYATTENDANCE.requiresAuth}
+  },
+  {
+    path: PATH.HR_STAFFINCOME.path,
+    component: StaffIncome,
+    meta:{ requiresAuth:PATH.HR_STAFFINCOME.requiresAuth}
+  },
+  {
+    path: PATH.HR_YEARBONUS.path,
+    component: StaffYearBonus,
+    meta:{ requiresAuth: PATH.HR_YEARBONUS.requiresAuth}
+  },
   // -----------------------未找到页面-----------------------------
   {
     path: "*",

@@ -34,6 +34,7 @@ export default {
     loginThis() {
       console.log(this.userInfo);
       login(this.userInfo).then(_res => {
+        // console.log(_res);
         if (_res.code === '00000') {
           let token = _res.result.token;
           if (token == null) {

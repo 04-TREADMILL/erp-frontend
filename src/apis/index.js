@@ -66,6 +66,8 @@ const CUSTOMER_ADD = 'api/customer/add';
 const CUSTOMER_DELETE = 'api/customer/delete';
 const CUSTOMER_UPDATE = 'api/customer/update';
 
+//人力资源管理
+
 module.exports = {
   TEST_GET,
   TEST_POST,

@@ -91,5 +91,26 @@ export const PATH = {
   GM_APPROVAL: {
     path: '/approval',
     requiresAuth: [ROLE.GM,ROLE.ADMIN]
+  },
+  //HR
+  HR_STAFFMANAGE: {
+    path: '/StaffManageView',
+    requiresAuth: [ROLE.HR,ROLE.ADMIN]
+  },
+
+  HR_STAFFDAILYATTENDANCE:{
+    path: '/StaffDailyAttendance',
+    requiresAuth: [ROLE.HR,ROLE.ADMIN]
+  },
+  HR_STAFFINCOME:{
+    path: '/StaffIncome',
+    requiresAuth: [ROLE.HR,ROLE.ADMIN]
+  },
+  HR_YEARBONUS:{
+    path: '/YearBonus',
+    requiresAuth: [ROLE.HR,ROLE.ADMIN]
   }
+
+
+
 }

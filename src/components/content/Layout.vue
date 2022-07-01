@@ -126,6 +126,46 @@
             <span slot="title">审批</span>
           </el-menu-item>
         </el-submenu>
+        <el-submenu index="5"
+          v-if = "permit(PATH.HR_STAFFMANAGE.requiresAuth)">
+          <template slot="title">
+            <i class = "el-icon-user-solid"></i>
+            <span slot="title">员工管理</span>
+          </template>
+            <el-menu-item
+            :index = "PATH.HR_STAFFMANAGE.path"
+            v-if = "permit(PATH.HR_STAFFMANAGE.requiresAuth)">
+            <i class="el-icon-user-solid"></i>
+            <span slot="title">员工管理</span>
+            </el-menu-item> 
+            <el-menu-item
+            :index = "PATH.HR_STAFFINCOME.path"
+            v-if = "permit(PATH.HR_STAFFINCOME.requiresAuth)">
+            <i class="el-icon-money"></i>
+            <span slot="title">薪资发放</span>
+            </el-menu-item> 
+            <el-menu-item
+            :index = "PATH.HR_YEARBONUS.path"
+            v-if = "permit(PATH.HR_YEARBONUS.requiresAuth)">
+            <i class="el-icon-money"></i>
+            <span slot="title">年终奖</span>
+
+            </el-menu-item>   
+        </el-submenu>
+      <el-submenu index="6"
+          v-if = "permit(PATH.HR_STAFFDAILYATTENDANCE.requiresAuth)">
+          <template slot="title">
+            <i class = "el-icon-finished"></i>
+            <span slot="title">员工打卡</span>
+          </template>
+           <el-menu-item
+            :index="PATH.HR_STAFFDAILYATTENDANCE.path"
+            v-if="permit(PATH.HR_STAFFDAILYATTENDANCE.requiresAuth)"
+          >
+            <i class="el-icon-finished"></i>
+            <span slot="title">打卡记录</span>
+          </el-menu-item>
+      </el-submenu>
       </el-menu>
       <div class="logout-fix">
         <el-tooltip
