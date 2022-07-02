@@ -159,6 +159,65 @@
             <span slot="title">打卡记录</span>
           </el-menu-item>
       </el-submenu>
+      
+      <el-submenu index="7"
+          v-if = "permit(PATH.ACCOUNT_MANAGE.requiresAuth)">
+          <template slot="title">
+            <i class = "el-icon-s-custom"></i>
+            <span slot="title">账户管理</span>
+          </template>
+           <el-menu-item
+            :index="PATH.ACCOUNT_MANAGE.path"
+            v-if="permit(PATH.ACCOUNT_MANAGE.requiresAuth)"
+          >
+            <i class="el-icon-s-custom"></i>
+            <span slot="title">账户管理</span>
+          </el-menu-item>
+           <el-menu-item
+            :index="PATH.RECEIVE_MANAGE.path"
+            v-if="permit(PATH.RECEIVE_MANAGE.requiresAuth)"
+          >
+            <i class="el-icon-money"></i>
+            <span slot="title">收款管理</span>
+          </el-menu-item>
+          <el-menu-item
+            :index="PATH.PAY_MANAGE.path"
+            v-if="permit(PATH.PAY_MANAGE.requiresAuth)"
+          >
+            <i class="el-icon-money"></i>
+            <span slot="title">付款管理</span>
+          </el-menu-item>
+          <el-menu-item
+            :index="PATH.INCOME_MANAGE.path"
+            v-if="permit(PATH.INCOME_MANAGE.requiresAuth)"
+          >
+            <i class="el-icon-money"></i>
+            <span slot="title">工资管理</span>
+          </el-menu-item>
+      </el-submenu>
+      <el-submenu index = "8"
+        v-if = "permit(PATH.CHECK_PURCHASE_DETAIL.requiresAuth)">
+          <template slot="title">
+            <i class = "el-icon-office-building"></i>
+            <span slot="title">经营管理</span>
+          </template>
+          <el-menu-item
+            :index="PATH.CHECK_PURCHASE_DETAIL.path"
+            v-if="permit(PATH.CHECK_PURCHASE_DETAIL.requiresAuth)"
+          >
+            <i class="el-icon-tickets"></i>
+            <span slot="title">销售明细</span>
+          </el-menu-item>
+          <el-menu-item
+            :index="PATH.CHECK_BUSSINESS_PROGRESS.path"
+            v-if="permit(PATH.CHECK_BUSSINESS_PROGRESS.requiresAuth)"
+          >
+            <i class="el-icon-edit-outline"></i>
+            <span slot="title">经营历程</span>
+          </el-menu-item>
+      </el-submenu>
+
+
       </el-menu>
       <div class="logout-fix">
         <el-tooltip

@@ -18,7 +18,7 @@ export default {
     }
   },
   mounted() {
-    this.showAll = new Array(this.list.length).fill(false)
+    console.log("CLockLIst")
   },
   methods: {
     

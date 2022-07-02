@@ -106,6 +106,33 @@ export const PATH = {
     path: '/EmployeeIncome',
     requiresAuth: [ROLE.HR,ROLE.ADMIN]
   },
+  //FINANCIAL_STAFF
+  ACCOUNT_MANAGE:{
+    path:'/AccountManage',
+    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+  },
+  RECEIVE_MANAGE:{
+    path:'/ReceiveManage',
+    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+  },
+  PAY_MANAGE:{
+    path:'/PayManage',
+    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+  },
+  INCOME_MANAGE:{
+    path:'/IncomeManage',
+    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+  },
+  CHECK_PURCHASE_DETAIL:{
+    path:'/CheckPurchaseDetail',
+    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+  },
+  CHECK_BUSSINESS_PROGRESS:{
+    path:'/ChceckBussinessProgress',
+    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+  },
+
+  
 
 
 

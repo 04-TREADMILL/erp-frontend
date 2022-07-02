@@ -8,7 +8,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-list :list="unclocked" :type="1" @refresh="getClock()"/>
+            <clock-list :list="unclocked" :type="1" @refresh="getClock()"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="今日已打卡" name="PENDING_LEVEL_2">
@@ -16,7 +16,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-list :list="clocked" :type="2" @refresh="getClock()"/>
+            <clock-list :list="clocked" :type="2" @refresh="getClock()"/>
           </div>
         </el-tab-pane>
 
@@ -30,6 +30,8 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import ClockList from "./components/ClockList";
+import {showEmployeepunch,addEmployeepunch,showEmployee} from "../../network/employee";
+
 
 export default {
   name: 'EmployeeDailyAttendance',
@@ -41,16 +43,33 @@ export default {
   data() {
     return {
      activeName: 'PENDING_LEVEL_1',
+     idList:[],
      clockList: [],
      unclocked: [],
      clocked: [],
     }
   },
   mounted() {
-    
+    showEmployee().then(_res=>{
+      let res = []
+      _res.result.forEach((item, index) => {
+            let obj = item
+            res.push({
+                id: obj.id,
+            })
+      })
+      // console.log(res)
+      this.idList = res;
+    })
+    this.getEmployee();
   },
   methods: {
+  getEmployee() {
+      
+  },
+  getClock(){
 
+  },
   }
 }
 </script>

@@ -288,11 +288,9 @@ export default {
         } else if (type === true) {
 
           var name = this.addForm.name;
-          var id = this.addForm.id;
           var gender = this.addForm.gender;
 
           if(name == "") alert("姓名不能为空！");
-          else if(id == "") alert("id不能为空！");
           else if(gender=="") alert("性别不能为空！");
           else{
           addEmployee(this.addForm).then(_res => {

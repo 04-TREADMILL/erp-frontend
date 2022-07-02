@@ -31,7 +31,12 @@ const EmployeeManageView = () => import("../views/employee/EmployeeView");
 const EmployeeIncome = () => import("../views/employee/Income");
 const EmployeeDailyAttendance = ()=>import("../views/employee/EmployeeDailyAttendance");
 
-
+const ReceiveManage = ()=>import("../views/financial/ReceiveManage");
+const PayManage = ()=> import("../views/financial/PayManage");
+const IncomeManage = ()=>import("../views/financial/IncomeManage");
+const CheckPurchaseDetail = ()=>import("../views/financial/CheckPurchaseDetail");
+const CheckBussinessProgress = ()=>import("../views/financial/CheckBussinessProgress");
+const AccountManage = ()=>import("../views/financial/AccountManage");
 Vue.use(VueRouter);
 
 const routes = [
@@ -172,6 +177,38 @@ const routes = [
     path: PATH.HR_EMPLOYEEINCOME.path,
     component: EmployeeIncome,
     meta:{ requiresAuth:PATH.HR_EMPLOYEEINCOME.requiresAuth}
+  },
+
+  //FINANCIAL_STAFF
+  {
+    path:PATH.ACCOUNT_MANAGE.path,
+    component:AccountManage,
+    meta:{requiresAuth: PATH.ACCOUNT_MANAGE.requiresAuth}
+  },
+  {
+    path:PATH.RECEIVE_MANAGE.path,
+    component:ReceiveManage,
+    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+  },
+  {
+    path:PATH.PAY_MANAGE.path,
+    component: PayManage,
+    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+  },
+  {
+    path:PATH.INCOME_MANAGE.path,
+    component: IncomeManage,
+    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+  },
+  {
+    path:PATH.CHECK_PURCHASE_DETAIL.path,
+    component:   CheckPurchaseDetail,
+    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+  },
+  {
+    path:PATH.CHECK_BUSSINESS_PROGRESS.path,
+    component: CheckBussinessProgress,
+    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
   },
   // -----------------------未找到页面-----------------------------
   {

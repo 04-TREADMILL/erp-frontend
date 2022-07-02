@@ -3,6 +3,7 @@
 </template>
 
 <script>
+
 import { ROLE, PATH } from "../common/const";
   export default {
     beforeMount() {
@@ -19,6 +20,8 @@ import { ROLE, PATH } from "../common/const";
         this.$router.push(PATH.PURCHASE_VIEW)
       } else if(role === ROLE.HR){
         this.$router.push(PATH.HR_EMPLOYEEMANAGE);
+      } else if(role === ROLE.FINANCIAL_STAFF){
+        this.$router.push(PATH.ACCOUNT_MANAGE);
       }
       else {
         this.$router.push("/error");
