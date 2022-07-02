@@ -44,6 +44,7 @@ export default {
     return {
      activeName: 'PENDING_LEVEL_1',
      idList:[],
+     employeeList:[],
      clockList: [],
      unclocked: [],
      clocked: [],
@@ -51,22 +52,30 @@ export default {
   },
   mounted() {
     showEmployee().then(_res=>{
+      this.employeeList = _res.result;
       let res = []
+      let unclockedlist = []
+
       _res.result.forEach((item, index) => {
             let obj = item
             res.push({
                 id: obj.id,
             })
+            unclockedlist.push({
+              id: obj.id,
+              name: obj.name,
+              role: obj.role,
+              gender: obj.gender
+            })
       })
       // console.log(res)
       this.idList = res;
+      this.unclocked = unclockedlist
     })
-    this.getEmployee();
+
   },
   methods: {
-  getEmployee() {
-      
-  },
+
   getClock(){
 
   },
