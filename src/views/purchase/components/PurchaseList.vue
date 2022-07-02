@@ -94,6 +94,7 @@
 
 <script>
 import { firstApproval, secondApproval } from '../../../network/purchase'
+
 export default {
   name: "PurchaseList",
   props: {

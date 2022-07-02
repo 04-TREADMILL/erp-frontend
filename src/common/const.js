@@ -93,23 +93,20 @@ export const PATH = {
     requiresAuth: [ROLE.GM,ROLE.ADMIN]
   },
   //HR
-  HR_STAFFMANAGE: {
-    path: '/StaffManageView',
+  HR_EMPLOYEEMANAGE: {
+    path: '/EmployeeManageView',
     requiresAuth: [ROLE.HR,ROLE.ADMIN]
   },
 
-  HR_STAFFDAILYATTENDANCE:{
-    path: '/StaffDailyAttendance',
+  HR_EMPLOYEEDAILYATTENDANCE:{
+    path: '/EmployeeDailyAttendance',
     requiresAuth: [ROLE.HR,ROLE.ADMIN]
   },
-  HR_STAFFINCOME:{
-    path: '/StaffIncome',
+  HR_EMPLOYEEINCOME:{
+    path: '/EmployeeIncome',
     requiresAuth: [ROLE.HR,ROLE.ADMIN]
   },
-  HR_YEARBONUS:{
-    path: '/YearBonus',
-    requiresAuth: [ROLE.HR,ROLE.ADMIN]
-  }
+
 
 
 

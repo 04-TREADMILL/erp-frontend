@@ -67,6 +67,13 @@ const CUSTOMER_DELETE = 'api/customer/delete';
 const CUSTOMER_UPDATE = 'api/customer/update';
 
 //人力资源管理
+const EMPLOYEE_ADD = 'api/employee/add';
+const EMPLOYEE_DELETE = 'api/employee/delete';
+const EMPLOYEE_UPDATE = 'api/employee/update';
+const EMPLOYEE_SHOW = 'api/employee/show';
+
+const EMPLOYEE_SHOW_PUNCH = 'api/employee/show-punch';
+const EMPLOYEE_ADD_PUNCH = 'api/employee/add-punch';
 
 module.exports = {
   TEST_GET,
@@ -124,4 +131,12 @@ module.exports = {
   CUSTOMER_ADD,
   CUSTOMER_DELETE,
   CUSTOMER_UPDATE,
+
+  EMPLOYEE_ADD,
+  EMPLOYEE_DELETE,
+  EMPLOYEE_SHOW,
+  EMPLOYEE_UPDATE,
+
+  EMPLOYEE_SHOW_PUNCH,
+  EMPLOYEE_ADD_PUNCH,
 };

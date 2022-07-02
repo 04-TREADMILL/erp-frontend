@@ -26,10 +26,11 @@ const SaleView = () => import("../views/sale/SaleView");
 const SaleReturnView = () => import("../views/sale/SaleReturnView");
 const CustomerView = () => import ("../views/purchase/CustomerView");
 const Approval = () => import("../views/approval/Approval");
-const StaffManageView = () => import("../views/staff/StaffView");
-const StaffIncome = () => import("../views/staff/Income");
-const StaffDailyAttendance = ()=>import("../views/staff/StaffDailyAttendance");
-const StaffYearBonus = ()=>import("../views/staff/YearBonus");
+
+const EmployeeManageView = () => import("../views/employee/EmployeeView");
+const EmployeeIncome = () => import("../views/employee/Income");
+const EmployeeDailyAttendance = ()=>import("../views/employee/EmployeeDailyAttendance");
+
 
 Vue.use(VueRouter);
 
@@ -158,24 +159,19 @@ const routes = [
   },
   //HR
   {
-    path: PATH.HR_STAFFMANAGE.path,
-    component: StaffManageView,
-    meta: { requiresAuth: PATH.HR_STAFFMANAGE.requiresAuth }
+    path: PATH.HR_EMPLOYEEMANAGE.path,
+    component: EmployeeManageView,
+    meta: { requiresAuth: PATH.HR_EMPLOYEEMANAGE.requiresAuth }
   },
   {
-    path:PATH.HR_STAFFDAILYATTENDANCE.path,
-    component: StaffDailyAttendance,
-    meta:{ requiresAuth:PATH.HR_STAFFDAILYATTENDANCE.requiresAuth}
+    path:PATH.HR_EMPLOYEEDAILYATTENDANCE.path,
+    component: EmployeeDailyAttendance,
+    meta:{ requiresAuth:PATH.HR_EMPLOYEEDAILYATTENDANCE.requiresAuth}
   },
   {
-    path: PATH.HR_STAFFINCOME.path,
-    component: StaffIncome,
-    meta:{ requiresAuth:PATH.HR_STAFFINCOME.requiresAuth}
-  },
-  {
-    path: PATH.HR_YEARBONUS.path,
-    component: StaffYearBonus,
-    meta:{ requiresAuth: PATH.HR_YEARBONUS.requiresAuth}
+    path: PATH.HR_EMPLOYEEINCOME.path,
+    component: EmployeeIncome,
+    meta:{ requiresAuth:PATH.HR_EMPLOYEEINCOME.requiresAuth}
   },
   // -----------------------未找到页面-----------------------------
   {

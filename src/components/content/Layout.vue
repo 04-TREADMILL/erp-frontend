@@ -127,40 +127,33 @@
           </el-menu-item>
         </el-submenu>
         <el-submenu index="5"
-          v-if = "permit(PATH.HR_STAFFMANAGE.requiresAuth)">
+          v-if = "permit(PATH.HR_EMPLOYEEMANAGE.requiresAuth)">
           <template slot="title">
             <i class = "el-icon-user-solid"></i>
             <span slot="title">员工管理</span>
           </template>
             <el-menu-item
-            :index = "PATH.HR_STAFFMANAGE.path"
-            v-if = "permit(PATH.HR_STAFFMANAGE.requiresAuth)">
+            :index = "PATH.HR_EMPLOYEEMANAGE.path"
+            v-if = "permit(PATH.HR_EMPLOYEEMANAGE.requiresAuth)">
             <i class="el-icon-user-solid"></i>
             <span slot="title">员工管理</span>
             </el-menu-item> 
             <el-menu-item
-            :index = "PATH.HR_STAFFINCOME.path"
-            v-if = "permit(PATH.HR_STAFFINCOME.requiresAuth)">
+            :index = "PATH.HR_EMPLOYEEINCOME.path"
+            v-if = "permit(PATH.HR_EMPLOYEEINCOME.requiresAuth)">
             <i class="el-icon-money"></i>
             <span slot="title">薪资发放</span>
             </el-menu-item> 
-            <el-menu-item
-            :index = "PATH.HR_YEARBONUS.path"
-            v-if = "permit(PATH.HR_YEARBONUS.requiresAuth)">
-            <i class="el-icon-money"></i>
-            <span slot="title">年终奖</span>
-
-            </el-menu-item>   
         </el-submenu>
       <el-submenu index="6"
-          v-if = "permit(PATH.HR_STAFFDAILYATTENDANCE.requiresAuth)">
+          v-if = "permit(PATH.HR_EMPLOYEEDAILYATTENDANCE.requiresAuth)">
           <template slot="title">
             <i class = "el-icon-finished"></i>
             <span slot="title">员工打卡</span>
           </template>
            <el-menu-item
-            :index="PATH.HR_STAFFDAILYATTENDANCE.path"
-            v-if="permit(PATH.HR_STAFFDAILYATTENDANCE.requiresAuth)"
+            :index="PATH.HR_EMPLOYEEDAILYATTENDANCE.path"
+            v-if="permit(PATH.HR_EMPLOYEEDAILYATTENDANCE.requiresAuth)"
           >
             <i class="el-icon-finished"></i>
             <span slot="title">打卡记录</span>
