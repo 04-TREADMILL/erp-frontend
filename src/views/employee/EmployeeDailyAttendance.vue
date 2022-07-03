@@ -75,7 +75,7 @@
           <el-input v-model="addForm.eid" placeholder="请输入员工id"></el-input>
         </el-form-item>
         <el-form-item label="打卡日期 ">
-            <el-date-picker v-model="addForm.punchTime" type="date" placeholder="选择日期" value-format="yyyy-MM-dd"> </el-date-picker>   
+            <el-date-picker v-model="addForm.punchTime" type="datetime" placeholder="选择时间" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>   
         </el-form-item>     
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -92,6 +92,7 @@ import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import {showEmployeepunch,addEmployeepunch,showEmployee} from "../../network/employee";
 import { formatDate } from "@/common/utils";
+import M from "minimatch";
 
 export default {
   name: 'EmployeeDailyAttendance',
@@ -130,15 +131,33 @@ export default {
       }
       // console.log(ret);
       this.idList = ret;
-      this.clockList = punchret;     
+      this.clockList = punchret; 
     })
+ setTimeout(()=>{
+ //反异步
+ for(var i=0;i<this.clockList.length;i++){
+  // console.log(this.clockList[i].punchTime)
+  this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
+ }
+ },800)
 
-
-    
   },
   methods: {
+    transformTimestamp(timestamp){
+    let a = new Date(timestamp).getTime();
+    const date = new Date(a);
+    const Y = date.getFullYear() + '-';
+    const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    const D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + '  ';
+    const h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
+    const m = (date.getMinutes() <10 ? '0'+date.getMinutes() : date.getMinutes()) ;
+    // const s = date.getSeconds(); // 秒
+    const dateString = Y + M + D + h + m;
+    // console.log('dateString', dateString); // > dateString 2021-07-06 14:23
+    return dateString;
+},
     getAll(){
-        showEmployee().then(_res=>{
+      showEmployee().then(_res=>{
       let ret = [];
       let punchret = []
       for(var i=0;i<_res.result.length;i++){
@@ -148,29 +167,45 @@ export default {
         })
 
         let config = {params:{id: obj.id}};
-       
+
         showEmployeepunch(config).then(_res=>{
           // console.log(_res);
           punchret.push(..._res.result)
         })
       }
       // console.log(ret);
+      punchret.forEach(function(element) {
+      // console.log(element);
+      });
+
       this.idList = ret;
       this.clockList = punchret;     
     })
+     setTimeout(()=>{
+ //反异步
+ for(var i=0;i<this.clockList.length;i++){
+  // console.log(this.clockList[i].punchTime)
+  this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
+ }
+ },800)
     },
     addPunch(){
         this.addDialogVisible = true;
     },
     handleAdd(type){
-        console.log(type);
+        // console.log(type);
         if (type === false) {
           this.addDialogVisible = false;
           this.addForm = {};
         } else if (type === true) {
 
           var id = this.addForm.id;
-          var eid = this.addForm.name;
+          var eid = this.addForm.eid;
+          
+          console.log(this.addForm.punchTime)
+          var time = this.addForm.punchTime
+          this.addForm.punchTime =Date.parse(time)
+          console.log(this.addForm.punchTime)
 
           if(id == "") alert("打卡id不能为空！");
           else if(eid=="") alert("员工id不能为空！");
