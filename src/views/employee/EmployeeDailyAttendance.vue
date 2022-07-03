@@ -143,19 +143,7 @@ export default {
 
   },
   methods: {
-    transformTimestamp(timestamp){
-    let a = new Date(timestamp).getTime();
-    const date = new Date(a);
-    const Y = date.getFullYear() + '-';
-    const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-    const D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + '  ';
-    const h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
-    const m = (date.getMinutes() <10 ? '0'+date.getMinutes() : date.getMinutes()) ;
-    // const s = date.getSeconds(); // 秒
-    const dateString = Y + M + D + h + m;
-    // console.log('dateString', dateString); // > dateString 2021-07-06 14:23
-    return dateString;
-},
+
     getAll(){
       showEmployee().then(_res=>{
       let ret = [];
@@ -202,10 +190,9 @@ export default {
           var id = this.addForm.id;
           var eid = this.addForm.eid;
           
-          console.log(this.addForm.punchTime)
+
           var time = this.addForm.punchTime
           this.addForm.punchTime =Date.parse(time)
-          console.log(this.addForm.punchTime)
 
           if(id == "") alert("打卡id不能为空！");
           else if(eid=="") alert("员工id不能为空！");
