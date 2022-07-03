@@ -90,7 +90,6 @@
 <script>
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
-import ClockList from "./components/ClockList";
 import {showEmployeepunch,addEmployeepunch,showEmployee} from "../../network/employee";
 import { formatDate } from "@/common/utils";
 
@@ -99,7 +98,6 @@ export default {
   components: {
     Layout,
     Title,
-    ClockList
   },
   data() {
     return {

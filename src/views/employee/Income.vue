@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <Title title="薪资发放"></Title>
+    <Title title="薪酬规则制定"></Title>
 
 
   </Layout>
