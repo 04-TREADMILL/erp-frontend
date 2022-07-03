@@ -123,9 +123,7 @@ export default {
         ret.push({
           id: obj.id
         })
-
         let config = {params:{id: obj.id}};
-       
         showEmployeepunch(config).then(_res=>{
           // console.log(_res);
           punchret.push(..._res.result)
