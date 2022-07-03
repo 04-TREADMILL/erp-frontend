@@ -140,7 +140,7 @@ export default {
           // console.log(this.clockList[i].punchTime)
           this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
         }
-         this.clockList = (this.clockList.reverse);
+         this.clockList = this.clockList.reverse();
  },800)
 
   },
@@ -177,7 +177,7 @@ export default {
             // console.log(this.clockList[i].punchTime)
             this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
           }
-      this.clockList = (this.clockList.reverse);
+      this.clockList = this.clockList.reverse();
  },800)
     },
     addPunch(){
@@ -202,7 +202,7 @@ export default {
           else{
           addEmployeepunch(this.addForm).then(_res => {
             console.log(_res)
-            if(_res.code === "000010"){
+            if(_res.code === "A0004"){
               this.$message({
                 type: 'error',
                 message: _res.msg
