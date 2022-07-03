@@ -27,7 +27,7 @@
       <el-table ref="table"
         :data="clockList"
         stripe
-        style="width: 100%"
+        style="width: 80%"
         :header-cell-style="{'text-align':'center'}"
         :cell-style="{'text-align':'center'}">
          <el-table-column
