@@ -140,7 +140,7 @@ export default {
           // console.log(this.clockList[i].punchTime)
           this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
         }
-         this.clockList = this.clockList.reverse();
+        this.clockList.sort(function(a, b){return b.id - a.id}); 
  },800)
 
   },
@@ -177,7 +177,7 @@ export default {
             // console.log(this.clockList[i].punchTime)
             this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
           }
-      this.clockList = this.clockList.reverse();
+      this.clockList.sort(function(a, b){return b.id - a.id}); 
  },800)
     },
     addPunch(){
