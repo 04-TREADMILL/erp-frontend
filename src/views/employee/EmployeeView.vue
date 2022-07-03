@@ -237,7 +237,7 @@ export default {
     return {
       employeeList:[],
       addDialogVisible: false,
-      editDialogVisble: false,
+      editDialogVisible: false,
       editForm:{},
       addForm:{
         id:0,

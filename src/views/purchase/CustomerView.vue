@@ -233,7 +233,7 @@ export default {
     return {
       customerList: [],
       addDialogVisible: false,
-      editDialogVisble: false,
+      editDialogVisible: false,
       editForm:{},
       addForm:{
         address:"",

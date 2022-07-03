@@ -105,15 +105,16 @@ export default {
     return {
      idList:[],
      clockList: [],
-     addDialogVisible:false,
+     addDialogVisible: false,
      addForm:{
       id:0,
       eid:0,
-      punchTime:""
+      punchTime:"",
      }
     }
   },
   mounted() {
+    this.addDialogVisible = false;
     showEmployee().then(_res=>{
       let ret = [];
       let punchret = []
@@ -130,14 +131,12 @@ export default {
           punchret.push(..._res.result)
         })
       }
-      // console.log(ret);
       this.idList = ret;
       this.clockList = punchret; 
     })
  setTimeout(()=>{
         //反异步
         for(var i=0;i<this.clockList.length;i++){
-          // console.log(this.clockList[i].punchTime)
           this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
         }
         this.clockList.sort(function(a, b){return b.id - a.id}); 
@@ -155,19 +154,12 @@ export default {
         ret.push({
           id: obj.id
         })
-
         let config = {params:{id: obj.id}};
-
         showEmployeepunch(config).then(_res=>{
-          // console.log(_res);
+
           punchret.push(..._res.result)
         })
       }
-      // console.log(ret);
-      punchret.forEach(function(element) {
-      // console.log(element);
-      });
-
       this.idList = ret;
       this.clockList = punchret;     
     })
