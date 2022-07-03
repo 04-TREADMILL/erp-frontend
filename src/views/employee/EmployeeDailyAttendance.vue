@@ -47,7 +47,7 @@
         </el-table-column> -->
         <el-table-column
           prop="punchTime"
-          label="打卡日期"
+          label="打卡时间"
           width="300">
         </el-table-column>
 
@@ -74,7 +74,7 @@
         <el-form-item label="员工id">
           <el-input v-model="addForm.eid" placeholder="请输入员工id"></el-input>
         </el-form-item>
-        <el-form-item label="打卡日期 ">
+        <el-form-item label="打卡时间 ">
             <el-date-picker v-model="addForm.punchTime" type="datetime" placeholder="选择时间" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>   
         </el-form-item>     
       </el-form>
