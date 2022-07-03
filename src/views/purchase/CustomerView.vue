@@ -260,7 +260,7 @@ export default {
       this.customerList = this.customerList.concat(_res.result)
     })
 
-    console.log(this.customerList);
+    // console.log(this.customerList);
   },
   methods: {
     filterTag(value, row) {
@@ -282,7 +282,7 @@ export default {
       this.addDialogVisible = true;
     },
     handleAdd(type) {
-      console.log(type);
+      // console.log(type);
         if (type === false) {
           this.addDialogVisible = false;
           this.addForm = {};
@@ -299,7 +299,7 @@ export default {
           else if(ty=="") alert("类型不能为空！");
           else{
           addCustomer(this.addForm).then(_res => {
-            console.log(_res.code);
+            // console.log(_res.code);
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',
@@ -354,7 +354,7 @@ export default {
           }
         };
 
-      console.log(id);
+      // console.log(id);
       this.$confirm('是否要删除该？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
