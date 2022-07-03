@@ -1,7 +1,8 @@
 <template>
   <Layout>
     <Title title="员工打卡"></Title>
-    <div class="body">
+    <el-button type="primary" size="medium" @click="addPunch">新增打卡记录</el-button>
+    <!-- <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
         <el-tab-pane label="今日未打卡" name="PENDING_LEVEL_1">
           <div v-if="unclocked.length === 0">
@@ -21,7 +22,67 @@
         </el-tab-pane>
 
       </el-tabs>
+    </div> -->
+   <div style="margin-top: 10px">
+      <el-table ref="table"
+        :data="clockList"
+        stripe
+        style="width: 100%"
+        :header-cell-style="{'text-align':'center'}"
+        :cell-style="{'text-align':'center'}">
+         <el-table-column
+          prop="id"
+          label="打卡id"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="eid"
+          label="员工id"
+          width="400">
+        </el-table-column>
+        <!-- <el-table-column
+          prop="name"
+          label="姓名"
+          width="70">
+        </el-table-column> -->
+        <el-table-column
+          prop="punchTime"
+          label="打卡日期"
+          width="300">
+        </el-table-column>
+
+      </el-table>
     </div>
+
+
+
+      <el-dialog
+      title="新增员工信息"
+      :visible.sync="addDialogVisible"
+      width="30%"
+      @close="close()">
+      <el-form :model="addForm" :label-width="'100px'" size="mini">
+      
+        <!-- <el-form-item label="i d">
+          <el-col :span="11">
+            <el-input v-model="addForm.id" placeholder="请输入员工id" ></el-input>
+          </el-col>
+        </el-form-item> -->
+        <el-form-item label="打卡id">
+          <el-input v-model="addForm.id" placeholder="请输入打卡id"></el-input>
+        </el-form-item>
+        <el-form-item label="员工id">
+          <el-input v-model="addForm.eid" placeholder="请输入员工id"></el-input>
+        </el-form-item>
+        <el-form-item label="打卡日期 ">
+            <el-date-picker v-model="addForm.punchTime" type="date" placeholder="选择日期" value-format="yyyy-MM-dd"> </el-date-picker>   
+        </el-form-item>     
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="handleAdd(false)">取 消</el-button>
+        <el-button type="primary" @click="handleAdd(true)">确 定</el-button>
+      </div>
+    </el-dialog>
 
   </Layout>
 </template>
@@ -31,7 +92,7 @@ import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import ClockList from "./components/ClockList";
 import {showEmployeepunch,addEmployeepunch,showEmployee} from "../../network/employee";
-
+import { formatDate } from "@/common/utils";
 
 export default {
   name: 'EmployeeDailyAttendance',
@@ -42,43 +103,103 @@ export default {
   },
   data() {
     return {
-     activeName: 'PENDING_LEVEL_1',
      idList:[],
-     employeeList:[],
      clockList: [],
-     unclocked: [],
-     clocked: [],
+     addDialogVisible:false,
+     addForm:{
+      id:0,
+      eid:0,
+      punchTime:""
+     }
     }
   },
   mounted() {
     showEmployee().then(_res=>{
-      this.employeeList = _res.result;
-      let res = []
-      let unclockedlist = []
+      let ret = [];
+      let punchret = []
+      for(var i=0;i<_res.result.length;i++){
+        let obj =_res.result[i];
+        ret.push({
+          id: obj.id
+        })
 
-      _res.result.forEach((item, index) => {
-            let obj = item
-            res.push({
-                id: obj.id,
-            })
-            unclockedlist.push({
-              id: obj.id,
-              name: obj.name,
-              role: obj.role,
-              gender: obj.gender
-            })
-      })
-      // console.log(res)
-      this.idList = res;
-      this.unclocked = unclockedlist
+        let config = {params:{id: obj.id}};
+       
+        showEmployeepunch(config).then(_res=>{
+          // console.log(_res);
+          punchret.push(..._res.result)
+        })
+      }
+      // console.log(ret);
+      this.idList = ret;
+      this.clockList = punchret;     
     })
 
+
+    
   },
   methods: {
+    getAll(){
+        showEmployee().then(_res=>{
+      let ret = [];
+      let punchret = []
+      for(var i=0;i<_res.result.length;i++){
+        let obj =_res.result[i];
+        ret.push({
+          id: obj.id
+        })
 
-  getClock(){
+        let config = {params:{id: obj.id}};
+       
+        showEmployeepunch(config).then(_res=>{
+          // console.log(_res);
+          punchret.push(..._res.result)
+        })
+      }
+      // console.log(ret);
+      this.idList = ret;
+      this.clockList = punchret;     
+    })
+    },
+    addPunch(){
+        this.addDialogVisible = true;
+    },
+    handleAdd(type){
+        console.log(type);
+        if (type === false) {
+          this.addDialogVisible = false;
+          this.addForm = {};
+        } else if (type === true) {
 
-  },
+          var id = this.addForm.id;
+          var eid = this.addForm.name;
+
+          if(id == "") alert("打卡id不能为空！");
+          else if(eid=="") alert("员工id不能为空！");
+          else{
+          addEmployeepunch(this.addForm).then(_res => {
+             console.log(_res);
+            if (_res.code === "A0002") {
+              this.$message({
+                type: 'error',
+                message: _res.msg
+              });
+            } else {
+              this.$message({
+                type: 'success',
+                message: '新增成功!'
+              });
+              this.addForm = {};
+              this.addDialogVisible = false;
+              this.getAll();
+            }
+          })
+          }
+        }
+    },
+    close(){
+        this.addForm = {};
+    },
   }
 }
 </script>
