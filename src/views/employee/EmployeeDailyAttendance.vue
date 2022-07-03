@@ -118,6 +118,7 @@ export default {
     showEmployee().then(_res=>{
       let ret = [];
       let punchret = []
+      
       for(var i=0;i<_res.result.length;i++){
         let obj =_res.result[i];
         ret.push({
