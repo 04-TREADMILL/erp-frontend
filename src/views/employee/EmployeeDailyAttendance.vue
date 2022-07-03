@@ -27,7 +27,7 @@
       <el-table ref="table"
         :data="clockList"
         stripe
-        style="width: 80%"
+        style="width: 100%"
         :header-cell-style="{'text-align':'center'}"
         :cell-style="{'text-align':'center'}">
          <el-table-column
@@ -92,7 +92,8 @@ import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import {showEmployeepunch,addEmployeepunch,showEmployee} from "../../network/employee";
 import { formatDate } from "@/common/utils";
-import M from "minimatch";
+
+
 
 export default {
   name: 'EmployeeDailyAttendance',
@@ -134,11 +135,12 @@ export default {
       this.clockList = punchret; 
     })
  setTimeout(()=>{
- //反异步
- for(var i=0;i<this.clockList.length;i++){
-  // console.log(this.clockList[i].punchTime)
-  this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
- }
+        //反异步
+        for(var i=0;i<this.clockList.length;i++){
+          // console.log(this.clockList[i].punchTime)
+          this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
+        }
+         this.clockList = (this.clockList.reverse);
  },800)
 
   },
@@ -170,11 +172,12 @@ export default {
       this.clockList = punchret;     
     })
      setTimeout(()=>{
- //反异步
- for(var i=0;i<this.clockList.length;i++){
-  // console.log(this.clockList[i].punchTime)
-  this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
- }
+          //反异步
+          for(var i=0;i<this.clockList.length;i++){
+            // console.log(this.clockList[i].punchTime)
+            this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
+          }
+      this.clockList = (this.clockList.reverse);
  },800)
     },
     addPunch(){
@@ -198,16 +201,22 @@ export default {
           else if(eid=="") alert("员工id不能为空！");
           else{
           addEmployeepunch(this.addForm).then(_res => {
-             console.log(_res);
-            if (_res.code === "A0002") {
+            console.log(_res)
+            if(_res.code === "000010"){
               this.$message({
                 type: 'error',
                 message: _res.msg
               });
-            } else {
+            } 
+            else if(_res.code==="111111"){
+                  this.$message({
+                type: 'error',
+                message: "打卡失败"
+              });
+            }else {
               this.$message({
                 type: 'success',
-                message: '新增成功!'
+                message: '打卡成功!'
               });
               this.addForm = {};
               this.addDialogVisible = false;
