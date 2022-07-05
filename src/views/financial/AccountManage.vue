@@ -82,6 +82,7 @@
     },
     mounted(){
       showAccount().then(_res=>{
+        console.log(_res);
         this.accountList = _res.result;
       })
     },
@@ -101,6 +102,8 @@
         if(choice === true){
           var name = this.addForm.name;
           var amount = this.addForm.amount;
+          console.log(name);
+          console.log(amount);
           if(name == "") alert("姓名不能为空！");
           else if(amount < 0) alert("初始金额不能为负！");
           else{

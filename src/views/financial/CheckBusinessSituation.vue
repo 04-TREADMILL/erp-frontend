@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Title title="经营情况"></Title>
-    经营历程
+    经营情况
   </Layout>
 </template>
 
