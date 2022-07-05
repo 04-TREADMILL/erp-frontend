@@ -66,6 +66,12 @@ const CUSTOMER_ADD = 'api/customer/add';
 const CUSTOMER_DELETE = 'api/customer/delete';
 const CUSTOMER_UPDATE = 'api/customer/update';
 
+//财务人员账号管理
+const ACCOUNT_ADD = "api/account/add";
+const ACCOUNT_SHOW = "api/account/show";
+const ACCOUNT_GET_BY_ID = "api/account/get";
+const ACCOUNT_DELETE = "api/account/delete";
+
 //人力资源管理
 const EMPLOYEE_ADD = 'api/employee/add';
 const EMPLOYEE_DELETE = 'api/employee/delete';
@@ -131,6 +137,11 @@ module.exports = {
   CUSTOMER_ADD,
   CUSTOMER_DELETE,
   CUSTOMER_UPDATE,
+
+  ACCOUNT_ADD,
+  ACCOUNT_SHOW,
+  ACCOUNT_GET_BY_ID,
+  ACCOUNT_DELETE,
 
   EMPLOYEE_ADD,
   EMPLOYEE_DELETE,

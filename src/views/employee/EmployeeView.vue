@@ -166,14 +166,14 @@
       @close="close()">
       <el-form :model="editForm" :label-width="'100px'" size="mini">
       
-         <el-form-item label="姓 名">
+        <el-form-item label="姓 名">
           <el-input v-model="editForm.name" placeholder="请输入员工姓名"></el-input>
         </el-form-item>
         <el-form-item label="性 别 ">
-              <el-select v-model= "editForm.gender" placeholder="请选择性别">
+            <el-select v-model= "editForm.gender" placeholder="请选择性别">
               <el-option label="男" value="男"></el-option>
               <el-option label="女" value="女"></el-option>
-              </el-select>
+            </el-select>
         </el-form-item>
         <el-form-item label="出生日期 ">
             <el-date-picker v-model="editForm.birthday" type="date" placeholder="选择日期" value-format="yyyy-MM-dd"> </el-date-picker>   
@@ -182,13 +182,13 @@
           <el-input v-model="editForm.phone" placeholder="请输入员工电话"></el-input>
         </el-form-item>
         <el-form-item label="岗 位">
-              <el-select v-model= "editForm.role" placeholder="请选择岗位">
+            <el-select v-model= "editForm.role" placeholder="请选择岗位">
               <el-option label="库存管理人员" value="INVENTORY_MANAGER"></el-option>
               <el-option label="人力资源人员" value="HR"></el-option>
               <el-option label="进货销售人员" value="SALE_STAFF"></el-option>
               <el-option label="财务人员" value="FINANCIAL_STAFF"></el-option>
               <el-option label="总经理" value="GM"></el-option>
-              </el-select>
+            </el-select>
         </el-form-item>
         <el-form-item label="基本工资">
           <el-input v-model="editForm.basicSalary" placeholder="请输入基本工资"></el-input>
