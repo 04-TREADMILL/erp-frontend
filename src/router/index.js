@@ -35,8 +35,8 @@ const ReceiveManage = ()=>import("../views/financial/ReceiveManage");
 const PayManage = ()=> import("../views/financial/PayManage");
 const IncomeManage = ()=>import("../views/financial/IncomeManage");
 const CheckPurchaseDetail = ()=>import("../views/financial/CheckPurchaseDetail");
-const CheckBussinessProgress = ()=>import("../views/financial/CheckBussinessProgress");
-const CheckBussinessSituation = ()=>import("../views/financial/CheckBussinessSituation");
+const CheckBusinessProgress = ()=>import("../views/financial/CheckBusinessProgress");
+const CheckBusinessSituation = ()=>import("../views/financial/CheckBusinessSituation");
 const AccountManage = ()=>import("../views/financial/AccountManage");
 
 Vue.use(VueRouter);
@@ -208,8 +208,13 @@ const routes = [
     meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
   },
   {
-    path:PATH.CHECK_BUSSINESS_PROGRESS.path,
-    component: CheckBussinessProgress,
+    path:PATH.CHECK_BUSINESS_PROGRESS.path,
+    component: CheckBusinessProgress,
+    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+  },
+  {
+    path:PATH.CHECK_BUSINESS_SITUATION.path,
+    component: CheckBusinessSituation,
     meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
   },
   // -----------------------未找到页面-----------------------------

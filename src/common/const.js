@@ -127,12 +127,12 @@ export const PATH = {
     path:'/CheckPurchaseDetail',
     requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
-  CHECK_BUSSINESS_PROGRESS:{
-    path:'/CheckBussinessProgress',
+  CHECK_BUSINESS_PROGRESS:{
+    path:'/CheckBusinessProgress',
     requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
-  CHECK_BUSSINESS_SITUATION:{
-    path:'/CheckBussinessSituation',
+  CHECK_BUSINESS_SITUATION:{
+    path:'/CheckBusinessSituation',
     requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
   
