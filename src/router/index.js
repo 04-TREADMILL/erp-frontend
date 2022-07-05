@@ -36,12 +36,18 @@ const PayManage = ()=> import("../views/financial/PayManage");
 const IncomeManage = ()=>import("../views/financial/IncomeManage");
 const CheckPurchaseDetail = ()=>import("../views/financial/CheckPurchaseDetail");
 const CheckBusinessProgress = ()=>import("../views/financial/CheckBusinessProgress");
+<<<<<<< HEAD
 const AccountManage = ()=>import("../views/financial/AccountManage");
 
 
 const SetPromotion = ()=>import("../views/sale/SalePromotion");
 
 
+=======
+const CheckBusinessSituation = ()=>import("../views/financial/CheckBusinessSituation");
+const AccountManage = ()=>import("../views/financial/AccountManage");
+
+>>>>>>> f910ea910d20b408ea1ac3a855d48e5b46eb329b
 Vue.use(VueRouter);
 
 const routes = [
@@ -218,6 +224,14 @@ const routes = [
   {
     path:PATH.CHECK_BUSINESS_PROGRESS.path,
     component: CheckBusinessProgress,
+<<<<<<< HEAD
+=======
+    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+  },
+  {
+    path:PATH.CHECK_BUSINESS_SITUATION.path,
+    component: CheckBusinessSituation,
+>>>>>>> f910ea910d20b408ea1ac3a855d48e5b46eb329b
     meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
   },
   // -----------------------未找到页面-----------------------------
