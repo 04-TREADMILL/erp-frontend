@@ -72,7 +72,7 @@
     },
     data(){
       return{
-        AccountList : [],
+        accountList : [],
         addDialogVisible: false,
         addForm: {
           name: "未填",
@@ -82,7 +82,7 @@
     },
     mounted(){
       showAccount().then(_res=>{
-        this.AccountList = _res.result;
+        this.accountList = _res.result;
       })
     },
     methods:{
