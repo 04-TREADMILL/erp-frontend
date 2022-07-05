@@ -35,8 +35,13 @@ const ReceiveManage = ()=>import("../views/financial/ReceiveManage");
 const PayManage = ()=> import("../views/financial/PayManage");
 const IncomeManage = ()=>import("../views/financial/IncomeManage");
 const CheckPurchaseDetail = ()=>import("../views/financial/CheckPurchaseDetail");
-const CheckBussinessProgress = ()=>import("../views/financial/CheckBussinessProgress");
+const CheckBusinessProgress = ()=>import("../views/financial/CheckBusinessProgress");
 const AccountManage = ()=>import("../views/financial/AccountManage");
+
+
+const SetPromotion = ()=>import("../views/sale/SalePromotion");
+
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -162,6 +167,11 @@ const routes = [
     component: Approval,
     meta: { requiresAuth: PATH.GM_APPROVAL.requiresAuth }
   },
+  {
+    path: PATH.GM_SET_PROMOTION.path,
+    component: SetPromotion,
+    meta: {requiresAuth: PATH.GM_SET_PROMOTION.requiresAuth }
+  },
   //HR
   {
     path: PATH.HR_EMPLOYEEMANAGE.path,
@@ -206,8 +216,8 @@ const routes = [
     meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
   },
   {
-    path:PATH.CHECK_BUSSINESS_PROGRESS.path,
-    component: CheckBussinessProgress,
+    path:PATH.CHECK_BUSINESS_PROGRESS.path,
+    component: CheckBusinessProgress,
     meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
   },
   // -----------------------未找到页面-----------------------------

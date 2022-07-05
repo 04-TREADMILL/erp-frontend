@@ -209,14 +209,28 @@
             <span slot="title">销售明细</span>
           </el-menu-item>
           <el-menu-item
-            :index="PATH.CHECK_BUSSINESS_PROGRESS.path"
-            v-if="permit(PATH.CHECK_BUSSINESS_PROGRESS.requiresAuth)"
+            :index="PATH.CHECK_BUSINESS_PROGRESS.path"
+            v-if="permit(PATH.CHECK_BUSINESS_PROGRESS.requiresAuth)"
           >
             <i class="el-icon-edit-outline"></i>
             <span slot="title">经营历程</span>
           </el-menu-item>
       </el-submenu>
 
+      <el-submenu index="9"
+          v-if="permit(PATH.GM_SET_PROMOTION.requiresAuth)">
+          <template slot="title">
+            <i class="el-icon-receiving"></i>
+            <span slot="title">促销管理</span>
+          </template>
+          <el-menu-item
+            :index="PATH.GM_SET_PROMOTION.path"
+            v-if="permit(PATH.GM_SET_PROMOTION.requiresAuth)"
+          >
+            <i class="el-icon-receiving"></i>
+            <span slot="title">促销策略</span>
+          </el-menu-item>
+        </el-submenu>
 
       </el-menu>
       <div class="logout-fix">

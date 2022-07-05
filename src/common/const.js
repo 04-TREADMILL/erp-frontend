@@ -92,6 +92,10 @@ export const PATH = {
     path: '/approval',
     requiresAuth: [ROLE.GM,ROLE.ADMIN]
   },
+  GM_SET_PROMOTION: {
+    path: '/SetPromotion',
+    requiresAuth: [ROLE.GM,ROLE.ADMIN]
+  },
   //HR
   HR_EMPLOYEEMANAGE: {
     path: '/EmployeeManageView',
@@ -127,8 +131,8 @@ export const PATH = {
     path:'/CheckPurchaseDetail',
     requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
-  CHECK_BUSSINESS_PROGRESS:{
-    path:'/ChceckBussinessProgress',
+  CHECK_BUSINESS_PROGRESS:{
+    path:'/ChceckBusinessProgress',
     requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
 

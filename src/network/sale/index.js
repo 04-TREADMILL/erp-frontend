@@ -15,3 +15,10 @@ export const getAllSaleReturn = config => request._get(testAPI.SALE_RETURN_ALL, 
 export const createSaleReturn = config => request._post(testAPI.SALE_RETURN_CREATE, config)
 export const returnFirstApproval = config => request._get(testAPI.SALE_RETURN_FIRST_APPROVAL, config)
 export const returnSecondApproval = config => request._get(testAPI.SALE_RETURN_SECOND_APPROVAL, config)
+
+export const gettotalpromotion = config => request._get(testAPI.GET_TOTAL_PROMOTION,config)
+export const getcustomerpromotion = config => request._get(testAPI.GET_CUSTOMER_PROMOTION,config)
+
+export const addpromotion = config => request._post(testAPI.ADD_PROMOTION,config)
+export const deletepromotion = config => request._get(testAPI.DELTE_PROMOTION,config)
+export const showpromotion = config => request._get(testAPI.SHOW_PROMOTION,config)
