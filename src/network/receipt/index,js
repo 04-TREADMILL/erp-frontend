@@ -1,0 +1,5 @@
+import request from "@/network/request";
+const testAPI = require("@/apis")
+
+export const addReceipt = config => request._get(testAPI.RECEIPT_CREATE, config);
+export const deleteAccount = config => request._get(testAPI.ACCOUNT_DELETE, config);

@@ -4,12 +4,12 @@
     <el-button type="primary" size="medium" @click="dialogVisible = true">制定收款单</el-button>
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
-        <el-tab-pane label="待审批" name="PENDING_LEVEL_1">
-          <div v-if="pendingLevelList.length === 0">
+        <el-tab-pane label="待审批" name="PENDING">
+          <div v-if="pendingList.length === 0">
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="pendingLevelList" :type="1" @refresh="getReceive()"/>
+            <purchase-return-list :list="pendingList" :type="1" @refresh="getReceive()"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="审批完成" name="SUCCESS">
@@ -31,13 +31,13 @@
       </el-tabs>
     </div>
     <el-dialog
-        title="创建进货退货单"
+        title="创建收款单"
         :visible.sync="dialogVisible"
         width="40%"
         :before-close="handleClose">
       <div style="width: 90%; margin: 0 auto">
-        <el-form :model="purchaseReturnForm" label-width="100px" ref="purchaseReturnForm">
-          <el-form-item label="进货单id: " prop="purchaseSheetId">
+        <el-form :model="receiptForm" label-width="100px" ref="ReceiptForm">
+          <el-form-item label="银行账户: " prop="accountName">
             <el-select v-model="purchaseReturnForm.purchaseSheetId"
                        placeholder="请选择关联的进货单id"
                        @change="selectPurchase(completedPurchase.filter(item => item.id === purchaseReturnForm.purchaseSheetId))">
@@ -103,6 +103,18 @@
         Layout,
         Title
     },
+    data(){
+      return{
+        activeName: 'PENDING',
+        pendingList: [],
+        successList: [],
+        failureList: [],
+        dialogVisible: false,
+        receiptForm:[
+
+        ]
+      }
+    }
   };
 </script>
 

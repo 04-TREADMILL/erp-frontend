@@ -78,7 +78,7 @@
         addDialogVisible: false,
         inquiryId : "",
         addForm: {
-          name: "未填",
+          name: "",
           amount: 0,
         }
       }
