@@ -9,7 +9,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="pendingList" :type="1" @refresh="getReceive()"/>
+            <purchase-return-list :list="pendingList" :type="1" @refresh="getReceipt()"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="审批完成" name="SUCCESS">
@@ -38,25 +38,20 @@
       <div style="width: 90%; margin: 0 auto">
         <el-form :model="receiptForm" label-width="100px" ref="ReceiptForm">
           <el-form-item label="银行账户: " prop="accountName">
-            <el-select v-model="purchaseReturnForm.purchaseSheetId"
-                       placeholder="请选择关联的进货单id"
-                       @change="selectPurchase(completedPurchase.filter(item => item.id === purchaseReturnForm.purchaseSheetId))">
+            <el-select v-model="receiptForm.account"
+                       placeholder="请选择关联的银行账户">
               <el-option
-                  v-for="(item, index) in completedPurchase"
-                  :key="item.id"
-                  :label="item.id"
-                  :value="item.id">
+                  v-for="(item, index) in accountList"
+                  :key="item.name"
+                  :label="item.name"
+                  :value="item.name">
                 <el-popover
                     placement="right"
                     width="800"
                     trigger="hover">
-                  <el-table :data="completedPurchase[index].purchaseSheetContent">
-                    <el-table-column width="100" property="id" label="id"></el-table-column>
-                    <el-table-column width="200" property="pid" label="pid"></el-table-column>
-                    <el-table-column width="100" property="unitPrice" label="单价"></el-table-column>
-                    <el-table-column width="100" property="quantity" label="数量"></el-table-column>
-                    <el-table-column width="100" property="totalPrice" label="总价"></el-table-column>
-                    <el-table-column property="remark" label="备注"></el-table-column>
+                  <el-table :data="accountList[index]">
+                    <el-table-column width="200" property="name" label="name"></el-table-column>
+                    <el-table-column width="200" property="amount" label="amount"></el-table-column>
                   </el-table>
                   <span slot="reference">{{ item.id }}</span>
                 </el-popover>
@@ -98,6 +93,10 @@
 <script>
   import Layout from "@/components/content/Layout";
   import Title from "@/components/content/Title";
+  import {
+    addReceipt,
+    showReceipt} from "../../network/receipt";
+  import {showAccount} from "../../network/account";
   export default {
     components: {
         Layout,
@@ -106,15 +105,44 @@
     data(){
       return{
         activeName: 'PENDING',
+        receiptList:[],
+        accountList:[],
         pendingList: [],
         successList: [],
         failureList: [],
         dialogVisible: false,
-        receiptForm:[
-
-        ]
+        receiptForm:{
+        }
       }
-    }
+    },
+    async mounted() {
+      this.getReceipt();
+      showAccount().then(_res=>{
+        this.accountList = _res.result;
+      })
+    },
+    methods:{
+      getReceipt(){
+        this.receiptList = [];
+        showReceipt().then(_res=>{
+          this.receiptList = _res.result;
+          this.pendingList = this.receiptList.filter(item => item.state === '待审批')
+          this.successList = this.receiptList.filter(item => item.state === '审批完成')
+          this.failureList = this.receiptList.filter(item => item.state === '审批失败')
+        })
+      },
+      selectAccount(content) {
+        this.receiptForm.account = content[0].purchaseSheetContent
+      },
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+            .then(_ => {
+              this.receiptForm = {}
+              done();
+            })
+            .catch(_ => {});
+      },
+    },
   };
 </script>
 

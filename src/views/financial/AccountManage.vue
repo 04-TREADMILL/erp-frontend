@@ -1,9 +1,11 @@
 <template>
   <Layout>
     <Title title="账户管理"></Title>
-    <el-button type="primary" size="medium" @click="addAccount">新增员工</el-button>
-    <el-input v-model="inquiryId" placeholder="请输入账号名称"></el-input>
-    <el-button type="primary" @click="getAccount()">立即创建</el-button>
+    <div>
+      <el-button type="primary" size="medium" @click="addAccount">新增员工</el-button>
+      <el-input v-model="inquiryId" placeholder="请输入账号名称"></el-input>
+      <el-button type="primary" @click="getAccount()">立即查询</el-button>
+    </div>
     <div style="margin-top: 10px">
       <el-table ref="table"
         :data="accountList"
@@ -12,18 +14,18 @@
         :header-cell-style="{'text-align':'center'}"
         :cell-style="{'text-align':'center'}">
         <el-table-column
-          prop="id"
+          prop="name"
           label="账户名称">
         </el-table-column>
         <el-table-column
-          prop="balance"
+          prop="amount"
           label="余额">
         </el-table-column>
         <el-table-column
           label="操作">
             <template slot-scope="scope">
             <el-button
-              @click="deleteAccount(scope.row.id)"
+              @click="deleteAccount(scope.row.name)"
               type="text"
               size="small">
               删除
