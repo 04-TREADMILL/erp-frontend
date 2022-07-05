@@ -2,6 +2,8 @@
   <Layout>
     <Title title="账户管理"></Title>
     <el-button type="primary" size="medium" @click="addAccount">新增员工</el-button>
+    <el-input v-model="inquiryId" placeholder="请输入账号名称"></el-input>
+    <el-button type="primary" @click="getAccount()">立即创建</el-button>
     <div style="margin-top: 10px">
       <el-table ref="table"
         :data="accountList"
@@ -74,6 +76,7 @@
       return{
         accountList : [],
         addDialogVisible: false,
+        inquiryId : "",
         addForm: {
           name: "未填",
           amount: 0,
@@ -96,6 +99,12 @@
       //点击新增账户，弹出浮窗
       addAccount(){
         this.addDialogVisible = true;
+      },
+      getAccount(){
+        this.accountList = [];
+        getAccount(this.inquiryId).then(_res=>{
+          this.accountList = _res.result;
+        })
       },
       //增加账户信息
       handleAdd(choice){
