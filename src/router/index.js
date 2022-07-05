@@ -35,11 +35,8 @@ const ReceiveManage = ()=>import("../views/financial/ReceiveManage");
 const PayManage = ()=> import("../views/financial/PayManage");
 const IncomeManage = ()=>import("../views/financial/IncomeManage");
 const CheckPurchaseDetail = ()=>import("../views/financial/CheckPurchaseDetail");
-const CheckBusinessProgress = ()=>import("../views/financial/CheckBusinessProgress");
-
 
 const SetPromotion = ()=>import("../views/sale/SalePromotion");
-
 const CheckBusinessSituation = ()=>import("../views/financial/CheckBusinessSituation");
 const AccountManage = ()=>import("../views/financial/AccountManage");
 
@@ -214,11 +211,6 @@ const routes = [
   {
     path:PATH.CHECK_PURCHASE_DETAIL.path,
     component:   CheckPurchaseDetail,
-    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
-  },
-  {
-    path:PATH.CHECK_BUSINESS_PROGRESS.path,
-    component: CheckBusinessProgress,
     meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
   },
   {
