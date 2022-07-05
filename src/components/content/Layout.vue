@@ -215,6 +215,13 @@
             <i class="el-icon-edit-outline"></i>
             <span slot="title">经营历程</span>
           </el-menu-item>
+          <el-menu-item
+            :index="PATH.CHECK_BUSSINESS_SITUATION.path"
+            v-if="permit(PATH.CHECK_BUSSINESS_SITUATION.requiresAuth)"
+          >
+            <i class="el-icon-tickets"></i>
+            <span slot="title">销售情况</span>
+          </el-menu-item>
       </el-submenu>
 
 

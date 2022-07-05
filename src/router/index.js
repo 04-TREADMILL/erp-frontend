@@ -36,7 +36,9 @@ const PayManage = ()=> import("../views/financial/PayManage");
 const IncomeManage = ()=>import("../views/financial/IncomeManage");
 const CheckPurchaseDetail = ()=>import("../views/financial/CheckPurchaseDetail");
 const CheckBussinessProgress = ()=>import("../views/financial/CheckBussinessProgress");
+const CheckBussinessSituation = ()=>import("../views/financial/CheckBussinessSituation");
 const AccountManage = ()=>import("../views/financial/AccountManage");
+
 Vue.use(VueRouter);
 
 const routes = [
