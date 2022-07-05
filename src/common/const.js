@@ -1,3 +1,5 @@
+
+
 // 部署url
 export const REQUEST_BASE_URL_PROD = "http://43.142.159.174:8080";
 // 开发url （mock的地址
@@ -130,6 +132,10 @@ export const PATH = {
   CHECK_PURCHASE_DETAIL:{
     path:'/CheckPurchaseDetail',
     requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+  },
+  CHECK_BUSINESS_PROGRESS:{
+    path:'/CheckBusinessProgress',
+    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF]
   },
   CHECK_BUSINESS_SITUATION:{
     path:'/CheckBusinessSituation',

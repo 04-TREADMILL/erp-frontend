@@ -36,9 +36,12 @@ const PayManage = ()=> import("../views/financial/PayManage");
 const IncomeManage = ()=>import("../views/financial/IncomeManage");
 const CheckPurchaseDetail = ()=>import("../views/financial/CheckPurchaseDetail");
 
-const SetPromotion = ()=>import("../views/sale/SalePromotion");
+
 const CheckBusinessSituation = ()=>import("../views/financial/CheckBusinessSituation");
+const CheckBusinessProgress  = ()=>import("../views/financial/CheckBusinessProgress");
 const AccountManage = ()=>import("../views/financial/AccountManage");
+
+const SetPromotion = ()=>import("../views/sale/SalePromotion");
 
 Vue.use(VueRouter);
 
@@ -212,6 +215,11 @@ const routes = [
     path:PATH.CHECK_PURCHASE_DETAIL.path,
     component:   CheckPurchaseDetail,
     meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+  },
+  {
+    path: PATH.CHECK_BUSINESS_PROGRESS.path,
+    component: CheckBusinessProgress,
+    meta: {requiresAuth: PATH.CHECK_BUSINESS_PROGRESS.requiresAuth}
   },
   {
     path:PATH.CHECK_BUSINESS_SITUATION.path,
