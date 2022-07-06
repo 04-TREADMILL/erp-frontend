@@ -42,16 +42,21 @@
         <el-table-column
           prop="eid"
           label="员工id"
-          width="400">
+          width="120">
         </el-table-column>
-        <!-- <el-table-column
+        <el-table-column
           prop="name"
           label="姓名"
-          width="70">
-        </el-table-column> -->
+          width="120">
+        </el-table-column>
         <el-table-column
           prop="punchTime"
           label="打卡时间"
+          width="300">
+        </el-table-column>
+        <el-table-column
+          prop="times"
+          label="最近一个月打卡次数"
           width="300">
         </el-table-column>
 
@@ -109,6 +114,8 @@ export default {
     return {
      idList:[],
      clockList: [],
+     showClockList:[],
+     employeeList:[],
      addDialogVisible: false,
      addForm:{
       id:0,
@@ -120,6 +127,7 @@ export default {
   mounted() {
     this.addDialogVisible = false;
     showEmployee().then(_res=>{
+      this.employeeList = _res.result
       let ret = [];
       let punchret = []
       for(var i=0;i<_res.result.length;i++){
@@ -130,18 +138,29 @@ export default {
         let config = {params:{id: obj.id}};
         showEmployeepunch(config).then(_res=>{
           // console.log(_res);
-          punchret.push(..._res.result)
+          var temp = _res.result
+          var times = temp.length
+          for(var t=0;t<times;t++) temp[t].times = times
+          console.log(temp)
+          punchret.push(...temp)
         })
       }
       this.idList = ret;
       this.clockList = punchret; 
+      
     })
  setTimeout(()=>{
         //反异步
         for(var i=0;i<this.clockList.length;i++){
           this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
-        }
+          var id = this.clockList[i].eid
+          for(var j=0;j<this.employeeList.length;j++) if(this.employeeList[j].id === id) {this.clockList[i].name = this.employeeList[j].name}
+       }
+        
         this.clockList.sort(function(a, b){return b.id - a.id}); 
+
+
+
  },800)
 
   },
@@ -172,6 +191,8 @@ export default {
             this.clockList[i].punchTime = formatDate(this.clockList[i].punchTime);
           }
       this.clockList.sort(function(a, b){return b.id - a.id}); 
+
+      
  },800)
     },
     addPunch(){
@@ -193,6 +214,7 @@ export default {
           console.log(this.addForm)
           if(id == "") alert("打卡id不能为空！");
           else if(eid=="") alert("员工id不能为空！");
+
           else{
           addEmployeepunch(this.addForm).then(_res => {
             console.log(_res)
