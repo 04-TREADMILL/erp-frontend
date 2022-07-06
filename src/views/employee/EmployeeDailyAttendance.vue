@@ -208,15 +208,15 @@ export default {
           var id = this.addForm.id;
           var eid = this.addForm.eid;
           
-
+          let config = this.addForm
           var time = this.addForm.punchTime
-          this.addForm.punchTime = Date.parse(time)
+          config.punchTime = Date.parse(time)
           console.log(this.addForm)
           if(id == "") alert("打卡id不能为空！");
           else if(eid=="") alert("员工id不能为空！");
 
           else{
-          addEmployeepunch(this.addForm).then(_res => {
+          addEmployeepunch(config).then(_res => {
             console.log(_res)
             if(_res.code === "A0004"){
               this.$message({
