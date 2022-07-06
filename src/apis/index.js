@@ -72,6 +72,11 @@ const ACCOUNT_SHOW = "api/account/show";
 const ACCOUNT_GET_BY_ID = "api/account/get";
 const ACCOUNT_DELETE = "api/account/delete";
 
+//财务人员收款制定
+const RECEIPT_CREATE = "api/receipt/sheet-make";
+const RECEIPT_SHOW = "api/receipt/sheet-show";
+const RECEIPT_APPROVAL="api/receipt/approval"
+
 //人力资源管理
 const EMPLOYEE_ADD = 'api/employee/add';
 const EMPLOYEE_DELETE = 'api/employee/delete';
@@ -152,6 +157,10 @@ module.exports = {
   ACCOUNT_SHOW,
   ACCOUNT_GET_BY_ID,
   ACCOUNT_DELETE,
+
+  RECEIPT_CREATE,
+  RECEIPT_SHOW,
+  RECEIPT_APPROVAL,
 
   EMPLOYEE_ADD,
   EMPLOYEE_DELETE,
