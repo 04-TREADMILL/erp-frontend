@@ -150,7 +150,7 @@
             this.receiptForm.id = null
             this.receiptForm.operator = sessionStorage.getItem("name")
             this.receiptForm.state = null
-            addReceipt(this.purchaseReturnForm).then(_res => {
+            addReceipt(this.receiptForm).then(_res => {
               if (_res.msg == 'Success') {
                 this.$message.success('创建成功!')
                 this.dialogVisible = false
