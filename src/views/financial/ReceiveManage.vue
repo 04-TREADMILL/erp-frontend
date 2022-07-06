@@ -48,24 +48,12 @@
             </el-select>
           </el-form-item>
           <el-form-item label="银行账户: " prop="account">
-            <el-select v-model="receiptForm.account"
-                       placeholder="请选择关联的银行账户"
-                       @change="selectAccount(accountList.filter(item => item. name === receiptForm.name))">
+            <el-select v-model="receiptForm.account" placeholder="请选择关联的银行账户">
               <el-option
-                  v-for="(item, index) in accountList"
+                  v-for="item in accountList"
                   :key="item.name"
                   :label="item.name"
                   :value="item.name">
-                <el-popover
-                    placement="right"
-                    width="800"
-                    trigger="hover">
-                  <el-table :data="accountList[index]">
-                    <el-table-column width="200" property="name" label="name"></el-table-column>
-                    <el-table-column width="200" property="amount" label="amount"></el-table-column>
-                  </el-table>
-                  <span slot="reference">{{ item.name }}</span>
-                </el-popover>
               </el-option>
             </el-select>
           </el-form-item>
@@ -128,10 +116,8 @@ export default {
       this.accountList = _res.result;
     })
     getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
-      console.log(_res);
+      this.sellers = _res.result;
     })
-    console.log(this.accountList);
-    console.log(this.sellers);
   },
   methods:{
     getReceipt(){
@@ -142,9 +128,6 @@ export default {
         this.successList = this.receiptList.filter(item => item.state === '审批完成')
         this.failureList = this.receiptList.filter(item => item.state === '审批失败')
       })
-    },
-    selectAccount(content) {
-      this.receiptForm.account = content[0];
     },
     handleClose(done) {
       this.$confirm('确认关闭？')

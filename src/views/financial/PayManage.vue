@@ -50,23 +50,12 @@
           </el-form-item>
           <el-form-item label="银行账户: " prop="account">
             <el-select v-model="paymentForm.account"
-                       placeholder="请选择关联的银行账户"
-                       @change="selectAccount(accountList.filter(item => item. name === paymentForm.name))">
+                       placeholder="请选择关联的银行账户">
               <el-option
-                  v-for="(item, index) in accountList"
+                  v-for="item in accountList"
                   :key="item.name"
                   :label="item.name"
                   :value="item.name">
-                <el-popover
-                    placement="right"
-                    width="800"
-                    trigger="hover">
-                  <el-table :data="accountList[index]">
-                    <el-table-column width="200" property="name" label="name"></el-table-column>
-                    <el-table-column width="200" property="amount" label="amount"></el-table-column>
-                  </el-table>
-                  <span slot="reference">{{ item.name }}</span>
-                </el-popover>
               </el-option>
             </el-select>
           </el-form-item>
@@ -131,10 +120,8 @@ export default {
       this.accountList = _res.result;
     })
     getAllCustomer({ params : { type: 'SUPPLIER' } }).then(_res => {
-      console.log(_res);
+      this.suppliers = _res.result;
     })
-    console.log(this.accountList);
-    console.log(this.sellers);
   },
   methods:{
     getPayment(){
