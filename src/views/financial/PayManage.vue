@@ -117,7 +117,7 @@ export default {
       },
       rules: {
         supplier: [
-          { required: true, message: '请选择一个销售商', trigger: 'change' }
+          { required: true, message: '请选择一个供应商', trigger: 'change' }
         ],
         account: [
           { required: true, message: '请选择一个银行账户', trigger: 'change' }
