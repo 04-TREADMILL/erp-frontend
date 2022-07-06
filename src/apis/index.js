@@ -94,10 +94,12 @@ const EMPLOYEE_ADD_PUNCH = 'api/employee/add-punch';
 //促销策略管理
 const GET_TOTAL_PROMOTION = 'api/sale/get-total-promotion';
 const GET_CUSTOMER_PROMOTION = 'api/sale/get-customer-promotion';
-const ADD_PROMOTION = 'api/promotion/add';
+const ADD_TOTAL_PROMOTION = 'api/promotion/add-total';
+const ADD_CUSTOMER_PROMOTION = 'api/promotion/add-customer';
 const DELETE_PROMOTION = 'api/promotion/delete';
 const SHOW_PROMOTION = 'api/promotion/show';
 
+const SALE_DETAIL = 'api/finance/sale-detail';
 
 module.exports = {
   TEST_GET,
@@ -180,7 +182,10 @@ module.exports = {
   GET_TOTAL_PROMOTION,
   GET_CUSTOMER_PROMOTION,
 
-  ADD_PROMOTION,
+  ADD_TOTAL_PROMOTION,
+  ADD_CUSTOMER_PROMOTION,
   DELETE_PROMOTION,
   SHOW_PROMOTION,
+
+  SALE_DETAIL,
 };
