@@ -1,7 +1,7 @@
 <template>
   <Layout>
-    <Title title="收款管理"></Title>
-    <el-button type="primary" size="medium" @click="dialogVisible = true">制定收款单</el-button>
+    <Title title="付款管理"></Title>
+    <el-button type="primary" size="medium" @click="dialogVisible = true">制定付款单</el-button>
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
         <el-tab-pane label="待审批" name="PENDING">
@@ -9,7 +9,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <receipt-list :list="pendingList" :type="1" @refresh="getReceipt()"/>
+            <payment-list :list="pendingList" :type="1" @refresh="getPayment()"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="审批完成" name="SUCCESS">
@@ -17,7 +17,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <receipt-list :list="successList" :type="2"/>
+            <payment-list :list="successList" :type="2"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="审批失败" name="FAILURE">
@@ -25,32 +25,32 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <receipt-list :list="failureList" :type="3"/>
+            <payment-list :list="failureList" :type="3"/>
           </div>
         </el-tab-pane>
       </el-tabs>
     </div>
     <el-dialog
-        title="创建收款单"
+        title="创建付款单"
         :visible.sync="dialogVisible"
         width="40%"
         :before-close="handleClose">
       <div style="width: 90%; margin: 0 auto">
-        <el-form :model="receiptForm" label-width="100px" ref="ReceiptForm">
-          <el-form-item label="销售商: " prop="supplier">
-            <el-select v-model="receiptForm.supplier" placeholder="请选择销售商">
+        <el-form :model="paymentForm" label-width="100px" ref="paymentForm" :rules="rules">
+          <el-form-item label="供应商: " prop="supplier">
+            <el-select v-model="paymentForm.supplier" placeholder="请选择供应商">
               <el-option
-                  v-for="item in sellers"
+                  v-for="item in suppliers"
                   :key="item.id"
                   :label="item.name"
                   :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="银行账户: " prop="name">
-            <el-select v-model="receiptForm.account"
+          <el-form-item label="银行账户: " prop="account">
+            <el-select v-model="paymentForm.account"
                        placeholder="请选择关联的银行账户"
-                       @change="selectAccount(accountList.filter(item => item. name === receiptForm.name))">
+                       @change="selectAccount(accountList.filter(item => item. name === paymentForm.name))">
               <el-option
                   v-for="(item, index) in accountList"
                   :key="item.name"
@@ -70,15 +70,15 @@
             </el-select>
           </el-form-item>
           <el-form-item label="转账金额: ">
-            <el-input type="textarea" v-model="receiptForm.totalAmount"></el-input>
+            <el-input type="textarea" v-model="paymentForm.totalAmount"></el-input>
           </el-form-item>
           <el-form-item label="备注: ">
-            <el-input type="textarea" v-model="receiptForm.comment"></el-input>
+            <el-input type="textarea" v-model="paymmentForm.comment"></el-input>
           </el-form-item>
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm('receiptForm')">立即创建</el-button>
+        <el-button type="primary" @click="submitForm('paymentForm')">立即创建</el-button>
       </span>
     </el-dialog>
   </Layout>
@@ -88,58 +88,68 @@
   import Layout from "@/components/content/Layout";
   import Title from "@/components/content/Title";
   import {
-    addReceipt,
-    showReceipt} from "../../network/receipt";
-  import {showAccount} from "../../network/account";
-  import {getAllCustomer} from "../../network/purchase";
-  import ReceiptList from "./compoents/ReceiptList";
+    addPayment,
+    showPayment } from "../../network/payment";
+  import { showAccount } from "../../network/account";
+  import { getAllCustomer } from "../../network/purchase";
+  import PaymentList from "./compoents/PaymentList";
   export default {
     components: {
-      ReceiptList,
-        Layout,
-        Title
+      PaymentList,
+      Layout,
+      Title
     },
     data(){
       return{
         activeName: 'PENDING',
-        receiptList:[],
+        paymentList:[],
         accountList:[],
         pendingList: [],
         successList: [],
         failureList: [],
         sellers: [],
         dialogVisible: false,
-        receiptForm:{
+        paymentForm:{
           comment:"",
-        }
+        },
+        rules: {
+          seller: [
+            { required: true, message: '请选择一个销售商', trigger: 'change' }
+          ],
+          account: [
+            { required: true, message: '请选择一个银行账户', trigger: 'change' }
+          ]
+        },
       }
     },
-    async mounted() {
-      this.getReceipt();
+    mounted() {
+      this.getPayment();
       showAccount().then(_res=>{
         this.accountList = _res.result;
       })
       getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
-        this.sellers = _res.result
+        console.log(_res);
       })
+      console.log(this.accountList);
+      console.log(this.sellers);
     },
     methods:{
-      getReceipt(){
-        this.receiptList = [];
-        showReceipt().then(_res=>{
-          this.receiptList = _res.result;
-          this.pendingList = this.receiptList.filter(item => item.state === '待审批')
-          this.successList = this.receiptList.filter(item => item.state === '审批完成')
-          this.failureList = this.receiptList.filter(item => item.state === '审批失败')
+      getPayment(){
+        this.paymentList = [];
+        showPayment().then(_res=>{
+          this.paymentList = _res.result;
+          this.pendingList = this.paymentList.filter(item => item.state === '待审批')
+          this.successList = this.paymentList.filter(item => item.state === '审批完成')
+          this.failureList = this.paymentList.filter(item => item.state === '审批失败')
         })
       },
       selectAccount(content) {
-        this.receiptForm.account = content[0];
+        this.paymentForm.account = content[0];
       },
       handleClose(done) {
         this.$confirm('确认关闭？')
             .then(_ => {
-              this.receiptForm = {}
+              this.paymentForm = {}
               done();
             })
             .catch(_ => {});
@@ -147,15 +157,15 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.receiptForm.id = null
-            this.receiptForm.operator = sessionStorage.getItem("name")
-            this.receiptForm.state = null
-            addReceipt(this.receiptForm).then(_res => {
+            this.paymentForm.id = null
+            this.paymentForm.operator = sessionStorage.getItem("name")
+            this.paymentForm.state = null
+            addPayment(this.paymentForm).then(_res => {
               if (_res.msg == 'Success') {
                 this.$message.success('创建成功!')
                 this.dialogVisible = false
-                this.receiptForm = {}
-                this.getReceipt()
+                this.paymentForm = {}
+                this.getPayment()
               }
             })
           }

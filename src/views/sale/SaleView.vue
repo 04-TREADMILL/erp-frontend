@@ -211,8 +211,8 @@ export default {
       res.forEach(item => this.commodityList.push({ id: item.id }))
     })
     getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
+      console.log(_res);
       this.sellers = _res.result
-
     })
   },
   methods: {

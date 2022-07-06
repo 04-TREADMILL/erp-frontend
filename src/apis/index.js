@@ -77,6 +77,11 @@ const RECEIPT_CREATE = "api/receipt/sheet-make";
 const RECEIPT_SHOW = "api/receipt/sheet-show";
 const RECEIPT_APPROVAL="api/receipt/approval"
 
+//财务人员付款制定
+const PAYMENT_CREATE = "api/payment/sheet-make";
+const PAYMENT_SHOW = "api/payment/sheet-show";
+const PAYMENT_APPROVAL = "api/payment/approval";
+
 //人力资源管理
 const EMPLOYEE_ADD = 'api/employee/add';
 const EMPLOYEE_DELETE = 'api/employee/delete';
@@ -159,6 +164,10 @@ module.exports = {
   RECEIPT_CREATE,
   RECEIPT_SHOW,
   RECEIPT_APPROVAL,
+
+  PAYMENT_CREATE,
+  PAYMENT_SHOW,
+  PAYMENT_APPROVAL,
 
   EMPLOYEE_ADD,
   EMPLOYEE_DELETE,

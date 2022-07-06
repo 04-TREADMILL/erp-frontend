@@ -103,10 +103,18 @@
         this.addDialogVisible = true;
       },
       getAccount(){
-        this.accountList = [];
-        getAccount(this.inquiryId).then(_res=>{
-          this.accountList = _res.result;
-        })
+        var id = this.inquiryId.toString();
+        console.log(id);
+        if(id === ""){
+          this.$message.error("查询名称不可为空！")
+        }else{
+          this.accountList = [];
+          getAccount({ params : { name: id } }).then(_res=>{
+            console.log(_res);
+            this.accountList = _res.result;
+          })
+        }
+        this.inquiryId = "";
       },
       //增加账户信息
       handleAdd(choice){
