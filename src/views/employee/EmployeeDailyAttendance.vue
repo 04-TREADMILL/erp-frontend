@@ -189,8 +189,8 @@ export default {
           
 
           var time = this.addForm.punchTime
-          this.addForm.punchTime =Date.parse(time)
-
+          this.addForm.punchTime = Date.parse(time)
+          console.log(this.addForm)
           if(id == "") alert("打卡id不能为空！");
           else if(eid=="") alert("员工id不能为空！");
           else{

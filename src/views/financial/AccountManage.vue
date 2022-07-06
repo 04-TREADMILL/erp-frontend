@@ -102,12 +102,16 @@
         if(choice === true){
           var name = this.addForm.name;
           var amount = this.addForm.amount;
-          console.log(name);
-          console.log(amount);
           if(name == "") alert("姓名不能为空！");
           else if(amount < 0) alert("初始金额不能为负！");
           else{
-            addAccount(this.addForm).then(_res=>{
+            let t = {
+              name:"yhj",
+              amount: 1231233243214
+            }
+            console.log(t)
+            addAccount(t).then(_res=>{
+              console.log(_res)
               if(_res.code === "114514"){
                 this.$message({
                 type: 'error',

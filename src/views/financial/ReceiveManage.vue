@@ -3,6 +3,8 @@
     <Title title="收款管理"></Title>
     收款管理
   </Layout>
+
+  
 </template>
 
 <script>
