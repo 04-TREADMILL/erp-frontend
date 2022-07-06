@@ -110,13 +110,13 @@ export default {
       pendingList: [],
       successList: [],
       failureList: [],
-      sellers: [],
+      suppliers: [],
       dialogVisible: false,
       paymentForm:{
         comment:"",
       },
       rules: {
-        seller: [
+        supplier: [
           { required: true, message: '请选择一个销售商', trigger: 'change' }
         ],
         account: [
@@ -130,7 +130,7 @@ export default {
     showAccount().then(_res=>{
       this.accountList = _res.result;
     })
-    getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
+    getAllCustomer({ params : { type: 'SUPPLIER' } }).then(_res => {
       console.log(_res);
     })
     console.log(this.accountList);
