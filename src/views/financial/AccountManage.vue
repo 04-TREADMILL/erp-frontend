@@ -109,7 +109,7 @@
           this.$message.error("查询名称不可为空！")
         }else{
           this.accountList = [];
-          getAccount({ params : { name: id } }).then(_res=>{
+          getAccount({ params : { key: id } }).then(_res=>{
             console.log(_res);
             this.accountList = _res.result;
           })
@@ -124,12 +124,8 @@
           if(name == "") alert("姓名不能为空！");
           else if(amount < 0) alert("初始金额不能为负！");
           else{
-            let t = {
-              name:"yhj",
-              amount: 1231233243214
-            }
-            console.log(t)
-            addAccount(t).then(_res=>{
+            console.log(this.addForm)
+            addAccount(this.addForm).then(_res=>{
               console.log(_res)
               if(_res.code === "114514"){
                 this.$message({
@@ -156,7 +152,7 @@
       deleteAccount(name){
         let config = {
           params: {
-            id: id
+            name: name.toString()
           }
         };
         this.$confirm('是否要删除？', '提示', {
