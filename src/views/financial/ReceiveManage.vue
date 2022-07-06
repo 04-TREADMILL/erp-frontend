@@ -158,5 +158,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.body {
+  margin: 0 auto;
+  margin-top: 10px;
+  height: 80vh;
+  overflow-y: auto;
+  width: 100%;
+  background: rgba($color: #fff, $alpha: 0.5);
+}
 </style>
