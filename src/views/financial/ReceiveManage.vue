@@ -37,9 +37,20 @@
         :before-close="handleClose">
       <div style="width: 90%; margin: 0 auto">
         <el-form :model="receiptForm" label-width="100px" ref="ReceiptForm">
-          <el-form-item label="银行账户: " prop="accountName">
+          <el-form-item label="销售商: " prop="supplier">
+            <el-select v-model="receiptForm.supplier" placeholder="请选择销售商">
+              <el-option
+                  v-for="item in sellers"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="银行账户: " prop="name">
             <el-select v-model="receiptForm.account"
-                       placeholder="请选择关联的银行账户">
+                       placeholder="请选择关联的银行账户"
+                       @change="selectAccount(accountList.filter(item => item. name === receiptForm.name))">
               <el-option
                   v-for="(item, index) in accountList"
                   :key="item.name"
@@ -53,38 +64,21 @@
                     <el-table-column width="200" property="name" label="name"></el-table-column>
                     <el-table-column width="200" property="amount" label="amount"></el-table-column>
                   </el-table>
-                  <span slot="reference">{{ item.id }}</span>
+                  <span slot="reference">{{ item.name }}</span>
                 </el-popover>
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="进货单清单: " v-if="this.purchaseReturnForm.purchaseReturnsSheetContent.length === 0">
-            暂无数据!
-          </el-form-item>
-          <el-form-item label="进货单清单: " v-else>
-            <div
-                v-for="(item, index) in purchaseReturnForm.purchaseReturnsSheetContent"
-                :key="index">
-              <el-row>
-                <el-col :span="8">
-                  <span>id: {{item.pid}}</span>
-                </el-col>
-                <el-col :span="8">
-                  数量: <el-input v-model="item.quantity" size="mini" style="width: 120px"></el-input>
-                </el-col>
-                <el-col :span="8">
-                  单价: <el-input v-model="item.unitPrice" size="mini" style="width: 120px"></el-input>
-                </el-col>
-              </el-row>
-            </div>
+          <el-form-item label="转账金额: ">
+            <el-input type="textarea" v-model="receiptForm.totalAmount"></el-input>
           </el-form-item>
           <el-form-item label="备注: ">
-            <el-input type="textarea" v-model="purchaseReturnForm.remark"></el-input>
+            <el-input type="textarea" v-model="receiptForm.comment"></el-input>
           </el-form-item>
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm('purchaseReturnForm')">立即创建</el-button>
+        <el-button type="primary" @click="submitForm('receiptForm')">立即创建</el-button>
       </span>
     </el-dialog>
   </Layout>
@@ -97,6 +91,7 @@
     addReceipt,
     showReceipt} from "../../network/receipt";
   import {showAccount} from "../../network/account";
+  import {getAllCustomer} from "../../network/purchase";
   export default {
     components: {
         Layout,
@@ -110,8 +105,10 @@
         pendingList: [],
         successList: [],
         failureList: [],
+        sellers: [],
         dialogVisible: false,
         receiptForm:{
+          comment:"",
         }
       }
     },
@@ -119,6 +116,9 @@
       this.getReceipt();
       showAccount().then(_res=>{
         this.accountList = _res.result;
+      })
+      getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
+        this.sellers = _res.result
       })
     },
     methods:{
@@ -132,7 +132,7 @@
         })
       },
       selectAccount(content) {
-        this.receiptForm.account = content[0].purchaseSheetContent
+        this.receiptForm.account = content[0];
       },
       handleClose(done) {
         this.$confirm('确认关闭？')
@@ -142,6 +142,23 @@
             })
             .catch(_ => {});
       },
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.receiptForm.id = null
+            this.receiptForm.operator = sessionStorage.getItem("name")
+            this.receiptForm.state = null
+            addReceipt(this.purchaseReturnForm).then(_res => {
+              if (_res.msg == 'Success') {
+                this.$message.success('创建成功!')
+                this.dialogVisible = false
+                this.receiptForm = {}
+                this.getReceipt()
+              }
+            })
+          }
+        })
+      }
     },
   };
 </script>

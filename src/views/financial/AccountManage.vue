@@ -87,8 +87,8 @@
     },
     mounted(){
       showAccount().then(_res=>{
-        console.log(_res);
         this.accountList = _res.result;
+        console.log(this.accountList);
       })
     },
     methods:{
