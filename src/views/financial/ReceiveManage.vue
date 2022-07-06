@@ -9,7 +9,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="pendingList" :type="1" @refresh="getReceipt()"/>
+            <receipt-list :list="pendingList" :type="1" @refresh="getReceipt()"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="审批完成" name="SUCCESS">
@@ -17,7 +17,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="successList" :type="2"/>
+            <receipt-list :list="successList" :type="2"/>
           </div>
         </el-tab-pane>
         <el-tab-pane label="审批失败" name="FAILURE">
@@ -25,7 +25,7 @@
             <el-empty description="暂无数据"></el-empty>
           </div>
           <div v-else>
-            <purchase-return-list :list="failureList" :type="3"/>
+            <receipt-list :list="failureList" :type="3"/>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -92,8 +92,10 @@
     showReceipt} from "../../network/receipt";
   import {showAccount} from "../../network/account";
   import {getAllCustomer} from "../../network/purchase";
+  import ReceiptList from "./compoents/ReceiptList";
   export default {
     components: {
+      ReceiptList,
         Layout,
         Title
     },

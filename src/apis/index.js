@@ -75,6 +75,7 @@ const ACCOUNT_DELETE = "api/account/delete";
 //财务人员收款制定
 const RECEIPT_CREATE = "api/receipt/sheet-make";
 const RECEIPT_SHOW = "api/receipt/sheet-show";
+const RECEIPT_APPROVAL="api/receipt/approval"
 
 //人力资源管理
 const EMPLOYEE_ADD = 'api/employee/add';
@@ -157,6 +158,7 @@ module.exports = {
 
   RECEIPT_CREATE,
   RECEIPT_SHOW,
+  RECEIPT_APPROVAL,
 
   EMPLOYEE_ADD,
   EMPLOYEE_DELETE,
