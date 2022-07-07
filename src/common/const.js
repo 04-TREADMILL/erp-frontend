@@ -153,6 +153,18 @@ export const PATH = {
     path:'/CheckBusinessSituation',
     requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
+  CHECK_SALE_SHEET:{
+    path:'/CheckSaleSheet',
+    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF]
+  },
+  CHECK_PURCHASE_SHEET:{
+    path:'/CheckPurchaseSheet',
+    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF]
+  },
+  CHECK_FINANCE_SHEET:{
+    path:'/CheckFinanceSheet',
+    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF]
+  }
   
 
 

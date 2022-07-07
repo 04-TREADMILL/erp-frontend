@@ -214,14 +214,8 @@
             <i class="el-icon-tickets"></i>
             <span slot="title">销售明细</span>
           </el-menu-item>
-          <el-menu-item
-            :index="PATH.CHECK_BUSINESS_PROGRESS.path"
-            v-if="permit(PATH.CHECK_BUSINESS_PROGRESS.requiresAuth)"
-          >
-            <i class="el-icon-edit-outline"></i>
-            <span slot="title">经营历程</span>
-          </el-menu-item>
-          <el-menu-item
+        
+            <el-menu-item
             :index="PATH.CHECK_BUSINESS_SITUATION.path"
             v-if="permit(PATH.CHECK_BUSINESS_SITUATION.requiresAuth)"
           >
@@ -229,7 +223,33 @@
             <span slot="title">经营情况</span>
           </el-menu-item>
       </el-submenu>
-
+        <el-submenu index ="11" v-if = "permit(PATH.CHECK_SALE_SHEET.requiresAuth)">
+            <template slot="title">
+            <i class = "el-icon-office-building"></i>
+            <span slot="title">经营历程</span>
+          </template>
+           <el-menu-item
+            :index="PATH.CHECK_SALE_SHEET.path"
+            v-if="permit(PATH.CHECK_SALE_SHEET.requiresAuth)"
+          >
+            <i class="el-icon-edit-outline"></i>
+            <span slot="title">销售类单据</span>
+          </el-menu-item>
+              <el-menu-item
+            :index="PATH.CHECK_PURCHASE_SHEET.path"
+            v-if="permit(PATH.CHECK_PURCHASE_SHEET.requiresAuth)"
+          >
+            <i class="el-icon-edit-outline"></i>
+            <span slot="title">进货类单据</span>
+          </el-menu-item>
+              <el-menu-item
+            :index="PATH.CHECK_FINANCE_SHEET.path"
+            v-if="permit(PATH.CHECK_FINANCE_SHEET.requiresAuth)"
+          >
+            <i class="el-icon-edit-outline"></i>
+            <span slot="title">财务类单据</span>
+          </el-menu-item>
+      </el-submenu>
       <el-submenu index="9"
           v-if="permit(PATH.GM_SET_PROMOTION.requiresAuth)">
           <template slot="title">

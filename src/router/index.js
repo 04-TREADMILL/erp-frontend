@@ -44,7 +44,9 @@ const AccountManage = ()=>import("../views/financial/AccountManage");
 
 const SetPromotion = ()=>import("../views/sale/SalePromotion");
 
-
+const checkSaleSheet = ()=> import("../views/financial/SaleSheet");
+const checkPurchaseSheet = ()=>import("../views/financial/PurchaseSheet");
+const checkFinanceSheet = ()=>import("../views/financial/FinanceSheet");
 Vue.use(VueRouter);
 
 const routes = [
@@ -241,6 +243,21 @@ const routes = [
     path:PATH.CHECK_BUSINESS_SITUATION.path,
     component: CheckBusinessSituation,
     meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+  },
+  {
+    path:PATH.CHECK_SALE_SHEET.path,
+    component: checkSaleSheet,
+    meta:{requiresAuth:PATH.CHECK_SALE_SHEET.requiresAuth}
+  },
+  {
+    path:PATH.CHECK_PURCHASE_SHEET.path,
+    component: checkPurchaseSheet,
+    meta:{requiresAuth:PATH.CHECK_PURCHASE_SHEET.requiresAuth}
+  },
+  {
+    path:PATH.CHECK_FINANCE_SHEET.path,
+    component: checkFinanceSheet,
+    meta:{requiresAuth:PATH.CHECK_FINANCE_SHEET.requiresAuth}
   },
   // -----------------------未找到页面-----------------------------
   {
