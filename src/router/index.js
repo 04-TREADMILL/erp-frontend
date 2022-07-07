@@ -30,7 +30,7 @@ const Approval = () => import("../views/approval/Approval");
 const EmployeeManageView = () => import("../views/employee/EmployeeView");
 const EmployeeIncome = () => import("../views/employee/Income");
 const EmployeeDailyAttendance = ()=>import("../views/employee/EmployeeDailyAttendance");
-
+const EmployeeSalaryManage = ()=>import("../views/employee/SalaryManage");
 const ReceiveManage = ()=>import("../views/financial/ReceiveManage");
 const PayManage = ()=> import("../views/financial/PayManage");
 const IncomeManage = ()=>import("../views/financial/IncomeManage");
@@ -189,7 +189,11 @@ const routes = [
     component: EmployeeIncome,
     meta:{ requiresAuth:PATH.HR_EMPLOYEEINCOME.requiresAuth}
   },
-
+  {
+    path:PATH.HR_SALARY_MANAGE.path,
+    component:EmployeeSalaryManage,
+    meta:{requiresAuth: PATH.HR_SALARY_MANAGE.requiresAuth}
+  },
   //FINANCIAL_STAFF
   {
     path:PATH.ACCOUNT_MANAGE.path,

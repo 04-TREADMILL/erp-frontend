@@ -112,6 +112,10 @@ export const PATH = {
     path: '/EmployeeIncome',
     requiresAuth: [ROLE.HR,ROLE.ADMIN]
   },
+  HR_SALARY_MANAGE:{
+    path:'/SalaryManage',
+    requiresAuth:[ROLE.HR,ROLE.ADMIN]
+  },
   //FINANCIAL_STAFF
   ACCOUNT_MANAGE:{
     path:'/AccountManage',
