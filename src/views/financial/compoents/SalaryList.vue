@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     authorization() {
-      if (this.type === 2 && sessionStorage.getItem('role') === 'GM') {
+      if (this.type === 1 && sessionStorage.getItem('role') === 'GM') {
         return 2
       }
     },

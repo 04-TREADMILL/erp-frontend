@@ -124,7 +124,7 @@ export default {
     authorization() {
       if (this.type === 1 && sessionStorage.getItem('role') === 'SALE_MANAGER') {
         return 1
-      } else if (this.type === 2 && sessionStorage.getItem('role') === 'GM') {
+      } else if (this.type === 1 && sessionStorage.getItem('role') === 'GM') {
         return 2
       }
     },

@@ -113,17 +113,31 @@
           </el-menu-item>
         </el-submenu>
         <el-submenu index="4"
-          v-if="permit(PATH.GM_APPROVAL.requiresAuth)">
+          v-if="permit(PATH.RECEIVE_MANAGE.requiresAuth)">
           <template slot="title">
             <i class="el-icon-receiving"></i>
             <span slot="title">审核管理</span>
           </template>
-          <el-menu-item
-            :index="PATH.GM_APPROVAL.path"
-            v-if="permit(PATH.GM_APPROVAL.requiresAuth)"
+            <el-menu-item
+            :index="PATH.RECEIVE_MANAGE.path"
+            v-if="permit(PATH.RECEIVE_MANAGE.requiresAuth)"
           >
-            <i class="el-icon-receiving"></i>
-            <span slot="title">审批</span>
+            <i class="el-icon-money"></i>
+            <span slot="title">收款审核</span>
+          </el-menu-item>
+          <el-menu-item
+            :index="PATH.PAY_MANAGE.path"
+            v-if="permit(PATH.PAY_MANAGE.requiresAuth)"
+          >
+            <i class="el-icon-money"></i>
+            <span slot="title">付款审核</span>
+          </el-menu-item>
+          <el-menu-item
+            :index="PATH.INCOME_MANAGE.path"
+            v-if="permit(PATH.INCOME_MANAGE.requiresAuth)"
+          >
+            <i class="el-icon-money"></i>
+            <span slot="title">工资审核</span>
           </el-menu-item>
         </el-submenu>
         <el-submenu index="5"

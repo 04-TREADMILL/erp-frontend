@@ -131,15 +131,15 @@ export const PATH = {
   },
   RECEIVE_MANAGE:{
     path:'/ReceiveManage',
-    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+    requiresAuth: [ROLE.GM,ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
   PAY_MANAGE:{
     path:'/PayManage',
-    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+    requiresAuth: [ROLE.GM,ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
   INCOME_MANAGE:{
     path:'/IncomeManage',
-    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+    requiresAuth: [ROLE.GM,ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
   },
   CHECK_PURCHASE_DETAIL:{
     path:'/CheckPurchaseDetail',
