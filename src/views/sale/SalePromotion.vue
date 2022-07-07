@@ -134,11 +134,19 @@
          <el-form-item label="金 额">
           <el-input v-model="addFormCustomer.amount" placeholder="请输入促销金额" type="number"></el-input>
         </el-form-item>
-
-        <el-form-item label="级 别">
+        <!-- <el-form-item label="级 别">
           <el-input v-model="addFormCustomer.level" placeholder="请输入客户级别" type="number"></el-input>
+        </el-form-item> -->
+        <el-form-item label="级别">
+          <el-select v-model="addFormCustomer.level" placeholder="请选择级别">
+              <el-option
+                  v-for="item in levelslist"
+                  :key="item.level"
+                  :label="item.level"
+                  :value="item.level">
+              </el-option>
+            </el-select>
         </el-form-item>
-        
 
         
              
@@ -178,6 +186,7 @@ export default {
       totalpromotionList:[],
       customerpromotionList:[],
 
+      levelslist:[{level:1},{level:2},{level:3},{level:4},{level:5}],
 
       addFormTotal:{
         id:0,
@@ -193,6 +202,9 @@ export default {
         discount:100,
         amount:10,
         level:1
+      },
+      addFormCombine:{
+
       }
 
     }
