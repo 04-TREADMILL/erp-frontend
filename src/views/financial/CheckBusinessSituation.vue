@@ -10,53 +10,31 @@
         :header-cell-style="{'text-align':'center'}"
         :cell-style="{'text-align':'center'}">
         <el-table-column
-          prop="time"
-          label="时间"
+          prop="incomingRaw"
+          label="预计收入"
           width="200">
         </el-table-column>
-        <el-table-column
-          prop="name"
-          label="商品名"
-          width="70">
+                <el-table-column
+          prop="incomingReal"
+          label="真实收入"
+          width="200">
         </el-table-column>
-        <el-table-column
-          prop="type"
-          label="型号"
-          width="300">
+                <el-table-column
+          prop="outgoingHuman"
+          label="外来人员"
+          width="200">
         </el-table-column>
-        <el-table-column
-          prop="quantity"
-          label="数量"
-          width="150">
+                <el-table-column
+          prop="outgoingPurchase"
+          label="外购"
+          width="200">
         </el-table-column>
-        <el-table-column
-          prop="unitPrice"
-          label="单价"
-          width="150">
+                <el-table-column
+          prop="profit"
+          label="利润"
+          width="200">
         </el-table-column>
-        <el-table-column
-          prop="totalPrice"
-          label="总额"
-          width="100">
-        </el-table-column>
-<!--       
-        <el-table-column
-          label="操作">
-             <template slot-scope="scope">
-            <el-button
-              @click="editCustomer(scope.row.id)"
-              type="text"
-              size="small">
-              编辑
-            </el-button>
-            <el-button
-              @click="deleteCustomer(scope.row.id)"
-              type="text"
-              size="small">
-              删除
-            </el-button>
-          </template>
-        </el-table-column> -->
+       
       </el-table>
     </div>
 
@@ -129,8 +107,9 @@
           let t = this.SearchForm
           console.log(t)
           getSaleSituation(
-          {params:{from:t.from}},
-          {params:{to:t.to}},).then(_res => {
+          {params:{from:t.from,to:t.to}},
+          ).then(_res => {
+            console.log("profit")
              console.log(_res);
             if (_res.code === "A0002") {
               this.$message({
@@ -142,8 +121,8 @@
                 type: 'success',
                 message: '查询成功!'
               });
-              this.saleDetailList = _res.result
-              this.dealwithTime()
+              this.saleDetailList.push(_res.result)
+              console.log(this.saleDetailList)
               this.SearchForm = {};
               this.searchDialogVisible = false;
             }
@@ -151,13 +130,6 @@
           
         }
     },
-    dealwithTime(){
-      var t = this.saleDetailList
-      for(var i=0;i<t.length;i++){
-        var time = t[i].time.substr(0,10)
-        t[i].time = time}
-      this.saleDetailList = t
-    }
   }
 
 

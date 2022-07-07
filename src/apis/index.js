@@ -116,6 +116,9 @@ const SHOW_PROMOTION = 'api/promotion/show';
 const SALE_DETAIL = 'api/finance/sale-detail';
 const SALE_SITUATION = 'api/finance/profit';
 const SALE_DETAIL_EXPORT = 'api/finance/sale-detail-excel';
+
+const CHANGE_SALARY_MODE = 'api/employee/change-salary-calculating-mode';
+
 module.exports = {
   TEST_GET,
   TEST_POST,
@@ -216,4 +219,5 @@ module.exports = {
 
   ALLOCATE_ANNUAL_BONUS,
   SHOW_ANNUAL_BONUS,
+  CHANGE_SALARY_MODE,
 };
