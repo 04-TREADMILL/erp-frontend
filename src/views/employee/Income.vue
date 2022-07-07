@@ -101,9 +101,29 @@ export default {
   },
   methods: {
     changeMode(id,mode){
-      changeSalaryMode({params:{id:id,mode:mode}}).then(_res=>{
+
+      if(mode === "default"){
+        console.log("default")
+        changeSalaryMode({params:{id:id,mode:"commission"}}).then(_res=>{
+        showEmployee().then(_res=>{
+        this.employeeList = _res.result
         console.log(_res)
       })
+      })
+      }
+      else{
+      changeSalaryMode({params:{id:id,mode:"default"}}).then(_res=>{
+        showEmployee().then(_res=>{
+        this.employeeList = _res.result
+        console.log(_res)
+      })
+      })
+      }
+               this.$message({
+                type: 'success',
+                message: '修改成功!'
+              });
+
     }
   }
 }
