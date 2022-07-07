@@ -5,7 +5,6 @@
       <el-button style="" type="primary" size="medium" @click="addAccount">新增员工</el-button> 
       <el-input style="width: 50%; margin-left: 300px; margin-right: 20px;" v-model="inquiryId" placeholder="请输入账号名称"></el-input>
       <el-button type="primary" @click="getAccount()">立即查询</el-button>
-     
     </div>
     <div style="margin-top: 10px">
       <el-table ref="table"

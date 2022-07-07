@@ -3,6 +3,7 @@
     <Title title="促销策略"></Title>
       <el-button type="primary" size="medium" @click="add_total_promotion">新增总价促销</el-button>
       <el-button type="primary" size="medium" @click="add_customer_promotion">新增客户促销</el-button>
+      <el-button type="primary" size="medium" @click="add_customer_customer">新增组合促销</el-button>
      <div style="margin-top: 10px">
       <el-table ref="table"
         :data="totalpromotionList"
@@ -157,6 +158,36 @@
       </div>
   </el-dialog>
 
+  <el-dialog
+      title="新增组合促销"
+      :visible.sync="addDialogVisible_of_Combine"
+      width="30%"
+      @close="close()">
+      <el-form :model="addFormTotal" :label-width="'100px'" size="mini">
+         <el-form-item label="i d">
+          <el-input v-model="addFormTotal.id" placeholder="请输入活动id" type="number"></el-input>
+        </el-form-item>
+        <el-form-item label="开始时间 ">
+           <el-date-picker v-model="addFormTotal.beginTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker>   
+        </el-form-item>
+        <el-form-item label="结束时间 ">
+          <el-date-picker v-model="addFormTotal.endTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker> 
+        </el-form-item>
+        <el-form-item label="条 件">
+          <el-input v-model="addFormTotal.condition" placeholder="请输入促销条件" type="number"></el-input>
+        </el-form-item>
+         <el-form-item label="金 额">
+          <el-input v-model="addFormTotal.amount" placeholder="请输入促销金额" type="number"></el-input>
+        </el-form-item>
+
+        
+             
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="handleAdd_total(false)">取 消</el-button>
+        <el-button type="primary" @click="handleAdd_total(true)">确 定</el-button>
+      </div>
+  </el-dialog>
   </Layout>
 
 
@@ -182,6 +213,7 @@ export default {
     return {
       addDialogVisible_of_Total:false,
       addDialogVisible_of_Customer:false,
+      addDialogVisible_of_Combine:false,
 
       totalpromotionList:[],
       customerpromotionList:[],
