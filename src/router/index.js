@@ -26,7 +26,8 @@ const SaleView = () => import("../views/sale/SaleView");
 const SaleReturnView = () => import("../views/sale/SaleReturnView");
 const CustomerView = () => import ("../views/purchase/CustomerView");
 const Approval = () => import("../views/approval/Approval");
-
+const AnnualBonus = ()=> import("../views/employee/AnnualBonus");
+const ShowAnnualBonus = ()=>import("../views/employee/ShowAnnualBonus");
 const EmployeeManageView = () => import("../views/employee/EmployeeView");
 const EmployeeIncome = () => import("../views/employee/Income");
 const EmployeeDailyAttendance = ()=>import("../views/employee/EmployeeDailyAttendance");
@@ -42,6 +43,7 @@ const CheckBusinessProgress  = ()=>import("../views/financial/CheckBusinessProgr
 const AccountManage = ()=>import("../views/financial/AccountManage");
 
 const SetPromotion = ()=>import("../views/sale/SalePromotion");
+
 
 Vue.use(VueRouter);
 
@@ -172,6 +174,16 @@ const routes = [
     path: PATH.GM_SET_PROMOTION.path,
     component: SetPromotion,
     meta: {requiresAuth: PATH.GM_SET_PROMOTION.requiresAuth }
+  },
+  {
+    path:PATH.ALLOCATE_ANNUAL_BONUS.path,
+    component: AnnualBonus,
+    meta:{requiresAuth: PATH.ALLOCATE_ANNUAL_BONUS.requiresAuth}
+  },
+  {
+    path:PATH.SHOW_ANNUAL_BONUS.path,
+    component: ShowAnnualBonus,
+    meta:{requiresAuth:PATH.SHOW_ANNUAL_BONUS.requiresAuth}
   },
   //HR
   {

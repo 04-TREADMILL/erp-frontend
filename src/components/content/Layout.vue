@@ -244,6 +244,27 @@
             <span slot="title">促销策略</span>
           </el-menu-item>
         </el-submenu>
+          <el-submenu index="10"
+          v-if="permit(PATH.ALLOCATE_ANNUAL_BONUS.requiresAuth)">
+          <template slot="title">
+            <i class="el-icon-receiving"></i>
+            <span slot="title">年终奖</span>
+          </template>
+          <el-menu-item
+            :index="PATH.ALLOCATE_ANNUAL_BONUS.path"
+            v-if="permit(PATH.ALLOCATE_ANNUAL_BONUS.requiresAuth)"
+          >
+            <i class="el-icon-receiving"></i>
+            <span slot="title">发放年终奖</span>
+          </el-menu-item><el-menu-item
+            :index="PATH.SHOW_ANNUAL_BONUS.path"
+            v-if="permit(PATH.SHOW_ANNUAL_BONUS.requiresAuth)"
+          >
+            <i class="el-icon-receiving"></i>
+            <span slot="title">查看年终奖</span>
+          </el-menu-item>
+          
+        </el-submenu>
 
       </el-menu>
       <div class="logout-fix">
