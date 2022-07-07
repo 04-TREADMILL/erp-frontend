@@ -100,7 +100,8 @@ const DELETE_PROMOTION = 'api/promotion/delete';
 const SHOW_PROMOTION = 'api/promotion/show';
 
 const SALE_DETAIL = 'api/finance/sale-detail';
-
+const SALE_SITUATION = 'api/finance/profit';
+const SALE_DETAIL_EXPORT = 'api/finance/sale-detail-excel';
 module.exports = {
   TEST_GET,
   TEST_POST,
@@ -188,4 +189,6 @@ module.exports = {
   SHOW_PROMOTION,
 
   SALE_DETAIL,
+  SALE_SITUATION,
+  SALE_DETAIL_EXPORT,
 };

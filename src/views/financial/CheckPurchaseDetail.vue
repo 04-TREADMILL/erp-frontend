@@ -2,6 +2,7 @@
   <Layout>
     <Title title="销售明细"></Title>
       <el-button type="primary" size="medium" @click="SearchDetail">查询销售明细</el-button>
+      <el-button type="primary" size="medium" @click="exportAsExcel">导出 Excel</el-button>
   <div style="margin-top: 10px">
       <el-table ref="table"
         :data="saleDetailList"
@@ -105,7 +106,7 @@
 <script>
   import Layout from "@/components/content/Layout";
   import Title from "@/components/content/Title";
-  import {getSaledetail} from "../../network/finance";
+  import {getSaledetail,getSaleDetailExport} from "../../network/finance";
   export default {
     components: {
         Layout,
@@ -131,6 +132,27 @@
     
   },
   methods: {
+    exportAsExcel() {
+
+      getSaleDetailExport({responseType:'blob'}).then(_res=>{
+        let blob = new Blob([_res],{
+          type:"application/vnd.ms.excel",
+        });
+        let filename = "Inventory.xls";
+        var blobUrl = window.URL.createObjectURL(blob);
+        var temp = document.createElement("a");
+        temp.style.display = "none";
+        temp.href = blobUrl;
+        temp.setAttribute("download",filename);
+        if(typeof temp.download == "undefined"){
+          temp.setAttribute("target","_black");
+        }
+        document.body.appendChild(temp);
+        temp.click();
+        document.removeChild(temp);
+        window.URL.revokeObjectURL(blobUrl);
+      })
+    },
     getAll(){
       getSaledetail()
     },
