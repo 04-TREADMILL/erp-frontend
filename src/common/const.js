@@ -98,6 +98,10 @@ export const PATH = {
     path: '/SetPromotion',
     requiresAuth: [ROLE.GM,ROLE.ADMIN]
   },
+  ALLOCATE_ANNUAL_BONUS:{
+    path:'/AllocateAnnualBonus',
+    requiresAuth:[ROLE.GM,ROLE.ADMIN]
+  },
   //HR
   HR_EMPLOYEEMANAGE: {
     path: '/EmployeeManageView',

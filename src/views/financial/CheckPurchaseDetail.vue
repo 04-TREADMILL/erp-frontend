@@ -80,14 +80,35 @@
         <el-form-item label="结束时间">
             <el-date-picker v-model="SearchForm.to" type="date" placeholder="选择日期" value-format="yyyy-MM-dd"> </el-date-picker>   
         </el-form-item>
-        <el-form-item label="商品">
-          <el-input v-model="SearchForm.product" placeholder="请输入商品名称"></el-input>
+        <el-form-item label="商 品">
+            <el-select v-model="SearchForm.product" placeholder="请输入商品名称">
+              <el-option
+                  v-for="item in productList"
+                  :key="item.name"
+                  :label="item.name"
+                  :value="item.name">
+              </el-option>
+            </el-select>
         </el-form-item>
-        <el-form-item label="客户id">
-          <el-input v-model="SearchForm.customerId" placeholder="请输入客户Id"></el-input>
+        <el-form-item label="客 户">
+            <el-select v-model="SearchForm.customerId" placeholder="请输入客户Id">
+              <el-option
+                  v-for="item in customerList"
+                  :key="item.id"
+                  :label="item.id"
+                  :value="item.id">
+              </el-option>
+            </el-select>
         </el-form-item>
-         <el-form-item label="业务员">
-          <el-input v-model="SearchForm.salesman" placeholder="请输入业务员"></el-input>
+                <el-form-item label="业务员">
+            <el-select v-model="SearchForm.salesman" placeholder="请输入业务员">
+              <el-option
+                  v-for="item in customerList"
+                  :key="item.operator"
+                  :label="item.operator"
+                  :value="item.operator">
+              </el-option>
+            </el-select>
         </el-form-item>
 
         
@@ -107,6 +128,9 @@
   import Layout from "@/components/content/Layout";
   import Title from "@/components/content/Title";
   import {getSaledetail,getSaleDetailExport} from "../../network/finance";
+  import {getAllCommodity} from "../../network/commodity";
+  import { getAllCustomer } from "../../network/purchase";
+
   export default {
     components: {
         Layout,
@@ -123,13 +147,32 @@
         to:"",
         salesman:""
       },
-      searchDialogVisible: false
+      searchDialogVisible: false,
+      customerList:[],
+      productList:[],
 
     }
   },
 
-  mounted() {
+  async mounted() {
+    await getAllCustomer({ params : { type: 'SUPPLIER' } }).then(_res => {
+      this.customerList = this.customerList.concat(_res.result)
+    })
+    await getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
+      this.customerList = this.customerList.concat(_res.result)
+    })
     
+    await getAllCommodity().then(_res=>{
+      for(var i=0;i<_res.result.length;i++){
+        let obj = {}
+        obj.name = ""
+        obj.name = _res.result[i].name
+        this.productList.push(obj)
+      }
+    })
+    
+    
+
   },
   methods: {
     exportAsExcel() {
