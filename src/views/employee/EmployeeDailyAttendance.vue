@@ -109,11 +109,10 @@ export default {
           else obj.punchdisable = false
         //  console.log(obj)
           list.push(obj)
-          this.employeeList = list
           })
-          
         }
-      })      
+      })
+        this.employeeList = list      
     },
     // 中国标准时间 转换成 年月日
    formatDateTime (date) {
@@ -137,7 +136,9 @@ export default {
       punchTime:timestamp}).then(_res=>{
        // console.log(_res)  
         for(var i =0;i<this.employeeList.length;i++){
-          if(this.employeeList[i].id === id) this.employeeList[i].punchdisable = true
+          if(this.employeeList[i].id === id) {this.employeeList[i].punchdisable = true
+          this.employeeList[i].thismonthpunch = this.employeeList[i].thismonthpunch+1
+          this.employeeList[i].latestpunch = this.today }
         }
           this.$message({
                 type: 'success',
