@@ -90,11 +90,20 @@ const EMPLOYEE_SHOW = 'api/employee/show';
 
 const EMPLOYEE_SHOW_PUNCH = 'api/employee/show-punch';
 const EMPLOYEE_ADD_PUNCH = 'api/employee/add-punch';
+const SHOW_LAST_MONTH_PUNCH = 'api/employee/show-last-month-punch';
+const SHOW_THIS_MONTH_PUNCH = 'api/employee/show-this-month-punch';
+const SHOW_LATEST_PUNCH = 'api/employee/show-latest-punch';
+
+//GM年终奖
+const ALLOCATE_ANNUAL_BONUS = 'api/employee/allocate-annual-bonus';
+const SHOW_ANNUAL_BONUS = 'api/employee/show-annual-bonus';
 
 //人力资源工资单
 const SALARY_CREATE = "api/salary/sheet-make";
 const SALARY_SHOW = "api/salary/sheet-show";
 const SALARY_APPROVAL = "api/salary/approval";
+
+
 
 //促销策略管理
 const GET_TOTAL_PROMOTION = 'api/sale/get-total-promotion';
@@ -200,4 +209,11 @@ module.exports = {
   SALE_DETAIL,
   SALE_SITUATION,
   SALE_DETAIL_EXPORT,
+
+  SHOW_LAST_MONTH_PUNCH,
+  SHOW_THIS_MONTH_PUNCH,
+  SHOW_LATEST_PUNCH,
+
+  ALLOCATE_ANNUAL_BONUS,
+  SHOW_ANNUAL_BONUS,
 };
