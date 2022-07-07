@@ -91,6 +91,11 @@ const EMPLOYEE_SHOW = 'api/employee/show';
 const EMPLOYEE_SHOW_PUNCH = 'api/employee/show-punch';
 const EMPLOYEE_ADD_PUNCH = 'api/employee/add-punch';
 
+//人力资源工资单
+const SALARY_CREATE = "api/salary/sheet-make";
+const SALARY_SHOW = "api/salary/sheet-show";
+const SALARY_APPROVAL = "api/salary/approval";
+
 //促销策略管理
 const GET_TOTAL_PROMOTION = 'api/sale/get-total-promotion';
 const GET_CUSTOMER_PROMOTION = 'api/sale/get-customer-promotion';
@@ -179,6 +184,10 @@ module.exports = {
 
   EMPLOYEE_SHOW_PUNCH,
   EMPLOYEE_ADD_PUNCH,
+
+  SALARY_CREATE,
+  SALARY_SHOW,
+  SALARY_APPROVAL,
 
   GET_TOTAL_PROMOTION,
   GET_CUSTOMER_PROMOTION,
