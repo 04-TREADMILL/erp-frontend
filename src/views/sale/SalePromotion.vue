@@ -4,6 +4,7 @@
       <el-button type="primary" size="medium" @click="add_total_promotion">新增总价促销</el-button>
       <el-button type="primary" size="medium" @click="add_customer_promotion">新增客户促销</el-button>
       <el-button type="primary" size="medium" @click="add_customer_customer">新增组合促销</el-button>
+
      <div style="margin-top: 10px">
       <el-table ref="table"
         :data="totalpromotionList"
@@ -354,6 +355,7 @@ export default {
     close(){
         this.addFormTotal = {}
         this.addFormCustomer = {}
+        this.addFormCombine = {}
     },
   }
 }
