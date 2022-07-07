@@ -133,7 +133,12 @@
   },
   methods: {
     exportAsExcel() {
-
+      if(this.saleDetailList.length===0){
+         this.$message({
+                type: 'error',
+                message: '表单不可为空!'
+              });
+      }else{
       getSaleDetailExport({responseType:'blob'}).then(_res=>{
         let blob = new Blob([_res],{
           type:"application/vnd.ms.excel",
@@ -152,6 +157,8 @@
         document.removeChild(temp);
         window.URL.revokeObjectURL(blobUrl);
       })
+
+      }
     },
     getAll(){
       getSaledetail()

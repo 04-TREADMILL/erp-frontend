@@ -33,7 +33,12 @@
         <el-table-column
           prop="amount"
           label="金额"
-          width="100">
+          width="200">
+        </el-table-column>
+          <el-table-column
+          prop= ""
+          label="级别"
+          width="100">all
         </el-table-column>
       </el-table>
     </div>
@@ -67,7 +72,7 @@
         <el-table-column
           prop="amount"
           label="金额"
-          width="100">
+          width="200">
         </el-table-column>
         <el-table-column
           prop="level"
