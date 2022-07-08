@@ -18,7 +18,7 @@ export const returnSecondApproval = config => request._get(testAPI.SALE_RETURN_S
 
 export const gettotalpromotion = config => request._get(testAPI.GET_TOTAL_PROMOTION,config)
 export const getcustomerpromotion = config => request._get(testAPI.GET_CUSTOMER_PROMOTION,config)
-
+export const getcombinepromotion = config => request._get(testAPI.GET_COMBINE_PROMOTION,config)
 
 export const addtotalpromotion = config => request._post(testAPI.ADD_TOTAL_PROMOTION,config)
 export const addcustomerpromotion = config => request._post(testAPI.ADD_CUSTOMER_PROMOTION,config) 

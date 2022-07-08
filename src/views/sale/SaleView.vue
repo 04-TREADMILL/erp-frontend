@@ -39,6 +39,7 @@
         </el-tab-pane>
       </el-tabs>
     </div>
+
     <el-dialog
       title="创建销售单"
       :visible.sync="dialogVisible"
@@ -47,12 +48,13 @@
       <div style="width: 90%; margin: 0 auto">
         <el-form :model="saleForm" label-width="100px" ref="saleForm" :rules="rules">
           <el-form-item label="销售商: " prop="supplier">
-            <el-select v-model="saleForm.supplier" placeholder="请选择销售商">
+            <el-select v-model="saleForm.supplier" @change="selectcustomer(saleForm.supplier)" placeholder="请选择销售商">
               <el-option
                 v-for="item in sellers"
                 :key="item.id"
                 :label="item.name"
-                :value="item.id">
+                :value="item.id"
+               >
               </el-option>
             </el-select>
           </el-form-item>
@@ -67,7 +69,7 @@
             :key="index"
             :label="'商品' + index">
             <div>
-              <el-select v-model="item.pid" placeholder="请选择商品id" style="width: 40%; margin-right: 5%">
+              <el-select v-model="item.pid" placeholder="请选择商品id" style="width: 40%; margin-right: 5%" @change="selectcommodity(item.pid)">
                 <el-option
                   v-for="item1 in commodityList"
                   :key="item1.id"
@@ -84,6 +86,9 @@
               <el-button type="text" size="small" @click.prevent="removeProduct(item)" v-if="index !== 0">删除</el-button>
             </div>
           </el-form-item>
+        <el-form-item label="促销策略">
+            <el-input   readonly v-model="this.currentpromotion.mode"></el-input>
+       </el-form-item>
           <el-form-item label="备注: ">
             <el-input type="textarea" v-model="saleForm.remark"></el-input>
           </el-form-item>
@@ -144,7 +149,8 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import SaleList from './components/SaleList'
-import { getAllSale, createSale,getMaxAmountCustomerOfSalesmanByTime } from '../../network/sale'
+import { getAllSale, createSale,getMaxAmountCustomerOfSalesmanByTime,getcombinepromotion,gettotalpromotion,getcustomerpromotion} from '../../network/sale'
+
 import { getAllCustomer } from '../../network/purchase'
 import { getAllCommodity } from '../../network/commodity'
 import { formatDate } from "@/common/utils";
@@ -201,17 +207,20 @@ export default {
         ]
       },
       commodityList: [],
-      salesmanList: []
+      salesmanList: [],
+
+      currentpromotion:{},
     }
   },
   mounted() {
+    this.currentpromotion = {mode:"总额促销"}
     this.getSale()
     getAllCommodity({}).then(_res => {
       let res = _res.result
       res.forEach(item => this.commodityList.push({ id: item.id }))
     })
     getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
-      console.log(_res);
+     // console.log(_res);
       this.sellers = _res.result
     })
   },
@@ -219,6 +228,7 @@ export default {
     getSale() {
       getAllSale({}).then(_res => {
         this.saleList = _res.result
+        console.log(this.saleList)
         var s = new Set();
         var ss = new Set();
         for(var i=0;i<this.saleList.length;i++) s.add(this.saleList[i].operator);
@@ -232,6 +242,54 @@ export default {
       })
     },
     getData() {
+    },
+    selectcustomer(supplier){
+      for(var i=0;i<this.sellers.length;i++){
+        if(this.sellers[i].id == supplier){
+          getcustomerpromotion({params:{level:this.sellers[i].level}}).then(_res=>{
+              console.log(_res.result)
+              var begin = _res.result.beginTime.substr(0,10)
+              var end   = _res.result.endTime.substr(0,10)
+              var date =this.timestampToTime(new Date().getTime())
+              if(this.compareTime(date,end) && this.compareTime(begin,date)){
+                this.currentpromotion.mode = "客户促销"
+              }
+          })
+        }
+      }
+      
+    },
+    timestampToTime(timestamp){
+      var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + '-';
+      var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+      var D = (date.getDate()+1 < 10 ? '0'+(date.getDate()+1) : date.getDate()+1) + ' ';
+      var h = (date.getHours() < 10 ? '0'+(date.getHours()) : date.getHours()) + ':' ;
+      var m = (date.getMinutes() < 10 ? '0'+(date.getMinutes()) : date.getMinutes()) + ':' ;
+      var s = (date.getSeconds() < 10 ? '0'+(date.getSeconds()) : date.getSeconds());
+      return Y+M+D;
+    },
+   compareTime(startTime,endTime) {  
+//          var start_time=startTime.replace(/-|\s|:|\//g,'').replace(' ', ''); //用这个加强版也可以
+            var start_time = startTime.replace(/-|\s|:|\//g,''); 
+            var end_time = endTime.replace(/-|\s|:|\//g,'');  
+            if (start_time < end_time) { return true; }
+	    else { return false; }
+            
+   },
+    selectcommodity(pid){
+      getcombinepromotion({params:{pids:pid}}).then(_res=>{
+              //console.log(_res.result)
+              if(_res.result!=null){
+              console.log(_res.result)
+              var begin = _res.result.beginTime.substr(0,10)
+              var end   = _res.result.endTime.substr(0,10)
+              var date =this.timestampToTime(new Date().getTime())
+              if(this.compareTime(date,end) && this.compareTime(begin,date)){
+                this.currentpromotion.mode = "组合促销"
+              }
+            }
+      })
     },
     handleClose(done) {
       this.$confirm('确认关闭？')
@@ -254,6 +312,7 @@ export default {
       }).catch(_=>{});
     },
     submitForm(formName) {
+
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.saleForm.id = null

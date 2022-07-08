@@ -108,6 +108,7 @@ const SALARY_APPROVAL = "api/salary/approval";
 //促销策略管理
 const GET_TOTAL_PROMOTION = 'api/sale/get-total-promotion';
 const GET_CUSTOMER_PROMOTION = 'api/sale/get-customer-promotion';
+const GET_COMBINE_PROMOTION ='api/sale/get-combine-promotion';
 const ADD_TOTAL_PROMOTION = 'api/promotion/add-total';
 const ADD_CUSTOMER_PROMOTION = 'api/promotion/add-customer';
 const ADD_COMBINE_PROMOTION ='api/promotion/add-combine';
@@ -204,7 +205,8 @@ module.exports = {
 
   GET_TOTAL_PROMOTION,
   GET_CUSTOMER_PROMOTION,
-  
+  GET_COMBINE_PROMOTION,
+
   ADD_COMBINE_PROMOTION,
   ADD_TOTAL_PROMOTION,
   ADD_CUSTOMER_PROMOTION,

@@ -108,7 +108,12 @@
         <el-table-column
           prop="pidList"
           label="商品组合"
-          width="100">
+          width="100"
+          >
+          <template slot-scope="scope">
+            <div v-for="item in scope.row.pidList" :key="item">
+            {{item}}</div>
+          </template>
         </el-table-column>
         <el-table-column
           prop="amount"
@@ -245,7 +250,7 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import {
-addtotalpromotion,addcustomerpromotion,showpromotion,addcombinepromotion
+addtotalpromotion,addcustomerpromotion,addcombinepromotion
     } from "../../network/sale";
 import { getAllCommodity } from '../../network/commodity'
 import { formatDate } from "@/common/utils";
@@ -320,6 +325,7 @@ export default {
     })
     showpromotion({params:{promotionType:"combine"}}).then(_res=>{
         this.combinepromotionList = _res.result
+            console.log(this.combinepromotionList)
         for(var i =0;i<this.combinepromotionList.length;i++){
           this.combinepromotionList[i].beginTime = this.combinepromotionList[i].beginTime.substr(0,10)
           this.combinepromotionList[i].endTime = this.combinepromotionList[i].endTime.substr(0,10)
