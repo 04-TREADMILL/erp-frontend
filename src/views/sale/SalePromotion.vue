@@ -250,7 +250,7 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import {
-addtotalpromotion,addcustomerpromotion,addcombinepromotion
+addtotalpromotion,addcustomerpromotion,addcombinepromotion,showpromotion
     } from "../../network/sale";
 import { getAllCommodity } from '../../network/commodity'
 import { formatDate } from "@/common/utils";
