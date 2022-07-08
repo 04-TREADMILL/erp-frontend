@@ -21,7 +21,7 @@
         </el-table-column>
                 <el-table-column
           prop="outgoingHuman"
-          label="外来人员"
+          label="人力指出"
           width="200">
         </el-table-column>
                 <el-table-column
