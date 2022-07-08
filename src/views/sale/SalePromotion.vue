@@ -325,7 +325,7 @@ export default {
     })
     showpromotion({params:{promotionType:"combine"}}).then(_res=>{
         this.combinepromotionList = _res.result
-            console.log(this.combinepromotionList)
+           // console.log(this.combinepromotionList)
         for(var i =0;i<this.combinepromotionList.length;i++){
           this.combinepromotionList[i].beginTime = this.combinepromotionList[i].beginTime.substr(0,10)
           this.combinepromotionList[i].endTime = this.combinepromotionList[i].endTime.substr(0,10)
@@ -363,10 +363,10 @@ export default {
           let config = this.addFormTotal
           config.beginTime = t1
           config.endTime = t2
-          console.log(config)
+         // console.log(config)
           addtotalpromotion(config).then(_res => {
             // console.log(_res.code);
-            console.log(_res);
+          //  console.log(_res);
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',
@@ -399,11 +399,11 @@ export default {
           let config = this.addFormCustomer
           config.beginTime = t1
           config.endTime = t2
-          console.log(config)
+         // console.log(config)
         
           addcustomerpromotion(config).then(_res => {
             // console.log(_res.code);
-            console.log(_res);
+           // console.log(_res);
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',
@@ -444,10 +444,10 @@ export default {
           for(var i=0;i<arr.length;i++) list.push(arr[i]);
           config.pidList = list
 
-          console.log(config)
+          //console.log(config)
           addcombinepromotion(config).then(_res => {
             // console.log(_res.code);
-            console.log(_res);
+         //   console.log(_res);
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',

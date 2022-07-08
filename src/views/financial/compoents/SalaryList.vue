@@ -72,7 +72,7 @@ export default {
     approval(id) {
       let config = {
         params: {
-          receiptSheetId : id,
+          salarySheetId : id,
           state: 'SUCCESS'
         }
       }

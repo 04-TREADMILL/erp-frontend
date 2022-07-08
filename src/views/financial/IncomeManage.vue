@@ -37,7 +37,7 @@
         :before-close="handleClose">
       <div style="width: 90%; margin: 0 auto">
         <el-form :model="salaryForm" label-width="100px" ref="salaryForm" :rules="rules">
-          <el-form-item label="员工: " prop="employee">
+          <el-form-item label="员工: " prop="employeeId">
             <el-select v-model="salaryForm.employeeId" placeholder="请选择员工">
               <el-option
                   v-for="item in employees"
@@ -91,10 +91,13 @@ export default {
       failureList: [],
       employees: [],
       dialogVisible: false,
-      salaryForm:{},
+      salaryForm:{
+        employeeId: null,
+        account:null
+      },
       rules: {
-        employee: [
-          { required: true, message: '请选择一个员工', trigger: 'change' }
+        employeeId: [
+          { required: true, message: '请选择一个员工' ,trigger: 'change'}
         ],
         account: [
           { required: true, message: '请选择一个银行账户', trigger: 'change' }
@@ -112,13 +115,16 @@ export default {
     })
   },
   methods:{
+    filterTag(value, row) {
+      return row.type === value
+    },
     getSalary(){
       this.salaryList = [];
       showSalary().then(_res=>{
         this.salaryList = _res.result;
-        this.pendingList = this.receiptList.filter(item => item.state === '待审批')
-        this.successList = this.receiptList.filter(item => item.state === '审批完成')
-        this.failureList = this.receiptList.filter(item => item.state === '审批失败')
+        this.pendingList = this.salaryList.filter(item => item.state === '待审批')
+        this.successList = this.salaryList.filter(item => item.state === '审批完成')
+        this.failureList = this.salaryList.filter(item => item.state === '审批失败')
       })
     },
     handleClose(done) {
@@ -130,6 +136,7 @@ export default {
           .catch(_ => {});
     },
     submitForm(formName) {
+      
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.salaryForm.id = null,
@@ -138,7 +145,8 @@ export default {
           this.salaryForm.realSalary = null,
           this.salaryForm.state = null,
           this.salaryForm.createTime = null,
-          addReceipt(this.receiptForm).then(_res => {
+          this.salaryForm.name = null,
+          addSalary(this.salaryForm).then(_res => {
             if (_res.msg == 'Success') {
               this.$message.success('创建成功!')
               this.dialogVisible = false

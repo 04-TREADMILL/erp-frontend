@@ -82,7 +82,7 @@ export default {
                 }
             })
         }
-        console.log(this.annualbonusList)    
+     //   console.log(this.annualbonusList)    
     },400)
   },
   methods: {
