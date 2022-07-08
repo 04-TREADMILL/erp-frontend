@@ -68,11 +68,11 @@
           label="薪资计算方式"
           width="120">
         </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="salaryGrantingMode"
           label="薪资发放方式"
           width="120">
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           prop="account"
           label="账户"
@@ -141,11 +141,14 @@
           <el-input v-model="addForm.postSalary" placeholder="请输入岗位工资"></el-input>
         </el-form-item>
         <el-form-item label="薪资计算方式">
-          <el-input v-model="addForm.salaryCalculatingMode" placeholder="请输入岗位工资"></el-input>
+          <el-select v-model= "addForm.salaryCalculatingMode" placeholder="请输入工资计算方式">
+              <el-option label="月薪制" value="default"></el-option>
+              <el-option label="提成制" value="commission"></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="薪资发放方式">
+        <!-- <el-form-item label="薪资发放方式">
           <el-input v-model="addForm.salaryGrantingMode" placeholder="请输入岗位工资"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="账 户">
           <el-input v-model="addForm.account" placeholder="请输入账户"></el-input>
         </el-form-item>
@@ -197,13 +200,16 @@
           <el-input v-model="editForm.postSalary" placeholder="请输入岗位工资"></el-input>
         </el-form-item>
         <el-form-item label="薪资计算方式">
-          <el-input v-model="editForm.salaryCalculatingMode" placeholder="请输入岗位工资"></el-input>
+          <el-select v-model= "editForm.salaryCalculatingMode" placeholder="请输入工资计算方式">
+              <el-option label="月薪制" value="default"></el-option>
+              <el-option label="提成制" value="commission"></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="薪资发放方式">
+        <!-- <el-form-item label="薪资发放方式">
           <el-input v-model="editForm.salaryGrantingMode" placeholder="请输入岗位工资"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="账 户">
-          <el-input v-model="editForm.account" placeholder="请输入账户"></el-input>
+          <el-input v-model="editForm.account"  readonly placeholder="请输入账户"></el-input>
         </el-form-item>   
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -259,6 +265,8 @@ export default {
        this.employeeList = _res.result;
        for(var i=0;i<_res.result.length;i++){
         this.employeeList[i].birthday = formatDate(_res.result[i].birthday).substr(0,10);
+        if(this.employeeList[i].salaryCalculatingMode === "default") this.employeeList[i].salaryCalculatingMode="月薪制"
+        else this.employeeList[i].salaryCalculatingMode ="提成制"
        }
     //    console.log(this.employeeList)
     })
@@ -273,6 +281,9 @@ export default {
        this.employeeList = _res.result;
        for(var i=0;i<_res.result.length;i++){
         this.employeeList[i].birthday = formatDate(_res.result[i].birthday).substr(0,10);
+
+        if(this.employeeList[i].salaryCalculatingMode === "default") this.employeeList[i].salaryCalculatingMode="月薪制"
+        else this.employeeList[i].salaryCalculatingMode ="提成制"
        }
     //    console.log(this.employeeList)
     })
@@ -293,6 +304,10 @@ export default {
           if(name == "") alert("姓名不能为空！");
           else if(gender=="") alert("性别不能为空！");
           else{
+
+        if(this.addForm.salaryCalculatingMode === "月薪制") this.addForm.salaryCalculatingMode="default"
+        else this.addForm.salaryCalculatingMode ="commission"
+
           addEmployee(this.addForm).then(_res => {
             // console.log(_res.code);
             if (_res.code === "A0002") {
@@ -322,6 +337,8 @@ export default {
         this.editDialogVisble = false;
         this.editForm = {};
       }else if(type === true){
+        if(this.editForm.salaryCalculatingMode === "月薪制") this.editForm.salaryCalculatingMode="default"
+        else this.editForm.salaryCalculatingMode ="commission"
         updateEmployee(this.editForm).then(_res => {
             if (_res.code === 'B0003') {
               this.$message({

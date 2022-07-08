@@ -2,7 +2,7 @@
   <Layout>
     <Title title="销售明细"></Title>
       <el-button type="primary" size="medium" @click="SearchDetail">查询销售明细</el-button>
-      <el-button type="primary" size="medium" @click="exportAsExcel">导出 Excel</el-button>
+      <el-button type="primary" style="margin-left:850px" size="medium" @click="exportAsExcel">导出 Excel</el-button>
   <div style="margin-top: 10px">
       <el-table ref="table"
         :data="saleDetailList"
@@ -90,7 +90,7 @@
               </el-option>
             </el-select>
         </el-form-item>
-        <el-form-item label="客 户">
+        <!-- <el-form-item label="客 户">
             <el-select v-model="SearchForm.customerId" placeholder="请输入客户Id">
               <el-option
                   v-for="item in customerList"
@@ -109,7 +109,7 @@
                   :value="item.operator">
               </el-option>
             </el-select>
-        </el-form-item>
+        </el-form-item> -->
 
         
         
@@ -141,11 +141,11 @@
     return{
       saleDetailList:[],
       SearchForm:{
-        customerId:0,
+        customerId: "",
         product:"",
-        from:"",
-        to:"",
-        salesman:""
+        from:null,
+        to: null,
+        salesman: null
       },
       searchDialogVisible: false,
       customerList:[],
@@ -155,6 +155,9 @@
   },
 
   async mounted() {
+    await getSaledetail().then(_res=>{
+      this.saleDetailList = _res.result
+    })
     await getAllCustomer({ params : { type: 'SUPPLIER' } }).then(_res => {
       this.customerList = this.customerList.concat(_res.result)
     })
@@ -216,15 +219,20 @@
         } else if (type === true) {
 
           let t = this.SearchForm
+          t.from = t.from.substr(0,4) + t.from.substr(5,7) + t.from.substr(8,10)
+          t.to = t.to.substr(0,4) + t.to.substr(5,7) + t.to.substr(8,10)
           console.log("t")
           console.log(t)
 
+
           getSaledetail(
-          {param:{from:t.from}},
-          {param:{to:t.to}},
-          {param:{product:t.product}},
-          {param:{salesman:t.salesman}},
-          {param:{customerId:t.customerId}}).then(_res => {
+           {params:{from:t.from,
+           to:t.to,
+           product:t.product,
+         
+        }},
+
+          ).then(_res => {
              console.log(_res);
             if (_res.code === "A0002") {
               this.$message({

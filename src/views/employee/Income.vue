@@ -96,26 +96,35 @@ export default {
   mounted() {
       showEmployee().then(_res=>{
         this.employeeList = _res.result
-        console.log(_res)
+        for(var i=0;i<_res.result.length;i++){
+        if(this.employeeList[i].salaryCalculatingMode === "default") this.employeeList[i].salaryCalculatingMode="月薪制"
+        else this.employeeList[i].salaryCalculatingMode ="提成制"
+        }
       })
   },
   methods: {
     changeMode(id,mode){
 
-      if(mode === "default"){
-        console.log("default")
+      if(mode === "月薪制"){
+
         changeSalaryMode({params:{id:id,mode:"commission"}}).then(_res=>{
         showEmployee().then(_res=>{
         this.employeeList = _res.result
-        console.log(_res)
+        for(var i=0;i<_res.result.length;i++){
+        if(this.employeeList[i].salaryCalculatingMode === "default") this.employeeList[i].salaryCalculatingMode="月薪制"
+        else this.employeeList[i].salaryCalculatingMode ="提成制"
+        }
       })
       })
       }
       else{
       changeSalaryMode({params:{id:id,mode:"default"}}).then(_res=>{
-        showEmployee().then(_res=>{
+      showEmployee().then(_res=>{
         this.employeeList = _res.result
-        console.log(_res)
+        for(var i=0;i<_res.result.length;i++){
+        if(this.employeeList[i].salaryCalculatingMode === "default") this.employeeList[i].salaryCalculatingMode="月薪制"
+        else this.employeeList[i].salaryCalculatingMode ="提成制"
+        }
       })
       })
       }

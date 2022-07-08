@@ -42,8 +42,8 @@
       title="查询明细"
       :visible.sync="searchDialogVisible"
       width="30%"
-      @close="close()">
-      <el-form :model="SearchForm" :label-width="'100px'" size="mini">
+      close="close()">
+      <el-form :model="this.SearchForm" :label-width="'100px'" size="mini">
       
         <!-- <el-form-item label="i d">
           <el-col :span="11">
@@ -72,6 +72,7 @@
   import Layout from "@/components/content/Layout";
   import Title from "@/components/content/Title";
   import {getSaledetail,getSaleSituation} from "../../network/finance";
+import { formatDate } from "@/common/utils";
   export default {
     components: {
         Layout,
@@ -82,8 +83,8 @@
     return{
       saleDetailList:[],
       SearchForm:{
-        from:"",
-        to:"",
+        from: null,
+        to: null,
       },
       searchDialogVisible: false
     }
@@ -105,12 +106,15 @@
           this.SearchForm = {};
         } else if (type === true) {
           let t = this.SearchForm
-          console.log(t)
+          
+          t.from = t.from.substr(0,4) + t.from.substr(5,7) + t.from.substr(8,10)
+          t.to = t.to.substr(0,4) + t.to.substr(5,7) + t.to.substr(8,10)
+           console.log(t)
           getSaleSituation(
           {params:{from:t.from,to:t.to}},
           ).then(_res => {
-            console.log("profit")
-             console.log(_res);
+            //console.log("profit")
+             //console.log(_res);
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',
@@ -121,7 +125,7 @@
                 type: 'success',
                 message: '查询成功!'
               });
-              this.saleDetailList.push(_res.result)
+              this.saleDetailList = [_res.result]
               console.log(this.saleDetailList)
               this.SearchForm = {};
               this.searchDialogVisible = false;
