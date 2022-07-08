@@ -3,7 +3,7 @@
     <Title title="促销策略"></Title>
       <el-button type="primary" size="medium" @click="add_total_promotion">新增总价促销</el-button>
       <el-button type="primary" size="medium" @click="add_customer_promotion">新增客户促销</el-button>
-      <el-button type="primary" size="medium" @click="add_customer_customer">新增组合促销</el-button>
+      <el-button type="primary" size="medium" @click="add_combine_promotion">新增组合促销</el-button>
 
      <div style="margin-top: 10px">
       <el-table ref="table"
@@ -83,6 +83,45 @@
         </el-table-column>
       </el-table>
     </div>
+         <div style="margin-top: 10px">
+      <el-table ref="table"
+        :data="combinepromotionList"
+        stripe
+        style="width: 100%"
+        :header-cell-style="{'text-align':'center'}"
+        :cell-style="{'text-align':'center'}">
+        <el-table-column
+          prop="id"
+          label="id"
+          width="70">
+        </el-table-column>
+        <el-table-column
+          prop="beginTime"
+          label="开始时间"
+          width="300">
+        </el-table-column>
+        <el-table-column
+          prop="endTime"
+          label="结束时间"
+          width="300">
+        </el-table-column>
+        <el-table-column
+          prop="pidList"
+          label="商品组合"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="amount"
+          label="金额"
+          width="200">
+        </el-table-column>
+          <el-table-column
+          prop= ""
+          label="级别"
+          width="100">all
+        </el-table-column>
+      </el-table>
+    </div>
 
   <el-dialog
       title="新增总价促销"
@@ -90,9 +129,9 @@
       width="30%"
       @close="close()">
       <el-form :model="addFormTotal" :label-width="'100px'" size="mini">
-         <el-form-item label="i d">
+         <!-- <el-form-item label="i d">
           <el-input v-model="addFormTotal.id" placeholder="请输入活动id" type="number"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="开始时间 ">
            <el-date-picker v-model="addFormTotal.beginTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker>   
         </el-form-item>
@@ -121,9 +160,9 @@
       width="30%"
       @close="close()">
       <el-form :model="addFormCustomer" :label-width="'100px'" size="mini">
-         <el-form-item label="i d">
+         <!-- <el-form-item label="i d">
           <el-input v-model="addFormCustomer.id" placeholder="请输入活动id" type="number"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="开始时间 ">
            <el-date-picker v-model="addFormCustomer.beginTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker>   
         </el-form-item>
@@ -164,29 +203,36 @@
       :visible.sync="addDialogVisible_of_Combine"
       width="30%"
       @close="close()">
-      <el-form :model="addFormTotal" :label-width="'100px'" size="mini">
+      <!-- <el-form :model="addFormCombine" :label-width="'100px'" size="mini">
          <el-form-item label="i d">
-          <el-input v-model="addFormTotal.id" placeholder="请输入活动id" type="number"></el-input>
-        </el-form-item>
+          <el-input v-model="addFormCombine.id" placeholder="请输入活动id" type="number"></el-input>
+        </el-form-item> -->
         <el-form-item label="开始时间 ">
-           <el-date-picker v-model="addFormTotal.beginTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker>   
+           <el-date-picker v-model="addFormCombine.beginTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker>   
         </el-form-item>
         <el-form-item label="结束时间 ">
-          <el-date-picker v-model="addFormTotal.endTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker> 
+          <el-date-picker v-model="addFormCombine.endTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker> 
         </el-form-item>
-        <el-form-item label="条 件">
-          <el-input v-model="addFormTotal.condition" placeholder="请输入促销条件" type="number"></el-input>
-        </el-form-item>
+        <el-form-item label="商品id">
+          <el-select v-model="addFormCombine.pidList" multiple placeholder="请选择">
+            <el-option
+              v-for="item in this.comodityList"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
+       </el-form-item>
          <el-form-item label="金 额">
-          <el-input v-model="addFormTotal.amount" placeholder="请输入促销金额" type="number"></el-input>
+          <el-input v-model="addFormCombine.amount" placeholder="请输入促销金额" type="number"></el-input>
         </el-form-item>
 
         
              
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="handleAdd_total(false)">取 消</el-button>
-        <el-button type="primary" @click="handleAdd_total(true)">确 定</el-button>
+        <el-button @click="handleAdd_combine(false)">取 消</el-button>
+        <el-button type="primary" @click="handleAdd_combine(true)">确 定</el-button>
       </div>
   </el-dialog>
   </Layout>
@@ -199,8 +245,9 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import {
-addtotalpromotion,addcustomerpromotion,showpromotion
+addtotalpromotion,addcustomerpromotion,showpromotion,addcombinepromotion
     } from "../../network/sale";
+import { getAllCommodity } from '../../network/commodity'
 import { formatDate } from "@/common/utils";
 
 export default {
@@ -212,13 +259,14 @@ export default {
   },
   data() {
     return {
+      comodityList:[],
       addDialogVisible_of_Total:false,
       addDialogVisible_of_Customer:false,
       addDialogVisible_of_Combine:false,
 
       totalpromotionList:[],
       customerpromotionList:[],
-
+      combinepromotionList:[],
       levelslist:[{level:1},{level:2},{level:3},{level:4},{level:5}],
 
       addFormTotal:{
@@ -237,13 +285,21 @@ export default {
         level:1
       },
       addFormCombine:{
+        id:0,
+        beginTime:"",
+        endTime:"",
+        pidList:[],
+        amount:10,
+      },
 
-      }
 
     }
   },
   mounted() {
-
+    getAllCommodity().then(_res=>{
+      this.comodityList = _res.result
+      //console.log(_res.result)
+    })
     showpromotion({params:{promotionType:"total"}}).then(_res=>{
         this.totalpromotionList = _res.result
     })
@@ -262,6 +318,13 @@ export default {
           this.customerpromotionList[i].endTime = this.customerpromotionList[i].endTime.substr(0,10)
         }
     })
+    showpromotion({params:{promotionType:"combine"}}).then(_res=>{
+        this.combinepromotionList = _res.result
+        for(var i =0;i<this.combinepromotionList.length;i++){
+          this.combinepromotionList[i].beginTime = this.combinepromotionList[i].beginTime.substr(0,10)
+          this.combinepromotionList[i].endTime = this.combinepromotionList[i].endTime.substr(0,10)
+        }
+      })
 
   },
   methods: {
@@ -269,12 +332,15 @@ export default {
       return row.type === value
     },
     getAll(){
-      showpromotion({param:{promotionType:"total"}}).then(_res=>{
+      showpromotion({params:{promotionType:"total"}}).then(_res=>{
           this.totalpromotionList = _res.result
       })
-      showpromotion({param:{promotionType:"customer"}}.then(_res=>{
+      showpromotion({params:{promotionType:"customer"}}.then(_res=>{
         this.customerpromotionList = _res.result
       }))
+      showpromotion({params:{promotionType:"combine"}}).then(_res=>{
+        this.combinepromotionList = _res.result
+      })
 
     },
     add_total_promotion(){
@@ -328,7 +394,7 @@ export default {
           config.beginTime = t1
           config.endTime = t2
           console.log(config)
-
+        
           addcustomerpromotion(config).then(_res => {
             // console.log(_res.code);
             console.log(_res);
@@ -351,7 +417,49 @@ export default {
         }
     },
 
-   
+    add_combine_promotion(){
+       this.addDialogVisible_of_Combine =  true
+    },
+    handleAdd_combine(type){
+     if (type === false) {
+          this.addDialogVisible_of_Combine = false;
+          this.addFormCombine = {};
+        } else if (type === true) {
+
+          var t1 = Date.parse(this.addFormCombine.beginTime)
+          var t2 = Date.parse(this.addFormCombine.endTime)
+          let config = this.addFormCombine
+          config.beginTime = t1
+          config.endTime = t2
+      //    console.log(config)
+          
+          let arr = this.addFormCombine.pidList
+          let list = []
+          for(var i=0;i<arr.length;i++) list.push(arr[i]);
+          config.pidList = list
+
+          console.log(config)
+          addcombinepromotion(config).then(_res => {
+            // console.log(_res.code);
+            console.log(_res);
+            if (_res.code === "A0002") {
+              this.$message({
+                type: 'error',
+                message: _res.msg
+              });
+            } else {
+              this.$message({
+                type: 'success',
+                message: '新增成功!'
+              });
+              this.addFormCombine = {};
+              this.addDialogVisible_of_Combine = false;
+              this.getAll();
+            }
+          })
+          
+        }
+    },
     close(){
         this.addFormTotal = {}
         this.addFormCustomer = {}

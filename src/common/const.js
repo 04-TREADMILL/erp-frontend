@@ -90,10 +90,10 @@ export const PATH = {
   },
 
   // GM
-  GM_APPROVAL: {
-    path: '/approval',
-    requiresAuth: [ROLE.GM,ROLE.ADMIN]
-  },
+  // GM_APPROVAL: {
+  //   path: '/approval',
+  //   requiresAuth: [ROLE.GM,ROLE.ADMIN]
+  // },
   GM_SET_PROMOTION: {
     path: '/SetPromotion',
     requiresAuth: [ROLE.GM,ROLE.ADMIN]

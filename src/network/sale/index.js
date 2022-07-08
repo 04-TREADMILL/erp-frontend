@@ -22,5 +22,6 @@ export const getcustomerpromotion = config => request._get(testAPI.GET_CUSTOMER_
 
 export const addtotalpromotion = config => request._post(testAPI.ADD_TOTAL_PROMOTION,config)
 export const addcustomerpromotion = config => request._post(testAPI.ADD_CUSTOMER_PROMOTION,config) 
+export const addcombinepromotion = config => request._post(testAPI.ADD_COMBINE_PROMOTION,config)
 export const deletepromotion = config => request._get(testAPI.DELTE_PROMOTION,config)
 export const showpromotion = config => request._get(testAPI.SHOW_PROMOTION,config)

@@ -110,6 +110,7 @@ const GET_TOTAL_PROMOTION = 'api/sale/get-total-promotion';
 const GET_CUSTOMER_PROMOTION = 'api/sale/get-customer-promotion';
 const ADD_TOTAL_PROMOTION = 'api/promotion/add-total';
 const ADD_CUSTOMER_PROMOTION = 'api/promotion/add-customer';
+const ADD_COMBINE_PROMOTION ='api/promotion/add-combine';
 const DELETE_PROMOTION = 'api/promotion/delete';
 const SHOW_PROMOTION = 'api/promotion/show';
 
@@ -203,7 +204,8 @@ module.exports = {
 
   GET_TOTAL_PROMOTION,
   GET_CUSTOMER_PROMOTION,
-
+  
+  ADD_COMBINE_PROMOTION,
   ADD_TOTAL_PROMOTION,
   ADD_CUSTOMER_PROMOTION,
   DELETE_PROMOTION,

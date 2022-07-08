@@ -25,7 +25,7 @@ const PurchaseReturnView = () => import("../views/purchase/PurchaseReturnView");
 const SaleView = () => import("../views/sale/SaleView");
 const SaleReturnView = () => import("../views/sale/SaleReturnView");
 const CustomerView = () => import ("../views/purchase/CustomerView");
-const Approval = () => import("../views/approval/Approval");
+// const Approval = () => import("../views/approval/Approval");
 const AnnualBonus = ()=> import("../views/employee/AnnualBonus");
 const ShowAnnualBonus = ()=>import("../views/employee/ShowAnnualBonus");
 const EmployeeManageView = () => import("../views/employee/EmployeeView");
@@ -167,11 +167,11 @@ const routes = [
     meta: { requiresAuth: PATH.CUSTOMER_VIEW.requiresAuth }
   },
   // 审批
-  {
-    path: PATH.GM_APPROVAL.path,
-    component: Approval,
-    meta: { requiresAuth: PATH.GM_APPROVAL.requiresAuth }
-  },
+  // {
+  //   path: PATH.GM_APPROVAL.path,
+  //   component: Approval,
+  //   meta: { requiresAuth: PATH.GM_APPROVAL.requiresAuth }
+  // },
   {
     path: PATH.GM_SET_PROMOTION.path,
     component: SetPromotion,
