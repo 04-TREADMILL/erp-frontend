@@ -228,7 +228,7 @@ export default {
     getSale() {
       getAllSale({}).then(_res => {
         this.saleList = _res.result
-        console.log(this.saleList)
+       // console.log(this.saleList)
         var s = new Set();
         var ss = new Set();
         for(var i=0;i<this.saleList.length;i++) s.add(this.saleList[i].operator);
@@ -241,8 +241,7 @@ export default {
         this.failureList = this.saleList.filter(item => item.state === '审批失败')
       })
     },
-    getData() {
-    },
+    getData() {},
     selectcustomer(supplier){
       for(var i=0;i<this.sellers.length;i++){
         if(this.sellers[i].id == supplier){
@@ -281,7 +280,7 @@ export default {
       getcombinepromotion({params:{pids:pid}}).then(_res=>{
               //console.log(_res.result)
               if(_res.result!=null){
-              console.log(_res.result)
+              //console.log(_res.result)
               var begin = _res.result.beginTime.substr(0,10)
               var end   = _res.result.endTime.substr(0,10)
               var date =this.timestampToTime(new Date().getTime())
