@@ -2,6 +2,7 @@
   <Layout>
     <Title title="经营情况"></Title>
       <el-button type="primary" size="medium" @click="SearchDetail">查询经营情况</el-button>
+      <el-button type="primary" size="medium" style="margin-left:850px" @click="CheckYear">查询年度经营</el-button>
   <div style="margin-top: 10px">
       <el-table ref="table"
         :data="saleDetailList"
@@ -100,18 +101,44 @@ import { formatDate } from "@/common/utils";
     SearchDetail(){
       this.searchDialogVisible = true
     },
+    CheckYear(){
+      let from = 20220000
+      let to   = 20230000
+      getSaleSituation(
+          {params:{from:from,to:to}},
+          ).then(_res => {
+            //console.log("profit")
+             //console.log(_res);
+            if (_res.code === "A0002") {
+              this.$message({
+                type: 'error',
+                message: _res.msg
+              });
+            } else {
+              this.$message({
+                type: 'success',
+                message: '查询成功!'
+              });
+              this.saleDetailList = [_res.result]
+              console.log(this.saleDetailList)
+              this.SearchForm = {};
+              this.searchDialogVisible = false;
+            }
+          })
+          
+    },
     handleSearch(type){
       if (type === false) {
           this.searchDialogVisible = false;
           this.SearchForm = {};
         } else if (type === true) {
           let t = this.SearchForm
-          
-          t.from = t.from.substr(0,4) + t.from.substr(5,7) + t.from.substr(8,10)
-          t.to = t.to.substr(0,4) + t.to.substr(5,7) + t.to.substr(8,10)
-           console.log(t)
+          //console.log(this.SearchForm)
+          let from = t.from.substr(0,4) + t.from.substr(5,2) + t.from.substr(8,2)
+          let to = t.to.substr(0,4) + t.to.substr(5,2) + t.to.substr(8,2)
+
           getSaleSituation(
-          {params:{from:t.from,to:t.to}},
+          {params:{from:from,to:to}},
           ).then(_res => {
             //console.log("profit")
              //console.log(_res);
