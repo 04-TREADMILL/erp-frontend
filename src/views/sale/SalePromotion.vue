@@ -203,8 +203,8 @@
       :visible.sync="addDialogVisible_of_Combine"
       width="30%"
       @close="close()">
-      <!-- <el-form :model="addFormCombine" :label-width="'100px'" size="mini">
-         <el-form-item label="i d">
+     <el-form :model="addFormCombine" :label-width="'100px'" size="mini">
+      <!--     <el-form-item label="i d">
           <el-input v-model="addFormCombine.id" placeholder="请输入活动id" type="number"></el-input>
         </el-form-item> -->
         <el-form-item label="开始时间 ">
@@ -213,8 +213,8 @@
         <el-form-item label="结束时间 ">
           <el-date-picker v-model="addFormCombine.endTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker> 
         </el-form-item>
-        <el-form-item label="商品id">
-          <el-select v-model="addFormCombine.pidList" multiple placeholder="请选择">
+        <el-form-item label="商品组合">
+          <el-select v-model="addFormCombine.pidList"  multiple placeholder="请选择">
             <el-option
               v-for="item in this.comodityList"
               :key="item.id"
