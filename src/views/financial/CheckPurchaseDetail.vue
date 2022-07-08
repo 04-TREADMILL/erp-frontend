@@ -18,12 +18,12 @@
         <el-table-column
           prop="name"
           label="商品名"
-          width="70">
+          width="100">
         </el-table-column>
         <el-table-column
           prop="type"
           label="型号"
-          width="300">
+          width="400">
         </el-table-column>
         <el-table-column
           prop="quantity"
@@ -65,8 +65,8 @@
       title="查询明细"
       :visible.sync="searchDialogVisible"
       width="30%"
-      @close="close()">
-      <el-form :model="addForm" :label-width="'100px'" size="mini">
+      close="close()">
+      <el-form :model="SearchForm" :label-width="'100px'" size="mini">
       
         <!-- <el-form-item label="i d">
           <el-col :span="11">
@@ -216,7 +216,9 @@
         } else if (type === true) {
 
           let t = this.SearchForm
+          console.log("t")
           console.log(t)
+
           getSaledetail(
           {param:{from:t.from}},
           {param:{to:t.to}},
@@ -250,9 +252,9 @@
         t[i].time = time}
       this.saleDetailList = t
     }
-  }
+  },
 
-
+close(){}
 
 
 
