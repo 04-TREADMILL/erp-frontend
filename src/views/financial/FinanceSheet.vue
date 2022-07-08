@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <Title title="收款管理"></Title>
+    <Title title="财务类单据"></Title>
     <el-button type="primary" size="medium" @click="dialogVisible = true">制定收款单</el-button>
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">

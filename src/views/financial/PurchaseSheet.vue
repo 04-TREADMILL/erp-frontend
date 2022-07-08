@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <Title title="进货管理"></Title>
+    <Title title="进货类单据"></Title>
     <!-- <el-button type="primary" size="medium" @click="dialogVisible = true">制定进货单</el-button> -->
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
