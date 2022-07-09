@@ -139,7 +139,7 @@ export const PATH = {
   },
   INCOME_MANAGE:{
     path:'/IncomeManage',
-    requiresAuth: [ROLE.GM,ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+    requiresAuth: [ROLE.GM,ROLE.HR,ROLE.ADMIN]
   },
   CHECK_PURCHASE_DETAIL:{
     path:'/CheckPurchaseDetail',

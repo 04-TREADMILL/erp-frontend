@@ -158,12 +158,12 @@
             <i class="el-icon-money"></i>
             <span slot="title">薪资发放</span>
             </el-menu-item> 
-             <!-- <el-menu-item
-            :index = "PATH.HR_SALARY_MANAGE.path"
-            v-if = "permit(PATH.HR_SALARY_MANAGE.requiresAuth)">
+             <el-menu-item
+            :index = "PATH.INCOME_MANAGE.path"
+            v-if = "permit(PATH.INCOME_MANAGE.requiresAuth)">
             <i class="el-icon-money"></i>
             <span slot="title">工资单制定</span>
-            </el-menu-item>  -->
+            </el-menu-item> 
         </el-submenu>
       <el-submenu index="6"
           v-if = "permit(PATH.HR_EMPLOYEEDAILYATTENDANCE.requiresAuth)">
@@ -207,13 +207,13 @@
             <i class="el-icon-money"></i>
             <span slot="title">付款管理</span>
           </el-menu-item>
-          <el-menu-item
+          <!-- <el-menu-item
             :index="PATH.INCOME_MANAGE.path"
             v-if="permit(PATH.INCOME_MANAGE.requiresAuth)"
           >
             <i class="el-icon-money"></i>
             <span slot="title">工资管理</span>
-          </el-menu-item>
+          </el-menu-item> -->
       </el-submenu>
       <el-submenu index = "8"
         v-if = "permit(PATH.CHECK_PURCHASE_DETAIL.requiresAuth)">

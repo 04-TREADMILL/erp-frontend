@@ -221,23 +221,23 @@ const routes = [
   {
     path:PATH.PAY_MANAGE.path,
     component: PayManage,
-    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+    meta:{requiresAuth:PATH.PAY_MANAGE.requiresAuth}
   },
   {
     path:PATH.INCOME_MANAGE.path,
     component: IncomeManage,
-    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+    meta:{requiresAuth:PATH.INCOME_MANAGE.requiresAuth}
   },
   {
     path:PATH.CHECK_PURCHASE_DETAIL.path,
     component:   CheckPurchaseDetail,
-    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+    meta:{requiresAuth:PATH.CHECK_PURCHASE_DETAIL.requiresAuth}
   },
 
   {
     path:PATH.CHECK_BUSINESS_SITUATION.path,
     component: CheckBusinessSituation,
-    meta:{requiresAuth:PATH.RECEIVE_MANAGE.requiresAuth}
+    meta:{requiresAuth:PATH.CHECK_BUSINESS_SITUATION.requiresAuth}
   },
   {
     path:PATH.CHECK_SALE_SHEET.path,
