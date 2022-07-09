@@ -55,6 +55,7 @@ export default {
       activeName: 'PENDING',
       receiptList:[],
       accountList:[],
+      
       pendingList: [],
       successList: [],
       failureList: [],
@@ -65,6 +66,7 @@ export default {
   },
   mounted() {
     this.getReceipt();
+
     showAccount().then(_res=>{
       this.accountList = _res.result;
     })
@@ -72,6 +74,7 @@ export default {
       this.sellers = _res.result;
     })
      this.getSalary();
+
     showAccount().then(_res=>{
       this.accountList = _res.result;
     })
@@ -79,9 +82,8 @@ export default {
       this.employees = _res.result;
     })
     this.getPayment();
-    showAccount().then(_res=>{
-      this.accountList = _res.result;
-    })
+
+
     getAllCustomer({ params : { type: 'SUPPLIER' } }).then(_res => {
       this.suppliers = _res.result;
     })
@@ -102,9 +104,9 @@ export default {
       this.salaryList = [];
       showSalary().then(_res=>{
         this.salaryList = _res.result;
-        this.pendingList = this.pendingList.concat(this.receiptList.filter(item => item.state === '待审批'))
-        this.successList = this.successList.concat(this.receiptList.filter(item => item.state === '审批完成'))
-        this.failureList = this.failureList.concat(this.receiptList.filter(item => item.state === '审批失败'))
+        this.pendingList = this.pendingList.concat(this.salaryList.filter(item => item.state === '待审批'))
+        this.successList = this.successList.concat(this.salaryList.filter(item => item.state === '审批完成'))
+        this.failureList = this.failureList.concat(this.salaryList.filter(item => item.state === '审批失败'))
       })
     },
     getPayment(){

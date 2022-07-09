@@ -143,23 +143,23 @@ export const PATH = {
   },
   CHECK_PURCHASE_DETAIL:{
     path:'/CheckPurchaseDetail',
-    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN,ROLE.GM]
   },
   CHECK_BUSINESS_SITUATION:{
     path:'/CheckBusinessSituation',
-    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN]
+    requiresAuth: [ROLE.FINANCIAL_STAFF,ROLE.ADMIN,ROLE.GM]
   },
   CHECK_SALE_SHEET:{
     path:'/CheckSaleSheet',
-    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF]
+    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF,ROLE.GM]
   },
   CHECK_PURCHASE_SHEET:{
     path:'/CheckPurchaseSheet',
-    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF]
+    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF,ROLE.GM]
   },
   CHECK_FINANCE_SHEET:{
     path:'/CheckFinanceSheet',
-    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF]
+    requiresAuth:[ROLE.ADMIN,ROLE.FINANCIAL_STAFF,ROLE.GM]
   }
   
 

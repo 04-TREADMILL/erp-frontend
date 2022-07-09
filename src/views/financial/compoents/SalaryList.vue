@@ -9,6 +9,8 @@
                        type="primary" icon="el-icon-check" circle size="mini" @click="approval(item.id)"></el-button>
             <el-button v-if="authorization() === 2"
                        type="danger" icon="el-icon-close" circle size="mini" @click="deny(item.id)"></el-button>
+            <el-button v-if="authorization() === 3"
+                       type="danger" icon="el-icon-close" circle size="mini" @click="deny(item.id)"></el-button>
             <span style="margin-left: 10px">
               <el-tag v-if="type === 2" effect="dark" type='success'>审核通过</el-tag>
               <el-tag v-if="type === 3" effect="dark" type='danger'>审核未通过</el-tag>
@@ -68,7 +70,11 @@ export default {
       if (this.type === 1 && sessionStorage.getItem('role') === 'GM') {
         return 2
       }
+      if(this.type === 2 && sessionStorage.getItem('role') === 'HR'){
+        return 3
+      }
     },
+
     approval(id) {
       let config = {
         params: {

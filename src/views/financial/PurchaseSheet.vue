@@ -45,7 +45,8 @@
 <script>
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
-import PurchaseList from "../purchase/components/PurchaseList"
+import PurchaseList from "./compoents/PurchaseList"
+
 import { getAllPurchase,getAllPurchaseReturn, createPurchase, getAllCustomer } from '../../network/purchase'
 import { getAllCommodity } from '../../network/commodity'
 export default {
