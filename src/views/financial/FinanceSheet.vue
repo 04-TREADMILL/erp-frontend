@@ -55,7 +55,7 @@ export default {
       activeName: 'PENDING',
       receiptList:[],
       accountList:[],
-      
+
       pendingList: [],
       successList: [],
       failureList: [],
@@ -65,32 +65,34 @@ export default {
     }
   },
   mounted() {
+    //获取收款单
     this.getReceipt();
-
+    //加载账号
     showAccount().then(_res=>{
       this.accountList = _res.result;
     })
+    //加载销售商
     getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
       this.sellers = _res.result;
     })
-     this.getSalary();
-
+    //获取工资单
+    this.getSalary();
     showAccount().then(_res=>{
       this.accountList = _res.result;
     })
+    //加载员工
     showEmployee().then(_res => {
       this.employees = _res.result;
     })
     this.getPayment();
-
-
+    //加载供应商
     getAllCustomer({ params : { type: 'SUPPLIER' } }).then(_res => {
       this.suppliers = _res.result;
     })
 
-  //  console.log(this.pendingList)
   },
   methods:{
+    //收款单获取
     getReceipt(){
       this.receiptList = [];
       showReceipt().then(_res=>{
@@ -100,7 +102,8 @@ export default {
         this.failureList = this.receiptList.filter(item => item.state === '审批失败')
       })
     },
-     getSalary(){
+    //工资单获取
+    getSalary(){
       this.salaryList = [];
       showSalary().then(_res=>{
         this.salaryList = _res.result;
@@ -109,6 +112,7 @@ export default {
         this.failureList = this.failureList.concat(this.salaryList.filter(item => item.state === '审批失败'))
       })
     },
+    //付款单获取
     getPayment(){
       this.paymentList = [];
       showPayment().then(_res=>{
@@ -118,7 +122,6 @@ export default {
         this.failureList = this.failureList.concat(this.paymentList.filter(item => item.state === '审批失败'))
       })
     },
-   
   },
 };
 </script>

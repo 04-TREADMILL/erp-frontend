@@ -137,7 +137,6 @@ export default {
     await getAllSale({ params: { state: 'SUCCESS' } }).then(_res => {
       this.completedSale = _res.result
     })
-    // console.log(this.completedSale);
   },
   methods: {
     getSaleReturn() {

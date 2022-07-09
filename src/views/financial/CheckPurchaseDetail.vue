@@ -58,7 +58,8 @@
             </el-button>
           </template>
         </el-table-column> -->
-      </el-table>
+     
+     </el-table>
     </div>
 
       <el-dialog
@@ -90,6 +91,7 @@
               </el-option>
             </el-select>
         </el-form-item>
+
         <!-- <el-form-item label="客 户">
             <el-select v-model="SearchForm.customerId" placeholder="请输入客户Id">
               <el-option
@@ -110,10 +112,7 @@
               </el-option>
             </el-select>
         </el-form-item> -->
-
-        
-        
-             
+     
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="handleSearch(false)">取 消</el-button>
@@ -155,16 +154,18 @@
   },
 
   async mounted() {
+    //获取销售明细
     await getSaledetail().then(_res=>{
       this.saleDetailList = _res.result
     })
+    //获取销售商 and 供应商
     await getAllCustomer({ params : { type: 'SUPPLIER' } }).then(_res => {
       this.customerList = this.customerList.concat(_res.result)
     })
     await getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
       this.customerList = this.customerList.concat(_res.result)
     })
-    
+    //获取商品
     await getAllCommodity().then(_res=>{
       for(var i=0;i<_res.result.length;i++){
         let obj = {}
@@ -173,11 +174,9 @@
         this.productList.push(obj)
       }
     })
-    
-    
-
   },
   methods: {
+    //导出EXCEL
     exportAsExcel() {
       if(this.saleDetailList.length===0){
          this.$message({
@@ -203,15 +202,17 @@
         document.removeChild(temp);
         window.URL.revokeObjectURL(blobUrl);
       })
-
       }
     },
+    //数据刷新
     getAll(){
       getSaledetail()
     },
+    //弹出窗口
     SearchDetail(){
       this.searchDialogVisible = true
     },
+    //处理数据
     handleSearch(type){
       if (type === false) {
           this.searchDialogVisible = false;
@@ -221,19 +222,13 @@
           let t = this.SearchForm
           t.from = t.from.substr(0,4) + t.from.substr(5,7) + t.from.substr(8,10)
           t.to = t.to.substr(0,4) + t.to.substr(5,7) + t.to.substr(8,10)
-          console.log("t")
-          console.log(t)
-
-
+          //时间格式处理
+          
           getSaledetail(
            {params:{from:t.from,
            to:t.to,
            product:t.product,
-         
-        }},
-
-          ).then(_res => {
-             console.log(_res);
+        }}).then(_res => {
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',
@@ -244,6 +239,7 @@
                 type: 'success',
                 message: '查询成功!'
               });
+              //查询成功后 处理数据
               this.saleDetailList = _res.result
               this.dealwithTime()
               this.SearchForm = {};
@@ -253,6 +249,7 @@
           
         }
     },
+    //时间格式处理
     dealwithTime(){
       var t = this.saleDetailList
       for(var i=0;i<t.length;i++){
@@ -261,13 +258,7 @@
       this.saleDetailList = t
     }
   },
-
-close(){}
-
-
-
-  
-  };
+};
 </script>
 
 <style lang="scss" scoped>

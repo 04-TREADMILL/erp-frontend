@@ -46,8 +46,9 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import PurchaseList from "./compoents/PurchaseList"
-
-import { getAllPurchase,getAllPurchaseReturn, createPurchase, getAllCustomer } from '../../network/purchase'
+import { getAllPurchase,
+         getAllPurchaseReturn, 
+         getAllCustomer } from '../../network/purchase'
 import { getAllCommodity } from '../../network/commodity'
 export default {
   name: 'PurchaseView',
@@ -70,6 +71,7 @@ export default {
     }
   },
   mounted() {
+    //获取进货单据
     this.getPurchase()
     getAllCommodity({}).then(_res => {
       let res = _res.result

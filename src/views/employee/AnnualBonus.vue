@@ -111,14 +111,17 @@ export default {
     }
   },
   mounted() {
-     showEmployee().then(_res=>{
+    //获取员工
+    showEmployee().then(_res=>{
         this.employeeList = _res.result
+        //初始化年终奖
         for(var i=0;i<_res.result.length;i++){
             this.employeeList[i].allocated = true
         }
     })
+    //Js异步处理
     setTimeout(()=>{
-    for(let i=0;i<this.employeeList.length;i++){
+        for(let i=0;i<this.employeeList.length;i++){
             let config = {params:{id:this.employeeList[i].id}}
             showAnnualBonus(config).then(_res=>{
                 if(_res.result.length === 0){
@@ -127,18 +130,19 @@ export default {
             })
         }
     },400)
-
   },
   methods: {
     filterTag(value, row) {
       return row.type === value
     },
+    //发放年终奖
     handleAdd(type){
         if (type === false) {
           this.addDialogVisible = false;
           this.bonus = 0;
         } else if (type === true) {
             let check = true;
+            //判断是否具备发放资格
             for(var i=0;i<this.employeeList.length;i++){
                 if(this.employeeList[i].id==this.cur_id){
                     if(this.employeeList[i].allocated){
@@ -151,19 +155,21 @@ export default {
                 }
             }
             if(check){
-          allocateAnnualBonus({params:{id:this.cur_id,extraBonus:this.bonus}}).then(_res => {
-            if (_res.code === "A0002") {
-              this.$message({
-                type: 'error',
-                message: _res.msg
-              });
-            } else {
+              //发放年终奖
+            allocateAnnualBonus({params:{id:this.cur_id,extraBonus:this.bonus}}).then(_res => {
+              if (_res.code === "A0002") {
+                this.$message({
+                  type: 'error',
+                  message: _res.msg
+                });
+              } else {
               this.$message({
                 type: 'success',
                 message: '发放成功!'
               });
               this.bonus = 0;
               this.addDialogVisible = false;
+              //刷新前端界面，但是避免全局刷新
                 for(var i=0;i<this.employeeList.length;i++){
                     if(this.employeeList[i].id === this.cur_id) this.employeeList[i].allocated = true;
                 }
@@ -172,10 +178,12 @@ export default {
             }
         }
     },
+    //弹出年终奖窗口
     handleallocate(id){
         this.addDialogVisible = true;
         this.cur_id = id
     },
+    //关闭窗口
     close(){
         this.bonus = 0;
     },

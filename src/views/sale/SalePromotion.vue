@@ -209,9 +209,6 @@
       width="30%"
       @close="close()">
      <el-form :model="addFormCombine" :label-width="'100px'" size="mini">
-      <!--     <el-form-item label="i d">
-          <el-input v-model="addFormCombine.id" placeholder="请输入活动id" type="number"></el-input>
-        </el-form-item> -->
         <el-form-item label="开始时间 ">
            <el-date-picker v-model="addFormCombine.beginTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker>   
         </el-form-item>
@@ -249,11 +246,12 @@
 <script>
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
-import {
-addtotalpromotion,addcustomerpromotion,addcombinepromotion,showpromotion
+import {addtotalpromotion,
+        addcustomerpromotion,
+        addcombinepromotion,
+        showpromotion
     } from "../../network/sale";
 import { getAllCommodity } from '../../network/commodity'
-import { formatDate } from "@/common/utils";
 
 export default {
   name: 'EmployeeView',
@@ -301,10 +299,11 @@ export default {
     }
   },
   mounted() {
+    //获取商品
     getAllCommodity().then(_res=>{
       this.comodityList = _res.result
-      //console.log(_res.result)
     })
+    //获取促销策略
     showpromotion({params:{promotionType:"total"}}).then(_res=>{
         this.totalpromotionList = _res.result
     })
@@ -325,7 +324,6 @@ export default {
     })
     showpromotion({params:{promotionType:"combine"}}).then(_res=>{
         this.combinepromotionList = _res.result
-           // console.log(this.combinepromotionList)
         for(var i =0;i<this.combinepromotionList.length;i++){
           this.combinepromotionList[i].beginTime = this.combinepromotionList[i].beginTime.substr(0,10)
           this.combinepromotionList[i].endTime = this.combinepromotionList[i].endTime.substr(0,10)
@@ -349,6 +347,7 @@ export default {
       })
 
     },
+    //增加总价促销
     add_total_promotion(){
         this.addDialogVisible_of_Total = true;
     },
@@ -363,10 +362,7 @@ export default {
           let config = this.addFormTotal
           config.beginTime = t1
           config.endTime = t2
-         // console.log(config)
           addtotalpromotion(config).then(_res => {
-            // console.log(_res.code);
-          //  console.log(_res);
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',
@@ -385,6 +381,7 @@ export default {
           
         }
     },
+    //增加客户促销
     add_customer_promotion(){
       this.addDialogVisible_of_Customer =  true
     },
@@ -422,7 +419,7 @@ export default {
           
         }
     },
-
+    //增加组合促销
     add_combine_promotion(){
        this.addDialogVisible_of_Combine =  true
     },

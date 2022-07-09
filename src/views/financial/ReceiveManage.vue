@@ -111,6 +111,7 @@ export default {
     }
   },
   mounted() {
+    //获取单据
     this.getReceipt();
     showAccount().then(_res=>{
       this.accountList = _res.result;

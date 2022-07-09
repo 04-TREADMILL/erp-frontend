@@ -94,6 +94,7 @@ export default {
     }
   },
   mounted() {
+    //获取员工
       showEmployee().then(_res=>{
         this.employeeList = _res.result
         for(var i=0;i<_res.result.length;i++){
@@ -103,10 +104,9 @@ export default {
       })
   },
   methods: {
+    //修改薪资计算方式
     changeMode(id,mode){
-
       if(mode === "月薪制"){
-
         changeSalaryMode({params:{id:id,mode:"commission"}}).then(_res=>{
         showEmployee().then(_res=>{
         this.employeeList = _res.result
@@ -128,11 +128,10 @@ export default {
       })
       })
       }
-               this.$message({
+        this.$message({
                 type: 'success',
                 message: '修改成功!'
-              });
-
+        });
     }
   }
 }

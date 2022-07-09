@@ -42,7 +42,7 @@
               <el-option
                   v-for="item in employees"
                   :key="item.id"
-                  :label="item.id"
+                  :label="item.name"
                   :value="item.id">
               </el-option>
             </el-select>
@@ -107,9 +107,11 @@ export default {
   },
   mounted() {
     this.getSalary();
+    //加载账号
     showAccount().then(_res=>{
       this.accountList = _res.result;
     })
+    //加载员工
     showEmployee().then(_res => {
       this.employees = _res.result;
     })
@@ -118,6 +120,7 @@ export default {
     filterTag(value, row) {
       return row.type === value
     },
+    //获取工资单
     getSalary(){
       this.salaryList = [];
       showSalary().then(_res=>{
@@ -127,16 +130,8 @@ export default {
         this.failureList = this.salaryList.filter(item => item.state === '审批失败')
       })
     },
-    handleClose(done) {
-      this.$confirm('确认关闭？')
-          .then(_ => {
-            this.salaryForm = {}
-            done();
-          })
-          .catch(_ => {});
-    },
+    //制定工资单
     submitForm(formName) {
-      
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.salaryForm.id = null,
@@ -156,7 +151,16 @@ export default {
           })
         }
       })
-    }
+    },
+    //关闭表单
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+          .then(_ => {
+            this.salaryForm = {}
+            done();
+          })
+          .catch(_ => {});
+    },
   },
 };
 </script>

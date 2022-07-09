@@ -59,11 +59,11 @@
 <script>
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
-import {showEmployeepunch,addEmployeepunch,showEmployee,showlastmonthpunch,showthismonthpunch,showlatestpunch,allocateAnnualBonus,showAnnualBonus} from "../../network/employee";
-import { formatDate } from "@/common/utils";
-
-
-
+import {addEmployeepunch,
+        showEmployee,
+        showlastmonthpunch,
+        showthismonthpunch,
+        showlatestpunch} from "../../network/employee";
 export default {
   name: 'EmployeeDailyAttendance',
   components: {
@@ -74,21 +74,19 @@ export default {
     return {
       employeeList:[],
       today:"",
-
     }
   },
   mounted() {
-    
+    //获取员工
     this.getemployee()
-   
   },
   methods: {
     getemployee(){
       let list = []
       showEmployee().then(_res=>{
-        //console.log(_res.result);
           var date = new Date()
           this.today = this.formatDateTime(date) 
+          //添加上月打卡，本月打卡，上次打卡属性
         for(var i=0;i<_res.result.length;i++){
           let obj = {}
           obj.id = _res.result[i].id
@@ -107,7 +105,6 @@ export default {
             obj.latestpunch = _res.result
           if(_res.result === this.today) obj.punchdisable = true
           else obj.punchdisable = false
-        //  console.log(obj)
           list.push(obj)
           })
         }
@@ -115,7 +112,7 @@ export default {
         this.employeeList = list      
     },
     // 中国标准时间 转换成 年月日
-   formatDateTime (date) {
+    formatDateTime (date) {
           var y = date.getFullYear();
           var m = date.getMonth() + 1;
           m = m < 10 ? ('0' + m) : m;
@@ -128,13 +125,13 @@ export default {
           console.log(y+m+d)
           return y +  ''+ m + '' + d
     },
+    // 打卡
     handlepunch(id){
-      //console.log(id)
       var timestamp = Date.parse(new Date())
       addEmployeepunch({id:0,
-      eid:id,
-      punchTime:timestamp}).then(_res=>{
-       // console.log(_res)  
+                        eid:id,
+                        punchTime:timestamp}).then(_res=>{
+       // 刷新前端显示界面
         for(var i =0;i<this.employeeList.length;i++){
           if(this.employeeList[i].id === id) {this.employeeList[i].punchdisable = true
           this.employeeList[i].thismonthpunch = this.employeeList[i].thismonthpunch+1

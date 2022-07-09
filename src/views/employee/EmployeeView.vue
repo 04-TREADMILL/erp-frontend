@@ -58,21 +58,13 @@
           label="岗位工资"
           width="100">
         </el-table-column>
-        <!-- <el-table-column
-          prop="lineOfCredit"
-          label="岗位级别"
-          width="120">
-        </el-table-column> -->
+
         <el-table-column
           prop="salaryCalculatingMode"
           label="薪资计算方式"
           width="120">
         </el-table-column>
-        <!-- <el-table-column
-          prop="salaryGrantingMode"
-          label="薪资发放方式"
-          width="120">
-        </el-table-column> -->
+
         <el-table-column
           prop="account"
           label="账户"
@@ -104,12 +96,7 @@
       width="30%"
       @close="close()">
       <el-form :model="addForm" :label-width="'100px'" size="mini">
-      
-        <!-- <el-form-item label="i d">
-          <el-col :span="11">
-            <el-input v-model="addForm.id" placeholder="请输入员工id" ></el-input>
-          </el-col>
-        </el-form-item> -->
+
         <el-form-item label="姓 名">
           <el-input v-model="addForm.name" placeholder="请输入员工姓名"></el-input>
         </el-form-item>
@@ -146,9 +133,7 @@
               <el-option label="提成制" value="commission"></el-option>
           </el-select>
         </el-form-item>
-        <!-- <el-form-item label="薪资发放方式">
-          <el-input v-model="addForm.salaryGrantingMode" placeholder="请输入岗位工资"></el-input>
-        </el-form-item> -->
+
         <el-form-item label="账 户">
           <el-input v-model="addForm.account" placeholder="请输入账户"></el-input>
         </el-form-item>
@@ -237,7 +222,6 @@ export default {
   components: {
     Layout,
     Title
-    
   },
   data() {
     return {
@@ -261,6 +245,7 @@ export default {
     }
   },
   mounted() {
+    //获取员工
     showEmployee().then(_res=>{
        this.employeeList = _res.result;
        for(var i=0;i<_res.result.length;i++){
@@ -268,31 +253,29 @@ export default {
         if(this.employeeList[i].salaryCalculatingMode === "default") this.employeeList[i].salaryCalculatingMode="月薪制"
         else this.employeeList[i].salaryCalculatingMode ="提成制"
        }
-    //    console.log(this.employeeList)
     })
   },
   methods: {
     filterTag(value, row) {
       return row.type === value
     },
+    //刷新页面
     getAll(){
         this.employeeList  = [];
-    showEmployee().then(_res=>{
+        showEmployee().then(_res=>{
        this.employeeList = _res.result;
        for(var i=0;i<_res.result.length;i++){
         this.employeeList[i].birthday = formatDate(_res.result[i].birthday).substr(0,10);
-
         if(this.employeeList[i].salaryCalculatingMode === "default") this.employeeList[i].salaryCalculatingMode="月薪制"
         else this.employeeList[i].salaryCalculatingMode ="提成制"
        }
-    //    console.log(this.employeeList)
     })
     },
+    //添加员工
     addEmployee(){
         this.addDialogVisible = true;
     },
     handleAdd(type){
-        console.log(type);
         if (type === false) {
           this.addDialogVisible = false;
           this.addForm = {};
@@ -300,16 +283,12 @@ export default {
 
           var name = this.addForm.name;
           var gender = this.addForm.gender;
-
           if(name == "") alert("姓名不能为空！");
           else if(gender=="") alert("性别不能为空！");
           else{
-
-        if(this.addForm.salaryCalculatingMode === "月薪制") this.addForm.salaryCalculatingMode="default"
-        else this.addForm.salaryCalculatingMode ="commission"
-
+          if(this.addForm.salaryCalculatingMode === "月薪制") this.addForm.salaryCalculatingMode="default"
+          else this.addForm.salaryCalculatingMode ="commission"
           addEmployee(this.addForm).then(_res => {
-            // console.log(_res.code);
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',
@@ -328,6 +307,7 @@ export default {
           }
         }
     },
+    //编辑员工
     editEmployee(id){
       this.editForm = this.employeeList.filter(x => x.id === id)[0];
       this.editDialogVisible = true;
@@ -339,6 +319,7 @@ export default {
       }else if(type === true){
         if(this.editForm.salaryCalculatingMode === "月薪制") this.editForm.salaryCalculatingMode="default"
         else this.editForm.salaryCalculatingMode ="commission"
+        //更新信息
         updateEmployee(this.editForm).then(_res => {
             if (_res.code === 'B0003') {
               this.$message({
@@ -357,6 +338,7 @@ export default {
           })
       }
     },
+    //删除员工
     deleteEmployee(id){
         let config = {
           params: {
@@ -364,22 +346,17 @@ export default {
           }
         };
 
-      console.log(config);
       this.$confirm('是否要删除？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           deleteEmployee(config).then(_res => {
-            console.log(_res);
-   
               this.$message({
                 type: 'success',
                 message: '删除成功!'
               })
               this.getAll();
-     
-              // this.getAll();
           })
         }).catch(() => {
           this.$message({
@@ -388,6 +365,7 @@ export default {
           })
         })
     },
+    //关闭窗口
     close(){
         this.addForm = {};
         this.editForm = {};

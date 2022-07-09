@@ -115,15 +115,19 @@ export default {
     }
   },
   mounted() {
+    //获取付款单
     this.getPayment();
+    //获取账号
     showAccount().then(_res=>{
       this.accountList = _res.result;
     })
+    //获取客户
     getAllCustomer({ params : { type: 'SUPPLIER' } }).then(_res => {
       this.suppliers = _res.result;
     })
   },
   methods:{
+    //获取付款单
     getPayment(){
       this.paymentList = [];
       showPayment().then(_res=>{
@@ -133,6 +137,7 @@ export default {
         this.failureList = this.paymentList.filter(item => item.state === '审批失败')
       })
     },
+    //筛选账号
     selectAccount(content) {
       this.paymentForm.account = content[0];
     },

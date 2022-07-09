@@ -1,7 +1,6 @@
 <template>
   <Layout>
     <Title title="销售类单据"></Title>
-    <!-- <el-button type="primary" size="medium" @click="dialogVisible = true">制定销售单</el-button> -->
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
         <el-tab-pane label="待一级审批" name="PENDING_LEVEL_1">
@@ -46,10 +45,9 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import SaleList from '../sale/components/SaleList'
-import { getAllSale, createSale,getAllSaleReturn } from '../../network/sale'
+import { getAllSale,getAllSaleReturn } from '../../network/sale'
 import { getAllCustomer } from '../../network/purchase'
 import { getAllCommodity } from '../../network/commodity'
-import { formatDate } from "@/common/utils";
 export default {
   name: 'SaleView',
   components: {
@@ -72,6 +70,7 @@ export default {
     }
   },
   mounted() {
+    //获取销售数据
     this.getSale()
     getAllCommodity({}).then(_res => {
       let res = _res.result
@@ -88,6 +87,7 @@ export default {
     })
   },
   methods: {
+    //获取销售数据
     getSale() {
       getAllSale({}).then(_res => {
         this.saleList = _res.result
@@ -103,7 +103,7 @@ export default {
         this.failureList = this.saleList.filter(item => item.state === '审批失败')
       })
     },
- 
+    //获取销售退货数据
     getSaleReturn() {
       getAllSaleReturn({}).then(_res => {
         this.saleReturnList = _res.result

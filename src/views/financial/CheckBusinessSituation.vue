@@ -46,12 +46,6 @@
       close="close()">
       <el-form :model="this.SearchForm" :label-width="'100px'" size="mini">
       
-        <!-- <el-form-item label="i d">
-          <el-col :span="11">
-            <el-input v-model="addForm.id" placeholder="请输入员工id" ></el-input>
-          </el-col>
-        </el-form-item> -->
-
         <el-form-item label="开始时间">
             <el-date-picker v-model="SearchForm.from" type="date" placeholder="选择日期" value-format="yyyy-MM-dd"> </el-date-picker>   
         </el-form-item>
@@ -73,7 +67,6 @@
   import Layout from "@/components/content/Layout";
   import Title from "@/components/content/Title";
   import {getSaledetail,getSaleSituation} from "../../network/finance";
-import { formatDate } from "@/common/utils";
   export default {
     components: {
         Layout,
@@ -95,12 +88,15 @@ import { formatDate } from "@/common/utils";
     
   },
   methods: {
+    //刷新页面
     getAll(){
       getSaledetail()
     },
+    //弹出窗口
     SearchDetail(){
       this.searchDialogVisible = true
     },
+    //检查年份
     CheckYear(){
       let from = 20220000
       let to   = 20230000
@@ -127,6 +123,7 @@ import { formatDate } from "@/common/utils";
           })
           
     },
+    //处理窗口
     handleSearch(type){
       if (type === false) {
           this.searchDialogVisible = false;
@@ -163,11 +160,6 @@ import { formatDate } from "@/common/utils";
     },
   }
 
-
-
-
-
-  
   };
 </script>
 

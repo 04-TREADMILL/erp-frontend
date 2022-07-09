@@ -69,9 +69,7 @@
 <script>
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
-import {
-  addSalary,
-  showSalary} from "../../network/salary";
+import {showSalary} from "../../network/salary";
 import { showAccount } from "../../network/account";
 import { showEmployee } from "../../network/employee";
 import SalaryList from "../financial/compoents/SalaryList";
@@ -103,15 +101,19 @@ export default {
     }
   },
   mounted() {
+    //获取工资单
     this.getSalary();
+    //获取账号
     showAccount().then(_res=>{
       this.accountList = _res.result;
     })
+    //获取员工
     showEmployee().then(_res => {
       this.employees = _res.result;
     })
   },
   methods:{
+    //获取工资
     getSalary(){
       this.salaryList = [];
       showSalary().then(_res=>{
@@ -121,14 +123,7 @@ export default {
         this.failureList = this.receiptList.filter(item => item.state === '审批失败')
       })
     },
-    handleClose(done) {
-      this.$confirm('确认关闭？')
-          .then(_ => {
-            this.salaryForm = {}
-            done();
-          })
-          .catch(_ => {});
-    },
+    //提交表单
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -148,7 +143,16 @@ export default {
           })
         }
       })
-    }
+    },
+    //关闭表单
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+          .then(_ => {
+            this.salaryForm = {}
+            done();
+          })
+          .catch(_ => {});
+    },
   },
 };
 </script>

@@ -53,11 +53,13 @@ export default {
   mounted() {
   },
   methods: {
+    //权限认证
     authorization() {
       if (this.type === 1 && sessionStorage.getItem('role') === 'GM') {
         return 2
       }
     },
+    //审批
     approval(id) {
       let config = {
         params: {
@@ -73,6 +75,7 @@ export default {
         })
       })
     },
+    //审批失败
     deny(id) {
       let config = {
         params: {

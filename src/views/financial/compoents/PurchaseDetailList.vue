@@ -118,9 +118,11 @@ export default {
     this.showAll = new Array(this.list.length).fill(false)
   },
   methods: {
+    //改变单据状态
     changeState(index) {
       this.$set(this.showAll, index, !this.showAll[index])
     },
+    //权限认证
     authorization() {
       if (this.type === 1 && sessionStorage.getItem('role') === 'SALE_MANAGER') {
         return 1
@@ -128,6 +130,7 @@ export default {
         return 2
       }
     },
+    //审批
     approval(id) {
       let config = {
         params: {
@@ -153,6 +156,7 @@ export default {
         })
       }
     },
+    //审批失败
     deny(id) {
       let config = {
         params: {
