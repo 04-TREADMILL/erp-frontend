@@ -1,7 +1,6 @@
 <template>
   <Layout>
     <Title title="财务类单据"></Title>
-    <el-button type="primary" size="medium" @click="dialogVisible = true">制定收款单</el-button>
     <div class="body">
       <el-tabs v-model="activeName" :stretch="true">
         <el-tab-pane label="待审批" name="PENDING">
@@ -49,6 +48,8 @@ import {
 import {showAccount} from "../../network/account";
 import {getAllCustomer} from "../../network/purchase";
 import ReceiptList from "./compoents/ReceiptList";
+import { showEmployee } from "../../network/employee";
+
 export default {
   components: {
     ReceiptList,
