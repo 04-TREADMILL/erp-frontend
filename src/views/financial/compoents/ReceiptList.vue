@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <el-card v-for="(item, index) in list" :index="item.index" :key="item.id" shadow="hover">
+    <el-card v-for="(item) in list" :index="item.index" :key="item.id" shadow="hover">
       <template #header>
         <el-row>
           <el-col :span="18">

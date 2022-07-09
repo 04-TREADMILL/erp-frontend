@@ -18,7 +18,7 @@ const COMMODITY_CREATE = '/api/product/create';
 const COMMODITY_UPDATE = '/api/product/update';
 const COMMODITY_DELETE = '/api/product/delete';
 
-
+//仓库
 const WAREHOUSE_INPUT = '/api/warehouse/input';
 const WAREHOUSE_OUTPUT_PRE = '/api/warehouse/product/count';
 const WAREHOUSE_OUTPUT = '/api/warehouse/output';
@@ -115,10 +115,12 @@ const ADD_COMBINE_PROMOTION ='api/promotion/add-combine';
 const DELETE_PROMOTION = 'api/promotion/delete';
 const SHOW_PROMOTION = 'api/promotion/show';
 
+//销售明细
 const SALE_DETAIL = 'api/finance/sale-detail';
 const SALE_SITUATION = 'api/finance/profit';
 const SALE_DETAIL_EXPORT = 'api/finance/sale-detail-excel';
 
+//薪资计算方式
 const CHANGE_SALARY_MODE = 'api/employee/change-salary-calculating-mode';
 
 module.exports = {
