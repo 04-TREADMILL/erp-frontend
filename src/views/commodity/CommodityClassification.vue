@@ -112,7 +112,6 @@
         getAllCommodityClassification({}).then(_res => {
           this.classificationList = _res.result;
           this.classificationList = JSON.parse(JSON.stringify(this.arrayToTree(this.classificationList, 0)));
-          console.log(this.classificationList);
         }).catch(err => {
           this.$message({
             type: 'error',
@@ -182,7 +181,6 @@
           type: 'warning'
         }).then(() => {
           deleteCommodityClassification(config).then(_res => {
-            console.log(_res);
             if (_res.code === 'A0006') {
               this.$message({
                 type: 'error',
