@@ -58,11 +58,11 @@
           label="薪资计算方式"
           width="120">
         </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="salaryGrantingMode"
           label="薪资发放方式"
           width="120">
-        </el-table-column>
+        </el-table-column> -->
     
         <el-table-column
           prop="allocated"
@@ -124,7 +124,8 @@ export default {
         for(let i=0;i<this.employeeList.length;i++){
             let config = {params:{id:this.employeeList[i].id}}
             showAnnualBonus(config).then(_res=>{
-                if(_res.result.length === 0){
+              console.log(_res)
+                if(_res.result){
                     this.employeeList[i].allocated = false;
                 }
             })

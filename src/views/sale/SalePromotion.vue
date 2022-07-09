@@ -175,7 +175,7 @@
           <el-date-picker v-model="addFormCustomer.endTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker> 
         </el-form-item>
         <el-form-item label="折 扣">
-          <el-input v-model="addFormCustomer.discount" placeholder="请输入促销条件" type="number"></el-input>
+          <el-input v-model="addFormCustomer.discount" placeholder="请输入促销条件"></el-input>
         </el-form-item>
          <el-form-item label="金 额">
           <el-input v-model="addFormCustomer.amount" placeholder="请输入促销金额" type="number"></el-input>
@@ -209,6 +209,9 @@
       width="30%"
       @close="close()">
      <el-form :model="addFormCombine" :label-width="'100px'" size="mini">
+        <!-- <el-form-item label="i d">
+          <el-input v-model="addFormCombine.id" type="number" placeholder="设置id"></el-input>
+        </el-form-item> -->
         <el-form-item label="开始时间 ">
            <el-date-picker v-model="addFormCombine.beginTime" type="date" placeholder="选择时间" value-format="yyyy-MM-dd"> </el-date-picker>   
         </el-form-item>
@@ -336,14 +339,36 @@ export default {
       return row.type === value
     },
     getAll(){
-      showpromotion({params:{promotionType:"total"}}).then(_res=>{
-          this.totalpromotionList = _res.result
-      })
-      showpromotion({params:{promotionType:"customer"}}.then(_res=>{
+
+          //获取商品
+    getAllCommodity().then(_res=>{
+      this.comodityList = _res.result
+    })
+    //获取促销策略
+    showpromotion({params:{promotionType:"total"}}).then(_res=>{
+        this.totalpromotionList = _res.result
+    })
+    setTimeout(()=>{
+        //反异步
+        for(var i =0;i<this.totalpromotionList.length;i++){
+          this.totalpromotionList[i].beginTime = this.totalpromotionList[i].beginTime.substr(0,10)
+          this.totalpromotionList[i].endTime = this.totalpromotionList[i].endTime.substr(0,10)
+        }
+    },800)
+    showpromotion({params:{promotionType:"customer"}}).then(_res=>{
         this.customerpromotionList = _res.result
-      }))
-      showpromotion({params:{promotionType:"combine"}}).then(_res=>{
+
+        for(var i =0;i<this.customerpromotionList.length;i++){
+          this.customerpromotionList[i].beginTime = this.customerpromotionList[i].beginTime.substr(0,10)
+          this.customerpromotionList[i].endTime = this.customerpromotionList[i].endTime.substr(0,10)
+        }
+    })
+    showpromotion({params:{promotionType:"combine"}}).then(_res=>{
         this.combinepromotionList = _res.result
+        for(var i =0;i<this.combinepromotionList.length;i++){
+          this.combinepromotionList[i].beginTime = this.combinepromotionList[i].beginTime.substr(0,10)
+          this.combinepromotionList[i].endTime = this.combinepromotionList[i].endTime.substr(0,10)
+        }
       })
 
     },
@@ -441,10 +466,10 @@ export default {
           for(var i=0;i<arr.length;i++) list.push(arr[i]);
           config.pidList = list
 
-          //console.log(config)
+          console.log(config)
           addcombinepromotion(config).then(_res => {
             // console.log(_res.code);
-         //   console.log(_res);
+            console.log(_res);
             if (_res.code === "A0002") {
               this.$message({
                 type: 'error',

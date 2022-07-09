@@ -103,11 +103,8 @@
       width="30%"
       @close="close()">
       <el-form :model="addForm" :label-width="'100px'" size="mini">
-      
         <el-form-item label="i d">
-          <el-col :span="11">
-            <el-input v-model="addForm.id" placeholder="请输入客户id" ></el-input>
-          </el-col>
+          <el-input v-model="addForm.id" placeholder="请输入客户id"></el-input>
         </el-form-item>
         <el-form-item label="姓 名">
           <el-input v-model="addForm.name" placeholder="请输入客户姓名"></el-input>
@@ -144,9 +141,6 @@
         <el-form-item label="应付">
           <el-input v-model="addForm.payable" placeholder="请输入应收（元）"></el-input>
         </el-form-item>
-        <el-form-item label="操作员">
-          <el-input v-model="addForm.operator" placeholder="请输入操作员"></el-input>
-        </el-form-item>                
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="handleAdd(false)">取 消</el-button>
@@ -160,12 +154,7 @@
       width="30%"
       @close="close()">
       <el-form :model="editForm" :label-width="'100px'" size="mini">
-      
-        <el-form-item label="i d">
-          <el-col :span="11">
-            <el-input v-model="editForm.id" placeholder="请输入客户id"></el-input>
-          </el-col>
-        </el-form-item>
+
         <el-form-item label="姓 名">
           <el-input v-model="editForm.name" readonly></el-input>
         </el-form-item>
@@ -200,9 +189,6 @@
         </el-form-item>
         <el-form-item label="应付">
           <el-input v-model="editForm.payable" placeholder="请输入应收（元）"></el-input>
-        </el-form-item>
-        <el-form-item label="操作员">
-          <el-input v-model="editForm.operator" placeholder="请输入操作员"></el-input>
         </el-form-item>                
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -256,11 +242,8 @@ export default {
       this.customerList = this.customerList.concat(_res.result)
     })
     await getAllCustomer({ params : { type: 'SELLER' } }).then(_res => {
-      
       this.customerList = this.customerList.concat(_res.result)
     })
-
-    // console.log(this.customerList);
   },
   methods: {
     filterTag(value, row) {
@@ -277,24 +260,22 @@ export default {
     })
       },
     addCustomer() {
-      // TODO: 新增客户
-      // alert('TODO: 新增客户')
+
       this.addDialogVisible = true;
     },
     handleAdd(type) {
-      // console.log(type);
+
         if (type === false) {
           this.addDialogVisible = false;
           this.addForm = {};
         } else if (type === true) {
 
-        
           var name = this.addForm.name;
           var email = this.addForm.email;
           var ty = this.addForm.type;
-          if(name == ""){
-            alert("姓名不能为空！");
-          }
+          this.addForm.operator =sessionStorage.getItem("name")
+
+          if(name == ""){ alert("姓名不能为空！");}
           else if(email == "") alert("邮箱不能为空！");
           else if(ty=="") alert("类型不能为空！");
           else{
@@ -353,8 +334,6 @@ export default {
             id: id
           }
         };
-
-      // console.log(id);
       this.$confirm('是否要删除该？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -368,7 +347,6 @@ export default {
               })
               this.getAll();
             }
-              // this.getAll();
           })
         }).catch(() => {
           this.$message({

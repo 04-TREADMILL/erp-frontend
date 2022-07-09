@@ -220,13 +220,14 @@
         } else if (type === true) {
 
           let t = this.SearchForm
-          t.from = t.from.substr(0,4) + t.from.substr(5,7) + t.from.substr(8,10)
-          t.to = t.to.substr(0,4) + t.to.substr(5,7) + t.to.substr(8,10)
+         let from = t.from.substr(0,4) + t.from.substr(5,2) + t.from.substr(8,2)
+          let to = t.to.substr(0,4) + t.to.substr(5,2) + t.to.substr(8,2)
+
           //时间格式处理
           
           getSaledetail(
-           {params:{from:t.from,
-           to:t.to,
+           {params:{from:from,
+           to:to,
            product:t.product,
         }}).then(_res => {
             if (_res.code === "A0002") {

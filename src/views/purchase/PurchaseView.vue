@@ -58,18 +58,18 @@
           <el-form-item
             v-for="(item, index) in purchaseForm.purchaseSheetContent"
             :key="index"
-            :label="'商品' + index">
+            :label="'商品 ' + index">
             <div>
-              <el-select v-model="item.pid" placeholder="请选择商品id" style="width: 40%; margin-right: 5%">
+              <el-select v-model="item.pid" placeholder="请选择商品" style="width: 40%; margin-right: 5%">
                 <el-option
                   v-for="item1 in commodityList"
                   :key="item1.id"
-                  :label="item1.id"
+                  :label="item1.name"
                   :value="item1.id">
                 </el-option>
               </el-select>
-              <el-input v-model="item.quantity" style="width: 25%; margin-right: 5%" placeholder="请输入商品数量"></el-input>
-              <el-input v-model="item.unitPrice" style="width: 25%;" placeholder="请输入商品单价"></el-input>
+              <el-input v-model="item.quantity" style="width: 40%; margin-right: 5%" placeholder="请输入商品数量"></el-input>
+              <el-input v-model="item.unitPrice" style="width: 40%; margin-top: 10px;" placeholder="请输入商品单价"></el-input>
             </div>
             <div style="margin-top: 10px">
               <el-input v-model="item.remark" style="width: 70%; margin-right: 10%" placeholder="请填写备注"></el-input>

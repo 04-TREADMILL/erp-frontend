@@ -96,7 +96,9 @@
       width="30%"
       @close="close()">
       <el-form :model="addForm" :label-width="'100px'" size="mini">
-
+        <el-form-item label="i d">
+          <el-input v-model="addForm.id" placeholder="请输入员工id"></el-input>
+        </el-form-item>
         <el-form-item label="姓 名">
           <el-input v-model="addForm.name" placeholder="请输入员工姓名"></el-input>
         </el-form-item>

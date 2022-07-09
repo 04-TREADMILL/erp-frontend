@@ -58,12 +58,12 @@ export default {
   mounted() {
      showEmployee().then(_res=>{
         this.employeeList = _res.result
-      //  console.log(_res.result)
+     // console.log(_res.result)
     })
     setTimeout(()=>{
         for(var i=0;i<this.employeeList.length;i++){
             showAnnualBonus({params:{id:this.employeeList[i].id}}).then(_ret=>{
-               // console.log(_ret)
+               console.log(_ret)
                 if(_ret.result.length===0){}
                 else{
                     let obj = {}

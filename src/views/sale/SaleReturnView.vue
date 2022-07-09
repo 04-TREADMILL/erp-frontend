@@ -169,6 +169,7 @@ export default {
           this.saleReturnForm.state = null
           this.saleReturnForm.rawTotalAmount = null
           this.saleReturnForm.finalAmount = null
+          
           this.saleReturnForm.discount = Number(this.saleReturnForm.discount)
           this.saleReturnForm.voucherAmount = Number(this.saleReturnForm.voucherAmount)
           this.saleReturnForm.createTime = null
