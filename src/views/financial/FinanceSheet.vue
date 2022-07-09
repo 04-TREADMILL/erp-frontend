@@ -36,15 +36,9 @@
 <script>
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
-import {
-  addReceipt,
-  showReceipt} from "../../network/receipt";
-import {
-  addSalary,
-  showSalary} from "../../network/salary";
-import {
-  addPayment,
-  showPayment } from "../../network/payment";
+import {showReceipt} from "../../network/receipt";
+import {showSalary} from "../../network/salary";
+import {showPayment } from "../../network/payment";
 import {showAccount} from "../../network/account";
 import {getAllCustomer} from "../../network/purchase";
 import ReceiptList from "./compoents/ReceiptList";
@@ -92,7 +86,7 @@ export default {
       this.suppliers = _res.result;
     })
 
-    console.log(this.pendingList)
+  //  console.log(this.pendingList)
   },
   methods:{
     getReceipt(){
