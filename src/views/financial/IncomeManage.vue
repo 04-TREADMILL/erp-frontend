@@ -93,7 +93,7 @@ export default {
       dialogVisible: false,
       salaryForm:{
         employeeId: null,
-        account:null
+        account:null,
       },
       rules: {
         employeeId: [
@@ -132,6 +132,13 @@ export default {
     },
     //制定工资单
     submitForm(formName) {
+      for(var i=0;i<this.employees.length;i++){
+        if(this.employees[i].id === this.salaryForm.employeeId){
+          console.log(this.employees.id)
+          console.log(this.employees[i].name)
+          this.salaryForm.name = this.employees[i].name
+        }
+      }
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.salaryForm.id = null,
@@ -140,7 +147,7 @@ export default {
           this.salaryForm.realSalary = null,
           this.salaryForm.state = null,
           this.salaryForm.createTime = null,
-          this.salaryForm.name = null,
+          // this.salaryForm.name = null,
           addSalary(this.salaryForm).then(_res => {
             if (_res.msg == 'Success') {
               this.$message.success('创建成功!')

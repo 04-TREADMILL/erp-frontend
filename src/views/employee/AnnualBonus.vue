@@ -124,7 +124,7 @@ export default {
         for(let i=0;i<this.employeeList.length;i++){
             let config = {params:{id:this.employeeList[i].id}}
             showAnnualBonus(config).then(_res=>{
-              console.log(_res)
+             // console.log(_res)
                 if(_res.result){
                     this.employeeList[i].allocated = false;
                 }
@@ -157,7 +157,11 @@ export default {
             }
             if(check){
               //发放年终奖
+              console.log("this.id")
+              console.log(this.cur_id)
+              console.log(this.bonus)
             allocateAnnualBonus({params:{id:this.cur_id,extraBonus:this.bonus}}).then(_res => {
+              console.log(_res)
               if (_res.code === "A0002") {
                 this.$message({
                   type: 'error',
