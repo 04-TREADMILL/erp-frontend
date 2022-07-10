@@ -69,7 +69,7 @@ const CUSTOMER_UPDATE = 'api/customer/update';
 //财务人员账号管理
 const ACCOUNT_ADD = "api/account/add";
 const ACCOUNT_SHOW = "api/account/show";
-const ACCOUNT_GET_BY_ID = "api/account/getFzf";
+const ACCOUNT_GET_BY_ID = "api/account/get-fzf";
 const ACCOUNT_DELETE = "api/account/delete";
 
 //财务人员收款制定

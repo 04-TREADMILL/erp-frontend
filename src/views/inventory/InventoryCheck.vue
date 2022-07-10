@@ -67,9 +67,7 @@
 import Layout from "@/components/content/Layout";
 import Title from "@/components/content/Title";
 import { getWarehouseCounting, getExcelExport } from "@/network/warehouse";
-import axios from "axios";
 
-import fileDownload from 'js-file-download'
 export default {
   components: {
     Layout,
